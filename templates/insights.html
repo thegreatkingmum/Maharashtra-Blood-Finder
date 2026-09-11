@@ -1,0 +1,2143 @@
+{% extends "base.html" %}
+
+{% block title %}
+Maharashtra Insights | Maharashtra Blood Finder
+{% endblock %}
+
+
+{% block content %}
+
+<section class="insights-page">
+
+    <div class="container py-5">
+
+        <!-- ==================================================
+             PAGE HEADER
+             ================================================== -->
+
+        <div class="insights-header">
+
+            <span class="section-label">
+                MAHARASHTRA BLOOD INTELLIGENCE
+            </span>
+
+            <h1>
+                Understand the blood-stock landscape
+            </h1>
+
+            <p>
+                Explore blood availability, blood-group
+                vulnerability and district-level hotspots
+                derived from the project's historical
+                e-RaktKosh analysis.
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             LIVE OVERVIEW
+             ================================================== -->
+
+        <div class="row g-4 mb-5">
+
+            <!-- CURRENT BANKS -->
+
+            <div class="col-md-3">
+
+                <div class="insight-kpi">
+
+                    <span>
+                        CURRENT BLOOD BANKS
+                    </span>
+
+                    <strong id="kpiBanks">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISTRICTS -->
+
+            <div class="col-md-3">
+
+                <div class="insight-kpi">
+
+                    <span>
+                        DISTRICTS
+                    </span>
+
+                    <strong id="kpiDistricts">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- SNAPSHOTS -->
+
+            <div class="col-md-3">
+
+                <div class="insight-kpi">
+
+                    <span>
+                        HISTORICAL SNAPSHOTS
+                    </span>
+
+                    <strong id="kpiSnapshots">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- LATEST SNAPSHOT -->
+
+            <div class="col-md-3">
+
+                <div class="insight-kpi">
+
+                    <span>
+                        LATEST SNAPSHOT
+                    </span>
+
+                    <strong
+                        id="kpiLatest"
+                        class="date-kpi"
+                    >
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             OBJECTIVE 1
+             MAHARASHTRA-WIDE AVAILABILITY
+             ================================================== -->
+
+        <section class="insight-section">
+
+            <div class="insight-section-heading">
+
+                <span class="section-label">
+                    OBJECTIVE 1
+                </span>
+
+                <h2>
+                    Maharashtra-wide blood availability
+                </h2>
+
+                <p>
+                    Stock levels and stockout behaviour
+                    across the eight major blood groups.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- CHART -->
+
+                <div class="col-lg-7">
+
+                    <div class="chart-card">
+
+                        <div class="chart-title">
+                            Average available stock by blood group
+                        </div>
+
+                        <div class="chart-wrapper">
+
+                            <canvas
+                                id="availabilityChart"
+                            ></canvas>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="col-lg-5">
+
+                    <div class="chart-card">
+
+                        <div class="chart-title">
+                            Maharashtra availability summary
+                        </div>
+
+                        <div
+                            id="availabilityTable"
+                            class="insight-table-wrap"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             OBJECTIVE 8
+             BLOOD GROUP COMPARISON
+             ================================================== -->
+
+        <section class="insight-section">
+
+            <div class="insight-section-heading">
+
+                <span class="section-label">
+                    OBJECTIVE 8
+                </span>
+
+                <h2>
+                    Blood-group risk comparison
+                </h2>
+
+                <p>
+                    Compare observed stockout behaviour
+                    and predictive performance for each
+                    blood group.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- STOCKOUT CHART -->
+
+                <div class="col-lg-7">
+
+                    <div class="chart-card">
+
+                        <div class="chart-title">
+                            Observed stockout percentage
+                        </div>
+
+                        <div class="chart-wrapper">
+
+                            <canvas
+                                id="bloodGroupChart"
+                            ></canvas>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMPARISON TABLE -->
+
+                <div class="col-lg-5">
+
+                    <div class="chart-card">
+
+                        <div class="chart-title">
+                            Blood-group model comparison
+                        </div>
+
+                        <div
+                            id="bloodGroupTable"
+                            class="insight-table-wrap"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             OBJECTIVE 1
+             DISTRICT STOCKOUT
+             ================================================== -->
+
+        <section class="insight-section">
+
+            <div class="insight-section-heading">
+
+                <span class="section-label">
+                    OBJECTIVE 1
+                </span>
+
+                <h2>
+                    District stockout landscape
+                </h2>
+
+                <p>
+                    The 15 districts with the highest
+                    observed stockout percentages.
+                </p>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div class="chart-title">
+                    Top 15 districts by stockout percentage
+                </div>
+
+                <div class="chart-wrapper large-chart">
+
+                    <canvas
+                        id="districtStockoutChart"
+                    ></canvas>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             OBJECTIVE 4
+             HOTSPOT HEATMAP
+             ================================================== -->
+
+        <section class="insight-section">
+
+            <div class="insight-section-heading">
+
+                <span class="section-label">
+                    OBJECTIVE 4
+                </span>
+
+                <h2>
+                    District × blood-group vulnerability
+                </h2>
+
+                <p>
+                    Hotspot scores identify combinations
+                    where vulnerability is relatively higher
+                    across the observed snapshot period.
+                </p>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <div
+                    id="hotspotHeatmap"
+                    class="hotspot-heatmap"
+                >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             INTERPRETATION
+             ================================================== -->
+
+        <section class="insight-section">
+
+            <div class="chart-card interpretation-card">
+
+                <span class="section-label">
+                    HOW TO READ THIS
+                </span>
+
+                <h3>
+                    From availability to vulnerability
+                </h3>
+
+                <p>
+                    Objective 1 describes the overall
+                    availability landscape. Objective 8
+                    compares the behaviour of individual
+                    blood groups. Objective 4 then combines
+                    district and blood-group information to
+                    identify relative vulnerability hotspots.
+                </p>
+
+                <p class="mb-0">
+                    These analytical views support the risk,
+                    geographic and recommendation components
+                    of the Maharashtra Blood Finder.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             DATA NOTE
+             ================================================== -->
+
+        <div class="data-note">
+
+            <strong>
+                Research data note
+            </strong>
+
+            <p>
+                Historical analytical views are generated
+                from the processed e-RaktKosh snapshot
+                dataset. Current blood availability is
+                maintained separately in the live SQLite
+                database.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ============================================================
+   GLOBAL CHART REFERENCES
+   ============================================================ */
+
+let availabilityChart = null;
+let bloodGroupChart = null;
+let districtStockoutChart = null;
+
+
+/* ============================================================
+   GENERAL HELPERS
+   ============================================================ */
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+function formatNumber(
+    value,
+    decimals = 2
+) {
+
+    const number =
+        Number(value);
+
+    if (
+        !Number.isFinite(number)
+    ) {
+
+        return "—";
+
+    }
+
+    return number.toFixed(
+        decimals
+    );
+
+}
+
+
+function findColumn(
+    data,
+    candidates
+) {
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        return null;
+
+    }
+
+    const columns =
+        Object.keys(
+            data[0]
+        );
+
+
+    const lookup = {};
+
+    columns.forEach(
+        column => {
+
+            lookup[
+                String(column)
+                    .trim()
+                    .toLowerCase()
+            ] = column;
+
+        }
+    );
+
+
+    for (
+        const candidate
+        of candidates
+    ) {
+
+        const key =
+            String(candidate)
+                .trim()
+                .toLowerCase();
+
+        if (
+            lookup[key]
+        ) {
+
+            return lookup[key];
+
+        }
+
+    }
+
+    return null;
+
+}
+
+
+/* ============================================================
+   OVERVIEW
+   ============================================================ */
+
+async function loadOverview() {
+
+    const response =
+        await fetch(
+            "/api/insights/overview"
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            "Overview request failed."
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    document
+        .getElementById("kpiBanks")
+        .textContent =
+        data.current_banks ?? "—";
+
+
+    document
+        .getElementById("kpiDistricts")
+        .textContent =
+        data.districts ?? "—";
+
+
+    document
+        .getElementById("kpiSnapshots")
+        .textContent =
+        data.snapshots ?? "—";
+
+
+    document
+        .getElementById("kpiLatest")
+        .textContent =
+        data.latest_snapshot ?? "—";
+
+}
+
+
+/* ============================================================
+   OBJECTIVE 1
+   AVAILABILITY
+   ============================================================ */
+
+async function loadAvailability() {
+
+    const response =
+        await fetch(
+            "/api/insights/availability"
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            "Availability request failed."
+        );
+
+    }
+
+
+    const payload =
+        await response.json();
+
+
+    if (
+        !payload.success
+    ) {
+
+        throw new Error(
+            payload.message ||
+            "Objective 1 data unavailable."
+        );
+
+    }
+
+
+    const data =
+        payload.data;
+
+
+    const groupColumn =
+        findColumn(
+            data,
+            [
+                "blood_group",
+                "blood group",
+                "group"
+            ]
+        );
+
+
+    const averageColumn =
+        findColumn(
+            data,
+            [
+                "average_stock",
+                "avg_stock",
+                "mean_stock",
+                "average"
+            ]
+        );
+
+
+    const medianColumn =
+        findColumn(
+            data,
+            [
+                "median_stock",
+                "median"
+            ]
+        );
+
+
+    const totalColumn =
+        findColumn(
+            data,
+            [
+                "total_units",
+                "total_stock",
+                "total"
+            ]
+        );
+
+
+    const zeroStockColumn =
+        findColumn(
+            data,
+            [
+                "zero_stock_percent",
+                "stockout_percent",
+                "stockout_percentage",
+                "stockout_rate",
+                "zero_stock_rate"
+            ]
+        );
+
+
+    const lowStockColumn =
+        findColumn(
+            data,
+            [
+                "low_stock_percent",
+                "low_stock_percentage",
+                "low_stock_rate"
+            ]
+        );
+
+
+    if (
+        !groupColumn
+    ) {
+
+        throw new Error(
+            "Blood-group column not found in Objective 1 file."
+        );
+
+    }
+
+
+    /* --------------------------------------------------------
+       Chart
+       -------------------------------------------------------- */
+
+    const labels =
+        data.map(
+            row =>
+                row[groupColumn]
+        );
+
+
+    let chartValues = [];
+
+    let chartLabel =
+        "Average Stock";
+
+
+    if (
+        averageColumn
+    ) {
+
+        chartValues =
+            data.map(
+                row =>
+                    Number(
+                        row[averageColumn]
+                    ) || 0
+            );
+
+        chartLabel =
+            "Average Stock";
+
+    }
+
+    else if (
+        medianColumn
+    ) {
+
+        chartValues =
+            data.map(
+                row =>
+                    Number(
+                        row[medianColumn]
+                    ) || 0
+            );
+
+        chartLabel =
+            "Median Stock";
+
+    }
+
+
+    const ctx =
+        document
+            .getElementById(
+                "availabilityChart"
+            )
+            .getContext(
+                "2d"
+            );
+
+
+    if (
+        availabilityChart
+    ) {
+
+        availabilityChart.destroy();
+
+    }
+
+
+    availabilityChart =
+        new Chart(
+            ctx,
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [
+
+                        {
+
+                            label: chartLabel,
+
+                            data: chartValues,
+
+                            borderRadius: 8,
+
+                            borderWidth: 0
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    /* --------------------------------------------------------
+       Summary table
+       -------------------------------------------------------- */
+
+    let html = `
+
+        <table class="table insight-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Group
+                    </th>
+
+                    ${
+                        averageColumn
+                        ?
+                        "<th>Average</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        medianColumn
+                        ?
+                        "<th>Median</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        totalColumn
+                        ?
+                        "<th>Total</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        zeroStockColumn
+                        ?
+                        "<th>Stockout %</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        lowStockColumn
+                        ?
+                        "<th>Low %</th>"
+                        :
+                        ""
+                    }
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+    `;
+
+
+    data.forEach(
+        row => {
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                row[groupColumn]
+                            )}
+                        </strong>
+                    </td>
+
+                    ${
+                        averageColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[averageColumn]
+                            )}
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        medianColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[medianColumn]
+                            )}
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        totalColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[totalColumn]
+                            )}
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        zeroStockColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[zeroStockColumn]
+                            )}%
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        lowStockColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[lowStockColumn]
+                            )}%
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                </tr>
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+    `;
+
+
+    document
+        .getElementById(
+            "availabilityTable"
+        )
+        .innerHTML =
+        html;
+
+}
+
+
+/* ============================================================
+   OBJECTIVE 8
+   BLOOD GROUP COMPARISON
+   ============================================================ */
+
+async function loadBloodGroupComparison() {
+
+    const response =
+        await fetch(
+            "/api/insights/blood-group-comparison"
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            "Blood-group comparison request failed."
+        );
+
+    }
+
+
+    const payload =
+        await response.json();
+
+
+    if (
+        !payload.success
+    ) {
+
+        throw new Error(
+            payload.message ||
+            "Objective 8 data unavailable."
+        );
+
+    }
+
+
+    const data =
+        payload.data;
+
+
+    const groupColumn =
+        findColumn(
+            data,
+            [
+                "blood_group",
+                "blood group",
+                "group"
+            ]
+        );
+
+
+    const stockoutColumn =
+        findColumn(
+            data,
+            [
+                "stockout_percent",
+                "stockout_percentage",
+                "stockout_rate",
+                "observed_stockout",
+                "observed_stockout_percent"
+            ]
+        );
+
+
+    const rocColumn =
+        findColumn(
+            data,
+            [
+                "roc_auc",
+                "roc_auc_score",
+                "roc-auc"
+            ]
+        );
+
+
+    const f1Column =
+        findColumn(
+            data,
+            [
+                "f1",
+                "f1_score"
+            ]
+        );
+
+
+    const recallColumn =
+        findColumn(
+            data,
+            [
+                "recall"
+            ]
+        );
+
+
+    if (
+        !groupColumn
+    ) {
+
+        throw new Error(
+            "Blood-group column not found in Objective 8 file."
+        );
+
+    }
+
+
+    /* --------------------------------------------------------
+       Chart
+       -------------------------------------------------------- */
+
+    const labels =
+        data.map(
+            row =>
+                row[groupColumn]
+        );
+
+
+    const values =
+        stockoutColumn
+        ?
+        data.map(
+            row =>
+                Number(
+                    row[stockoutColumn]
+                ) || 0
+        )
+        :
+        [];
+
+
+    const ctx =
+        document
+            .getElementById(
+                "bloodGroupChart"
+            )
+            .getContext(
+                "2d"
+            );
+
+
+    if (
+        bloodGroupChart
+    ) {
+
+        bloodGroupChart.destroy();
+
+    }
+
+
+    bloodGroupChart =
+        new Chart(
+            ctx,
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Observed Stockout %",
+
+                            data: values,
+
+                            borderRadius: 8,
+
+                            borderWidth: 0
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    /* --------------------------------------------------------
+       Table
+       -------------------------------------------------------- */
+
+    let html = `
+
+        <table class="table insight-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Group
+                    </th>
+
+                    ${
+                        stockoutColumn
+                        ?
+                        "<th>Stockout %</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        rocColumn
+                        ?
+                        "<th>ROC-AUC</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        f1Column
+                        ?
+                        "<th>F1</th>"
+                        :
+                        ""
+                    }
+
+                    ${
+                        recallColumn
+                        ?
+                        "<th>Recall</th>"
+                        :
+                        ""
+                    }
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+    `;
+
+
+    data.forEach(
+        row => {
+
+            html += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${escapeHtml(
+                                row[groupColumn]
+                            )}
+                        </strong>
+                    </td>
+
+                    ${
+                        stockoutColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[stockoutColumn]
+                            )}%
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        rocColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[rocColumn],
+                                3
+                            )}
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        f1Column
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[f1Column],
+                                3
+                            )}
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                    ${
+                        recallColumn
+                        ?
+                        `
+                        <td>
+                            ${formatNumber(
+                                row[recallColumn],
+                                3
+                            )}
+                        </td>
+                        `
+                        :
+                        ""
+                    }
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </tbody>
+
+        </table>
+    `;
+
+
+    document
+        .getElementById(
+            "bloodGroupTable"
+        )
+        .innerHTML =
+        html;
+
+}
+
+
+/* ============================================================
+   OBJECTIVE 1
+   DISTRICT STOCKOUT
+   ============================================================ */
+
+async function loadDistrictStockout() {
+
+    const response =
+        await fetch(
+            "/api/insights/district-stockout"
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            "District stockout request failed."
+        );
+
+    }
+
+
+    const payload =
+        await response.json();
+
+
+    if (
+        !payload.success
+    ) {
+
+        throw new Error(
+            payload.message ||
+            "District stockout data unavailable."
+        );
+
+    }
+
+
+    const data =
+        payload.data;
+
+
+    const districtColumn =
+        findColumn(
+            data,
+            [
+                "district"
+            ]
+        );
+
+
+    const stockoutColumn =
+        findColumn(
+            data,
+            [
+                "stockout_percent",
+                "stockout_percentage",
+                "stockout_rate",
+                "overall_stockout_percent"
+            ]
+        );
+
+
+    if (
+        !districtColumn ||
+        !stockoutColumn
+    ) {
+
+        throw new Error(
+            "District stockout columns not found."
+        );
+
+    }
+
+
+    const cleaned =
+        data
+
+            .map(
+                row => ({
+
+                    district:
+                        row[districtColumn],
+
+                    stockout:
+                        Number(
+                            row[stockoutColumn]
+                        ) || 0
+
+                })
+            )
+
+            .filter(
+                row =>
+                    row.district !== null &&
+                    row.district !== ""
+            )
+
+            .sort(
+                (a, b) =>
+                    b.stockout -
+                    a.stockout
+            )
+
+            .slice(
+                0,
+                15
+            );
+
+
+    const ctx =
+        document
+            .getElementById(
+                "districtStockoutChart"
+            )
+            .getContext(
+                "2d"
+            );
+
+
+    if (
+        districtStockoutChart
+    ) {
+
+        districtStockoutChart.destroy();
+
+    }
+
+
+    districtStockoutChart =
+        new Chart(
+            ctx,
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels:
+                        cleaned.map(
+                            row =>
+                                row.district
+                        ),
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Stockout %",
+
+                            data:
+                                cleaned.map(
+                                    row =>
+                                        row.stockout
+                                ),
+
+                            borderRadius: 6,
+
+                            borderWidth: 0
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    indexAxis: "y",
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            display: true
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+}
+
+
+/* ============================================================
+   OBJECTIVE 4
+   HOTSPOT HEATMAP
+   ============================================================ */
+
+async function loadHotspots() {
+
+    const response =
+        await fetch(
+            "/api/insights/hotspots"
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            "Hotspot request failed."
+        );
+
+    }
+
+
+    const payload =
+        await response.json();
+
+
+    if (
+        !payload.success
+    ) {
+
+        throw new Error(
+            payload.message ||
+            "Objective 4 data unavailable."
+        );
+
+    }
+
+
+    const data =
+        payload.data;
+
+
+    const districtColumn =
+        findColumn(
+            data,
+            [
+                "district"
+            ]
+        );
+
+
+    const groupColumn =
+        findColumn(
+            data,
+            [
+                "blood_group",
+                "blood group",
+                "group"
+            ]
+        );
+
+
+    const scoreColumn =
+        findColumn(
+            data,
+            [
+                "hotspot_score",
+                "score"
+            ]
+        );
+
+
+    const classColumn =
+        findColumn(
+            data,
+            [
+                "hotspot_class",
+                "classification",
+                "risk_class"
+            ]
+        );
+
+
+    if (
+        !districtColumn ||
+        !groupColumn ||
+        !scoreColumn
+    ) {
+
+        throw new Error(
+            "Hotspot columns not found."
+        );
+
+    }
+
+
+    const groups = [
+        "A+",
+        "A-",
+        "B+",
+        "B-",
+        "O+",
+        "O-",
+        "AB+",
+        "AB-"
+    ];
+
+
+    const districts = [
+        ...new Set(
+            data
+                .map(
+                    row =>
+                        row[districtColumn]
+                )
+                .filter(
+                    value =>
+                        value !== null &&
+                        value !== ""
+                )
+        )
+    ].sort();
+
+
+    /* --------------------------------------------------------
+       Build lookup
+       -------------------------------------------------------- */
+
+    const lookup = {};
+
+    data.forEach(
+        row => {
+
+            const district =
+                String(
+                    row[districtColumn]
+                );
+
+            const group =
+                String(
+                    row[groupColumn]
+                );
+
+            if (
+                !lookup[district]
+            ) {
+
+                lookup[district] = {};
+
+            }
+
+            lookup[district][group] = {
+
+                score:
+                    Number(
+                        row[scoreColumn]
+                    ),
+
+                classification:
+                    classColumn
+                    ?
+                    row[classColumn]
+                    :
+                    null
+
+            };
+
+        }
+    );
+
+
+    /* --------------------------------------------------------
+       Header
+       -------------------------------------------------------- */
+
+    let html = `
+
+        <div class="heatmap-scroll">
+
+            <table class="hotspot-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            District
+                        </th>
+    `;
+
+
+    groups.forEach(
+        group => {
+
+            html += `
+                <th>
+                    ${group}
+                </th>
+            `;
+
+        }
+    );
+
+
+    html += `
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+    `;
+
+
+    /* --------------------------------------------------------
+       Rows
+       -------------------------------------------------------- */
+
+    districts.forEach(
+        district => {
+
+            html += `
+
+                <tr>
+
+                    <td class="district-name">
+                        ${escapeHtml(
+                            district
+                        )}
+                    </td>
+            `;
+
+
+            groups.forEach(
+                group => {
+
+                    const item =
+                        lookup[
+                            String(district)
+                        ]
+                        ?
+                        lookup[
+                            String(district)
+                        ][group]
+                        :
+                        null;
+
+
+                    const score =
+                        item
+                        ?
+                        item.score
+                        :
+                        null;
+
+
+                    const classification =
+                        item
+                        ?
+                        String(
+                            item.classification
+                            ?? ""
+                        ).toLowerCase()
+                        :
+                        "";
+
+
+                    let level =
+                        "empty";
+
+
+                    /*
+                     * Prefer the stored Objective 4
+                     * classification where available.
+                     */
+
+                    if (
+                        classification.includes(
+                            "critical"
+                        )
+                    ) {
+
+                        level =
+                            "critical";
+
+                    }
+
+                    else if (
+                        classification.includes(
+                            "high"
+                        )
+                    ) {
+
+                        level =
+                            "high";
+
+                    }
+
+                    else if (
+                        classification.includes(
+                            "moderate"
+                        )
+                    ) {
+
+                        level =
+                            "moderate";
+
+                    }
+
+                    else if (
+                        score !== null &&
+                        Number.isFinite(score)
+                    ) {
+
+                        if (
+                            score >= 90
+                        ) {
+
+                            level =
+                                "critical";
+
+                        }
+
+                        else if (
+                            score >= 75
+                        ) {
+
+                            level =
+                                "high";
+
+                        }
+
+                        else if (
+                            score >= 50
+                        ) {
+
+                            level =
+                                "moderate";
+
+                        }
+
+                        else {
+
+                            level =
+                                "lower";
+
+                        }
+
+                    }
+
+
+                    html += `
+
+                        <td>
+
+                            <div
+                                class="
+                                    hotspot-cell
+                                    ${level}
+                                "
+                                title="${
+                                    score !== null &&
+                                    Number.isFinite(score)
+                                    ?
+                                    `${score.toFixed(2)}`
+                                    :
+                                    "No data"
+                                }"
+                            >
+
+                                ${
+                                    score !== null &&
+                                    Number.isFinite(score)
+                                    ?
+                                    score.toFixed(0)
+                                    :
+                                    "—"
+                                }
+
+                            </div>
+
+                        </td>
+                    `;
+
+                }
+            );
+
+
+            html += `
+
+                </tr>
+            `;
+
+        }
+    );
+
+
+    html += `
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="heatmap-legend">
+
+            <span>
+                <i class="legend-box lower"></i>
+                Lower
+            </span>
+
+            <span>
+                <i class="legend-box moderate"></i>
+                Moderate
+            </span>
+
+            <span>
+                <i class="legend-box high"></i>
+                High
+            </span>
+
+            <span>
+                <i class="legend-box critical"></i>
+                Critical
+            </span>
+
+        </div>
+    `;
+
+
+    document
+        .getElementById(
+            "hotspotHeatmap"
+        )
+        .innerHTML =
+        html;
+
+}
+
+
+/* ============================================================
+   INITIALIZE PAGE
+   ============================================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+
+        try {
+
+            await loadOverview();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Overview error:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadAvailability();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Availability error:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadBloodGroupComparison();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Blood-group comparison error:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadDistrictStockout();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "District stockout error:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadHotspots();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Hotspot error:",
+                error
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

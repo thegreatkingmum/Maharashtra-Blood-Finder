@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+
+{% block title %}
+Maharashtra Blood Finder | Home
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ========================================================
+     HERO
+     ======================================================== -->
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row align-items-center min-vh-75">
+
+            <div class="col-lg-7">
+
+                <div class="hero-badge">
+                    🩸 Maharashtra-wide Blood Availability
+                </div>
+
+
+                <h1 class="hero-title">
+
+                    Find the right blood
+
+                    <span>
+                        when it matters.
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-text">
+
+                    Search blood banks across Maharashtra
+                    using location, blood group and required
+                    units — with availability, risk and
+                    alternative recommendations.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="{{ url_for('finder') }}"
+                        class="btn btn-primary btn-lg"
+                    >
+                        Find Blood
+                    </a>
+
+
+                    <a
+                        href="{{ url_for('gis') }}"
+                        class="btn btn-outline-dark btn-lg"
+                    >
+                        Explore Maharashtra
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-5">
+
+                <div class="hero-card">
+
+                    <div class="blood-drop">
+                        ♥
+                    </div>
+
+
+                    <h3>
+                        Blood Finder
+                    </h3>
+
+
+                    <p>
+                        Search nearby blood banks and
+                        discover available alternatives.
+                    </p>
+
+
+                    <div class="hero-stat-row">
+
+                        <div>
+
+                            <strong>
+                                8
+                            </strong>
+
+                            <span>
+                                Blood Groups
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                37
+                            </strong>
+
+                            <span>
+                                Districts
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     FEATURES
+     ======================================================== -->
+
+<section class="section-light">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span class="section-label">
+                DATA + INTELLIGENCE
+            </span>
+
+
+            <h2>
+                More than just a blood-bank directory
+            </h2>
+
+
+            <p>
+                The platform connects blood availability,
+                risk analysis, prediction, GIS and
+                intelligent recommendations.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+
+            <!-- FIND BLOOD -->
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🩸
+                    </div>
+
+
+                    <h4>
+                        Find Blood
+                    </h4>
+
+
+                    <p>
+                        Search by city, area, blood group
+                        and required units.
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('finder') }}"
+                    >
+                        Search blood →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- INSIGHTS -->
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        📊
+                    </div>
+
+
+                    <h4>
+                        Maharashtra Insights
+                    </h4>
+
+
+                    <p>
+                        Explore blood availability,
+                        stockout patterns and
+                        district-level vulnerability.
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('insights') }}"
+                    >
+                        View insights →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- GIS -->
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+                        🗺️
+                    </div>
+
+
+                    <h4>
+                        GIS & Network
+                    </h4>
+
+
+                    <p>
+                        Explore geographic vulnerability,
+                        network resilience and redistribution.
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('gis') }}"
+                    >
+                        Explore map →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================================
+     RESEARCH STRIP
+     ======================================================== -->
+
+<section class="research-strip">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+
+                <span class="section-label">
+                    DATA SCIENCE
+                </span>
+
+
+                <h2>
+                    Built from blood-stock intelligence
+                </h2>
+
+
+                <p>
+                    Historical snapshots are analyzed to
+                    understand risk, predict shortages,
+                    identify geographic vulnerability and
+                    recommend alternatives.
+                </p>
+
+            </div>
+
+
+            <div class="col-lg-4 text-lg-end">
+
+                <a
+                    href="{{ url_for('research') }}"
+                    class="btn btn-light"
+                >
+                    Explore Research
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

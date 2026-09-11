@@ -1,0 +1,2163 @@
+/* ============================================================
+   MAHARASHTRA BLOOD FINDER
+   Main Styles
+   ============================================================ */
+
+:root {
+
+    --primary: #b4232f;
+    --primary-dark: #8f1d27;
+
+    --dark: #171717;
+    --muted: #6b7280;
+
+    --light: #f8f9fb;
+    --white: #ffffff;
+
+    --border: #e7e7e7;
+
+}
+
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family: "Inter", sans-serif;
+
+    color: var(--dark);
+
+    background: var(--white);
+
+}
+
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+
+.navbar {
+
+    padding: 14px 0;
+
+}
+
+
+.brand-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--dark) !important;
+
+    font-weight: 500;
+
+}
+
+
+.brand-logo strong {
+
+    display: block;
+
+    font-weight: 800;
+
+}
+
+
+.brand-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #fbe9eb;
+
+    color: var(--primary);
+
+    font-size: 21px;
+
+}
+
+
+.nav-link {
+
+    margin-left: 12px;
+
+    color: #444 !important;
+
+    font-weight: 500;
+
+}
+
+
+.nav-link:hover {
+
+    color: var(--primary) !important;
+
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero-section {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff7f7,
+            #ffffff
+        );
+
+}
+
+
+.min-vh-75 {
+
+    min-height: 76vh;
+
+}
+
+
+.hero-badge {
+
+    display: inline-block;
+
+    background: #fbe9eb;
+
+    color: var(--primary);
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 20px;
+
+}
+
+
+.hero-title {
+
+    font-size: clamp(
+        42px,
+        6vw,
+        72px
+    );
+
+    line-height: 1.04;
+
+    letter-spacing: -2px;
+
+    font-weight: 800;
+
+    max-width: 750px;
+
+}
+
+
+.hero-title span {
+
+    display: block;
+
+    color: var(--primary);
+
+}
+
+
+.hero-text {
+
+    max-width: 650px;
+
+    color: var(--muted);
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-top: 24px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+}
+
+
+.btn-primary {
+
+    background: var(--primary);
+
+    border-color: var(--primary);
+
+}
+
+
+.btn-primary:hover {
+
+    background: var(--primary-dark);
+
+    border-color: var(--primary-dark);
+
+}
+
+
+/* ============================================================
+   HERO CARD
+   ============================================================ */
+
+.hero-card {
+
+    background: var(--white);
+
+    padding: 42px;
+
+    border-radius: 28px;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 25px 70px rgba(
+            0,
+            0,
+            0,
+            0.08
+        );
+
+}
+
+
+.blood-drop {
+
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #fbe9eb;
+
+    color: var(--primary);
+
+    font-size: 32px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.hero-card h3 {
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+}
+
+
+.hero-card p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+.hero-stat-row {
+
+    display: flex;
+
+    gap: 50px;
+
+    margin-top: 30px;
+
+}
+
+
+.hero-stat-row strong {
+
+    display: block;
+
+    font-size: 30px;
+
+}
+
+
+.hero-stat-row span {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+/* ============================================================
+   COMMON SECTIONS
+   ============================================================ */
+
+.section-light {
+
+    background: var(--light);
+
+    padding: 100px 0;
+
+}
+
+
+.section-heading {
+
+    max-width: 720px;
+
+    margin: 0 auto 55px;
+
+}
+
+
+.section-label {
+
+    color: var(--primary);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.section-heading h2,
+.research-strip h2 {
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    margin-top: 10px;
+
+}
+
+
+.section-heading p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+/* ============================================================
+   FEATURE CARDS
+   ============================================================ */
+
+.feature-card {
+
+    background: var(--white);
+
+    padding: 32px;
+
+    border-radius: 22px;
+
+    border: 1px solid var(--border);
+
+    height: 100%;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.feature-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 18px 50px rgba(
+            0,
+            0,
+            0,
+            0.07
+        );
+
+}
+
+
+.feature-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: #fbe9eb;
+
+    font-size: 24px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.feature-card h4 {
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+}
+
+
+.feature-card p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+.feature-card a {
+
+    color: var(--primary);
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+
+/* ============================================================
+   RESEARCH STRIP
+   ============================================================ */
+
+.research-strip {
+
+    background: var(--dark);
+
+    color: white;
+
+    padding: 80px 0;
+
+}
+
+
+.research-strip p {
+
+    color: #c7c7c7;
+
+    max-width: 700px;
+
+    line-height: 1.7;
+
+}
+
+
+.research-strip .section-label {
+
+    color: #ffb4bb;
+
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+
+    background: #101010;
+
+    color: white;
+
+    padding: 45px 0;
+
+}
+
+
+.footer p {
+
+    color: #a9a9a9;
+
+}
+
+
+.footer small {
+
+    color: #777;
+
+}
+
+
+/* ============================================================
+   FIND BLOOD
+   ============================================================ */
+
+.finder-page {
+
+    background: #f8f9fb;
+
+    min-height: 85vh;
+
+}
+
+
+.finder-header {
+
+    max-width: 750px;
+
+}
+
+
+.finder-header h1 {
+
+    font-size: 48px;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    margin-top: 10px;
+
+}
+
+
+.finder-header p {
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+}
+
+
+.search-panel {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 15px 45px rgba(
+            0,
+            0,
+            0,
+            0.05
+        );
+
+}
+
+
+.form-label {
+
+    font-weight: 700;
+
+}
+
+
+.form-control,
+.form-select {
+
+    border-radius: 12px;
+
+    border: 1px solid #dcdcdc;
+
+}
+
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(
+            180,
+            35,
+            47,
+            0.10
+        );
+
+}
+
+
+.search-info {
+
+    margin-top: 25px;
+
+    background: #fff7f7;
+
+    border: 1px solid #f2d1d4;
+
+    color: #8f1d27;
+
+    padding: 15px 20px;
+
+    border-radius: 14px;
+
+}
+
+
+.results-header {
+
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    margin-top: 50px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.results-header h2 {
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+}
+
+
+.result-count {
+
+    background: #ffffff;
+
+    padding: 10px 16px;
+
+    border-radius: 999px;
+
+    border: 1px solid var(--border);
+
+    font-weight: 600;
+
+}
+
+
+.blood-bank-card {
+
+    background: #ffffff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    height: 100%;
+
+    transition: 0.2s ease;
+
+}
+
+
+.blood-bank-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 45px rgba(
+            0,
+            0,
+            0,
+            0.07
+        );
+
+}
+
+
+.bank-card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.availability-badge {
+
+    display: inline-block;
+
+    background: #e9f7ef;
+
+    color: #19733e;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.bank-card-top h3 {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+    margin-top: 12px;
+
+}
+
+
+.stock-number {
+
+    min-width: 80px;
+
+    text-align: right;
+
+}
+
+
+.stock-number strong {
+
+    display: block;
+
+    font-size: 34px;
+
+    color: var(--primary);
+
+    line-height: 1;
+
+}
+
+
+.stock-number span {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+.bank-details {
+
+    margin-top: 20px;
+
+}
+
+
+.bank-details p {
+
+    color: #5f6368;
+
+    margin-bottom: 8px;
+
+}
+
+
+.bank-details span {
+
+    margin-right: 6px;
+
+}
+
+
+.bank-actions {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 24px;
+
+}
+
+
+.empty-state {
+
+    background: #ffffff;
+
+    text-align: center;
+
+    padding: 70px 30px;
+
+    margin-top: 35px;
+
+    border-radius: 24px;
+
+    border: 1px solid var(--border);
+
+}
+
+
+.empty-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.empty-state h3 {
+
+    font-weight: 800;
+
+}
+
+
+.empty-state p {
+
+    color: var(--muted);
+
+}
+
+
+/* ============================================================
+   INSIGHTS
+   ============================================================ */
+
+.insights-page {
+
+    background: #f8f9fb;
+
+    min-height: 100vh;
+
+}
+
+
+.insights-header {
+
+    max-width: 850px;
+
+    padding: 45px 0 35px;
+
+}
+
+
+.insights-header h1 {
+
+    font-size: clamp(
+        40px,
+        5vw,
+        58px
+    );
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+
+    font-weight: 800;
+
+    margin-top: 10px;
+
+}
+
+
+.insights-header p {
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-top: 18px;
+
+}
+
+
+.insight-kpi {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    height: 100%;
+
+    box-shadow:
+        0 10px 35px rgba(
+            0,
+            0,
+            0,
+            0.04
+        );
+
+}
+
+
+.insight-kpi span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.insight-kpi strong {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+}
+
+
+.date-kpi {
+
+    font-size: 20px !important;
+
+    padding-top: 8px;
+
+}
+
+
+.insight-section {
+
+    margin-top: 75px;
+
+}
+
+
+.insight-section-heading {
+
+    margin-bottom: 25px;
+
+}
+
+
+.insight-section-heading h2 {
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin-top: 8px;
+
+}
+
+
+.insight-section-heading p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+.chart-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 26px;
+
+    box-shadow:
+        0 12px 40px rgba(
+            0,
+            0,
+            0,
+            0.04
+        );
+
+}
+
+
+.chart-title {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+}
+
+
+.chart-wrapper {
+
+    position: relative;
+
+    height: 360px;
+
+}
+
+
+.large-chart {
+
+    height: 500px;
+
+}
+
+
+.insight-table-wrap {
+
+    max-height: 380px;
+
+    overflow-y: auto;
+
+}
+
+
+.insight-table {
+
+    margin-bottom: 0;
+
+}
+
+
+.insight-table th {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    white-space: nowrap;
+
+}
+
+
+.insight-table td {
+
+    font-size: 14px;
+
+    vertical-align: middle;
+
+}
+
+
+.heatmap-scroll {
+
+    overflow-x: auto;
+
+    overflow-y: auto;
+
+    max-height: 650px;
+
+}
+
+
+.hotspot-table {
+
+    border-collapse: separate;
+
+    border-spacing: 6px;
+
+    width: max-content;
+
+    min-width: 100%;
+
+}
+
+
+.hotspot-table th {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
+
+    background: white;
+
+    padding: 10px;
+
+    font-size: 12px;
+
+}
+
+
+.hotspot-table td {
+
+    padding: 0;
+
+    min-width: 64px;
+
+}
+
+
+.hotspot-table .district-name {
+
+    position: sticky;
+
+    left: 0;
+
+    z-index: 1;
+
+    background: white;
+
+    min-width: 130px;
+
+    padding: 10px;
+
+    font-weight: 700;
+
+    border-right: 1px solid var(--border);
+
+}
+
+
+.hotspot-cell {
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-weight: 800;
+
+    font-size: 12px;
+
+}
+
+
+.hotspot-cell.lower {
+
+    background: #eef7ef;
+
+    color: #25733e;
+
+}
+
+
+.hotspot-cell.moderate {
+
+    background: #fff6d8;
+
+    color: #8b6b00;
+
+}
+
+
+.hotspot-cell.high {
+
+    background: #ffe7d6;
+
+    color: #9a4d12;
+
+}
+
+
+.hotspot-cell.critical {
+
+    background: #f9d9dc;
+
+    color: #a51f2a;
+
+}
+
+
+.hotspot-cell.empty {
+
+    background: #f0f1f3;
+
+    color: #9a9da3;
+
+}
+
+
+.heatmap-legend {
+
+    display: flex;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    margin-top: 20px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+.heatmap-legend span {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+
+.legend-box {
+
+    width: 16px;
+
+    height: 16px;
+
+    border-radius: 5px;
+
+    display: inline-block;
+
+}
+
+
+.legend-box.lower {
+
+    background: #eef7ef;
+
+}
+
+
+.legend-box.moderate {
+
+    background: #fff6d8;
+
+}
+
+
+.legend-box.high {
+
+    background: #ffe7d6;
+
+}
+
+
+.legend-box.critical {
+
+    background: #f9d9dc;
+
+}
+
+
+.data-note {
+
+    margin-top: 70px;
+
+    margin-bottom: 50px;
+
+    background: #fff7f7;
+
+    border: 1px solid #f2d1d4;
+
+    border-radius: 18px;
+
+    padding: 22px 25px;
+
+}
+
+
+.data-note strong {
+
+    color: var(--primary);
+
+}
+
+
+.data-note p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+    margin: 7px 0 0;
+
+}
+
+
+/* ============================================================
+   RISK & PREDICTION
+   ============================================================ */
+
+.risk-page {
+
+    background: #f8f9fb;
+
+    min-height: 100vh;
+
+}
+
+
+.risk-header {
+
+    max-width: 900px;
+
+    padding: 45px 0 35px;
+
+}
+
+
+.risk-header h1 {
+
+    font-size: clamp(
+        40px,
+        5vw,
+        60px
+    );
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+
+    font-weight: 800;
+
+    margin-top: 10px;
+
+}
+
+
+.risk-header p {
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-top: 18px;
+
+}
+
+
+.risk-kpi {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    height: 100%;
+
+    box-shadow:
+        0 10px 35px rgba(
+            0,
+            0,
+            0,
+            0.04
+        );
+
+}
+
+
+.risk-kpi span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    font-weight: 800;
+
+}
+
+
+.risk-kpi strong {
+
+    display: block;
+
+    font-size: 34px;
+
+    margin-top: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.risk-kpi small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--muted);
+
+}
+
+
+.risk-section {
+
+    margin-top: 75px;
+
+}
+
+
+.risk-section-heading {
+
+    margin-bottom: 25px;
+
+}
+
+
+.risk-section-heading h2 {
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin-top: 8px;
+
+}
+
+
+.risk-section-heading p {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+.risk-card {
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 12px 40px rgba(
+            0,
+            0,
+            0,
+            0.04
+        );
+
+}
+
+
+.risk-card h3 {
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+}
+
+
+.muted-text {
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+.risk-table {
+
+    margin: 0;
+
+}
+
+
+.risk-table th {
+
+    font-size: 12px;
+
+    color: var(--muted);
+
+    white-space: nowrap;
+
+}
+
+
+.risk-table td {
+
+    vertical-align: middle;
+
+    font-size: 14px;
+
+}
+
+
+.risk-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.risk-low {
+
+    background: #e9f7ef;
+
+    color: #19733e;
+
+}
+
+
+.risk-moderate {
+
+    background: #fff6d8;
+
+    color: #8b6b00;
+
+}
+
+
+.risk-high {
+
+    background: #ffe7d6;
+
+    color: #9a4d12;
+
+}
+
+
+.risk-very-high {
+
+    background: #f9d9dc;
+
+    color: #a51f2a;
+
+}
+
+
+/* ============================================================
+   PREDICTION
+   ============================================================ */
+
+.prediction-placeholder {
+
+    text-align: center;
+
+    min-height: 430px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.prediction-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 20px;
+
+    background: #fbe9eb;
+
+    color: var(--primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.prediction-placeholder p {
+
+    max-width: 500px;
+
+    color: var(--muted);
+
+    line-height: 1.7;
+
+}
+
+
+.prediction-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.prediction-top h3 {
+
+    margin-top: 8px;
+
+}
+
+
+.prediction-top p {
+
+    color: var(--muted);
+
+}
+
+
+.prediction-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+}
+
+
+.prediction-badge.low {
+
+    background: #e9f7ef;
+
+    color: #19733e;
+
+}
+
+
+.prediction-badge.moderate {
+
+    background: #fff6d8;
+
+    color: #8b6b00;
+
+}
+
+
+.prediction-badge.high {
+
+    background: #f9d9dc;
+
+    color: #a51f2a;
+
+}
+
+
+.probability-block {
+
+    margin-top: 30px;
+
+    padding: 24px;
+
+    background: #fafafa;
+
+    border-radius: 18px;
+
+}
+
+
+.probability-block span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.probability-block strong {
+
+    display: block;
+
+    font-size: 48px;
+
+    font-weight: 800;
+
+    margin-top: 5px;
+
+}
+
+
+.probability-bar {
+
+    height: 12px;
+
+    background: #ececec;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+
+    margin-top: 16px;
+
+}
+
+
+.probability-fill {
+
+    height: 100%;
+
+    width: 0;
+
+    background: var(--primary);
+
+    border-radius: 999px;
+
+    transition: width 0.5s ease;
+
+}
+
+
+.feature-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+}
+
+
+.feature-grid > div {
+
+    background: #f8f9fb;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 15px;
+
+}
+
+
+.feature-grid span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.feature-grid strong {
+
+    display: block;
+
+    font-size: 21px;
+
+    margin-top: 7px;
+
+}
+
+
+.prediction-reasons {
+
+    margin-top: 28px;
+
+}
+
+
+.prediction-reasons h4 {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+}
+
+
+.reason-item {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 10px;
+
+    padding: 11px 13px;
+
+    background: #fff7f7;
+
+    border-radius: 12px;
+
+    color: #5b5b5b;
+
+    line-height: 1.5;
+
+}
+
+
+.reason-icon {
+
+    min-width: 22px;
+
+    height: 22px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #fbe9eb;
+
+    color: var(--primary);
+
+    font-weight: 800;
+
+    font-size: 12px;
+
+}
+
+
+.prediction-note {
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+}
+
+
+/* ============================================================
+   XAI
+   ============================================================ */
+
+.xai-explanation {
+
+    min-height: 360px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+.xai-explanation h3 {
+
+    margin-top: 10px;
+
+}
+
+
+.xai-explanation p {
+
+    color: var(--muted);
+
+    line-height: 1.8;
+
+}
+
+
+.xai-highlight {
+
+    background: #fff7f7;
+
+    border: 1px solid #f2d1d4;
+
+    border-radius: 16px;
+
+    padding: 18px;
+
+    margin-top: 20px;
+
+}
+
+
+.xai-highlight strong {
+
+    display: block;
+
+    color: var(--primary);
+
+}
+
+
+.xai-highlight span {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+    .hero-title {
+
+        letter-spacing: -1px;
+
+    }
+
+
+    .hero-card {
+
+        margin-top: 35px;
+
+        padding: 30px;
+
+    }
+
+
+    .section-light {
+
+        padding: 70px 0;
+
+    }
+
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+    }
+
+
+    .finder-header h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .results-header {
+
+        display: block;
+
+    }
+
+
+    .result-count {
+
+        display: inline-block;
+
+        margin-top: 12px;
+
+    }
+
+
+    .bank-card-top {
+
+        flex-direction: column;
+
+    }
+
+
+    .stock-number {
+
+        text-align: left;
+
+    }
+
+
+    .bank-actions {
+
+        flex-direction: column;
+
+    }
+
+
+    .insights-header h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .insight-section-heading h2 {
+
+        font-size: 27px;
+
+    }
+
+
+    .chart-wrapper {
+
+        height: 300px;
+
+    }
+
+
+    .large-chart {
+
+        height: 420px;
+
+    }
+
+
+    .risk-header h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .risk-section-heading h2 {
+
+        font-size: 27px;
+
+    }
+
+
+    .feature-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+
+    .prediction-top {
+
+        flex-direction: column;
+
+    }
+
+
+    .prediction-badge {
+
+        align-self: flex-start;
+
+    }
+
+}

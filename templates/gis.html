@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        GIS & Network | Maharashtra Blood Finder
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        #vulnerabilityMap,
+        #networkMap,
+        #redistributionMap {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        #vulnerabilityMap {
+            height: 520px;
+        }
+
+        #networkMap {
+            height: 520px;
+        }
+
+        #redistributionMap {
+            height: 520px;
+        }
+
+        .gis-card {
+            border: 0;
+            border-radius: 16px;
+        }
+
+        .metric-number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .risk-critical {
+            color: #b91c1c;
+            font-weight: 700;
+        }
+
+        .risk-high {
+            color: #d97706;
+            font-weight: 700;
+        }
+
+        .risk-moderate {
+            color: #ca8a04;
+            font-weight: 700;
+        }
+
+        .risk-low {
+            color: #15803d;
+            font-weight: 700;
+        }
+
+        .network-line {
+            stroke: #7f1d1d;
+            stroke-width: 1;
+            opacity: 0.35;
+        }
+
+        .transfer-line {
+            stroke: #dc2626;
+            stroke-width: 2;
+            opacity: 0.65;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container-fluid py-4">
+
+    <div class="container">
+
+
+        <!-- ==================================================
+             HEADER
+        =================================================== -->
+
+        <div class="mb-4">
+
+            <span class="badge bg-danger mb-2">
+                OBJECTIVES 3, 5, 9 & 10
+            </span>
+
+            <h1 class="fw-bold">
+                GIS & Network Intelligence
+            </h1>
+
+            <p class="text-muted">
+                Geographic vulnerability, district-level risk,
+                network resilience and blood redistribution.
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             KPI ROW
+        =================================================== -->
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-3">
+
+                <div class="card gis-card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <div class="text-muted">
+                            Districts
+                        </div>
+
+                        <div
+                            id="districtCount"
+                            class="metric-number"
+                        >
+                            —
+                        </div>
+
+                        <small class="text-muted">
+                            Objective 3
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="card gis-card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <div class="text-muted">
+                            Geographic Banks
+                        </div>
+
+                        <div
+                            id="geoBankCount"
+                            class="metric-number"
+                        >
+                            —
+                        </div>
+
+                        <small class="text-muted">
+                            Objective 5
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="card gis-card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <div class="text-muted">
+                            Network Nodes
+                        </div>
+
+                        <div
+                            id="networkNodeCount"
+                            class="metric-number"
+                        >
+                            —
+                        </div>
+
+                        <small class="text-muted">
+                            Objective 9
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-3">
+
+                <div class="card gis-card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <div class="text-muted">
+                            Transfer Rows
+                        </div>
+
+                        <div
+                            id="transferCount"
+                            class="metric-number"
+                        >
+                            —
+                        </div>
+
+                        <small class="text-muted">
+                            Objective 10
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             OBJECTIVE 3
+        =================================================== -->
+
+        <div class="card gis-card shadow-sm mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h3 class="fw-bold mb-1">
+                            District Blood Availability Risk
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            DBARI combines district BBRI,
+                            stockout and low-stock risk.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 3
+                    </span>
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Rank
+                                </th>
+
+                                <th>
+                                    District
+                                </th>
+
+                                <th>
+                                    Blood Banks
+                                </th>
+
+                                <th>
+                                    Stockout %
+                                </th>
+
+                                <th>
+                                    Low Stock %
+                                </th>
+
+                                <th>
+                                    DBARI
+                                </th>
+
+                                <th>
+                                    Risk
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="dbariTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="text-center"
+                                >
+                                    Loading...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             OBJECTIVE 5
+        =================================================== -->
+
+        <div class="card gis-card shadow-sm mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h3 class="fw-bold mb-1">
+                            Geographic Vulnerability
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Bank-level geographic vulnerability
+                            using BBRI, DBARI and spatial access.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 5
+                    </span>
+
+                </div>
+
+
+                <div id="vulnerabilityMap"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             OBJECTIVE 9
+        =================================================== -->
+
+        <div class="card gis-card shadow-sm mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h3 class="fw-bold mb-1">
+                            Blood-Bank Network Resilience
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Centrality and structurally critical
+                            blood banks in the geographic network.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 9
+                    </span>
+
+                </div>
+
+
+                <div class="row g-4">
+
+                    <div class="col-lg-8">
+
+                        <div id="networkMap"></div>
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+
+                        <h5 class="fw-bold">
+                            Critical Network Nodes
+                        </h5>
+
+                        <div
+                            class="table-responsive"
+                            style="
+                                max-height:500px;
+                                overflow:auto;
+                            "
+                        >
+
+                            <table class="table table-sm">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Bank
+                                        </th>
+
+                                        <th>
+                                            District
+                                        </th>
+
+                                        <th>
+                                            Criticality
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="criticalNodesTable">
+
+                                    <tr>
+
+                                        <td
+                                            colspan="3"
+                                            class="text-center"
+                                        >
+                                            Loading...
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             OBJECTIVE 10
+        =================================================== -->
+
+        <div class="card gis-card shadow-sm mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h3 class="fw-bold mb-1">
+                            Blood Redistribution
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Same-blood-group donor-to-recipient
+                            redistribution recommendations.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 10
+                    </span>
+
+                </div>
+
+
+                <div class="row g-3 mb-3">
+
+                    <div class="col-md-4">
+
+                        <div class="border rounded p-3">
+
+                            <div class="text-muted">
+                                Recommended Transfers
+                            </div>
+
+                            <div
+                                id="redistributionRows"
+                                class="fs-3 fw-bold"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="border rounded p-3">
+
+                            <div class="text-muted">
+                                Total Units
+                            </div>
+
+                            <div
+                                id="redistributionUnits"
+                                class="fs-3 fw-bold"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <div class="border rounded p-3">
+
+                            <div class="text-muted">
+                                Average Distance
+                            </div>
+
+                            <div
+                                id="redistributionDistance"
+                                class="fs-3 fw-bold"
+                            >
+                                —
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="redistributionMap"></div>
+
+
+                <div class="table-responsive mt-4">
+
+                    <table class="table table-hover">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Group
+                                </th>
+
+                                <th>
+                                    Donor
+                                </th>
+
+                                <th>
+                                    Recipient
+                                </th>
+
+                                <th>
+                                    Distance
+                                </th>
+
+                                <th>
+                                    Units
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="redistributionTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="5"
+                                    class="text-center"
+                                >
+                                    Loading...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             NOTE
+        =================================================== -->
+
+        <div class="alert alert-light border">
+
+            <strong>Research note:</strong>
+
+            Geographic calculations use straight-line
+            geographic distance rather than road travel time.
+            Redistribution is decision support and not a
+            clinical transfer order.
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+async function getJSON(url) {
+
+    const response =
+        await fetch(url);
+
+    if (!response.ok) {
+
+        throw new Error(
+            `${url} → ${response.status}`
+        );
+
+    }
+
+    return await response.json();
+
+}
+
+
+function rowsFrom(
+    data,
+    keys = []
+) {
+
+    if (
+        Array.isArray(data)
+    ) {
+
+        return data;
+
+    }
+
+    for (
+        const key of keys
+    ) {
+
+        if (
+            Array.isArray(
+                data?.[key]
+            )
+        ) {
+
+            return data[key];
+
+        }
+
+    }
+
+    return [];
+
+}
+
+
+function riskClass(
+    risk
+) {
+
+    const text =
+        String(
+            risk || ""
+        ).toLowerCase();
+
+    if (
+        text.includes("critical")
+        ||
+        text.includes("very high")
+    ) {
+
+        return "risk-critical";
+
+    }
+
+    if (
+        text.includes("high")
+    ) {
+
+        return "risk-high";
+
+    }
+
+    if (
+        text.includes("moderate")
+    ) {
+
+        return "risk-moderate";
+
+    }
+
+    return "risk-low";
+
+}
+
+
+/* =========================================================
+   OBJECTIVE 3
+========================================================= */
+
+async function loadDBARI() {
+
+    const data =
+        await getJSON(
+            "/api/gis/dbari"
+        );
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "data",
+                "rows"
+            ]
+        );
+
+    document.getElementById(
+        "districtCount"
+    ).textContent =
+        rows.length;
+
+
+    const table =
+        document.getElementById(
+            "dbariTable"
+        );
+
+
+    table.innerHTML =
+        rows
+        .slice()
+        .sort(
+            (
+                a,
+                b
+            ) =>
+                Number(
+                    b.DBARI
+                    ??
+                    0
+                )
+                -
+                Number(
+                    a.DBARI
+                    ??
+                    0
+                )
+        )
+        .map(
+            (
+                row,
+                index
+            ) => `
+
+                <tr>
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${
+                                row.district
+                                ??
+                                "—"
+                            }
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${
+                            row.blood_banks
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                row.stockout_percent
+                                ??
+                                0
+                            ).toFixed(1)
+                        }%
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                row.low_stock_percent
+                                ??
+                                0
+                            ).toFixed(1)
+                        }%
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${
+                                Number(
+                                    row.DBARI
+                                    ??
+                                    0
+                                ).toFixed(2)
+                            }
+                        </strong>
+                    </td>
+
+                    <td class="${riskClass(row.risk_class)}">
+                        ${
+                            row.risk_class
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                </tr>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   OBJECTIVE 5
+========================================================= */
+
+async function loadVulnerability() {
+
+    const data =
+        await getJSON(
+            "/api/gis/vulnerability"
+        );
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "data",
+                "rows"
+            ]
+        );
+
+
+    const validRows =
+        rows.filter(
+            row =>
+                Number.isFinite(
+                    Number(
+                        row.latitude
+                    )
+                )
+                &&
+                Number.isFinite(
+                    Number(
+                        row.longitude
+                    )
+                )
+        );
+
+
+    document.getElementById(
+        "geoBankCount"
+    ).textContent =
+        validRows.length;
+
+
+    const map =
+        L.map(
+            "vulnerabilityMap"
+        ).setView(
+            [
+                19.2,
+                75.0
+            ],
+            6
+        );
+
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution:
+                "&copy; OpenStreetMap contributors"
+        }
+    ).addTo(map);
+
+
+    validRows.forEach(
+        row => {
+
+            const gvs =
+                Number(
+                    row.GVS
+                    ??
+                    0
+                );
+
+
+            let color =
+                "#16a34a";
+
+            if (
+                gvs >= 75
+            ) {
+
+                color =
+                    "#dc2626";
+
+            } else if (
+                gvs >= 50
+            ) {
+
+                color =
+                    "#f97316";
+
+            } else if (
+                gvs >= 25
+            ) {
+
+                color =
+                    "#eab308";
+
+            }
+
+
+            L.circleMarker(
+
+                [
+                    Number(
+                        row.latitude
+                    ),
+
+                    Number(
+                        row.longitude
+                    )
+
+                ],
+
+                {
+
+                    radius:
+                        6,
+
+                    fillColor:
+                        color,
+
+                    color:
+                        "#ffffff",
+
+                    weight:
+                        1,
+
+                    fillOpacity:
+                        0.8
+
+                }
+
+            )
+
+            .bindPopup(`
+
+                <strong>
+                    ${
+                        row.blood_bank_name
+                        ??
+                        "Blood Bank"
+                    }
+                </strong>
+
+                <br>
+
+                District:
+                ${
+                    row.district
+                    ??
+                    "—"
+                }
+
+                <br>
+
+                BBRI:
+                ${
+                    Number(
+                        row.BBRI
+                        ??
+                        0
+                    ).toFixed(2)
+                }
+
+                <br>
+
+                DBARI:
+                ${
+                    Number(
+                        row.DBARI
+                        ??
+                        0
+                    ).toFixed(2)
+                }
+
+                <br>
+
+                GVS:
+                ${
+                    gvs.toFixed(2)
+                }
+
+                <br>
+
+                Vulnerability:
+                ${
+                    row.geographic_vulnerability
+                    ??
+                    "—"
+                }
+
+            `)
+
+            .addTo(map);
+
+        }
+    );
+
+
+}
+
+
+/* =========================================================
+   OBJECTIVE 9
+========================================================= */
+
+async function loadNetwork() {
+
+    const data =
+        await getJSON(
+            "/api/gis/network"
+        );
+
+
+    const centrality =
+        rowsFrom(
+            data.centrality,
+            []
+        );
+
+    const critical =
+        rowsFrom(
+            data.critical,
+            []
+        );
+
+
+    document.getElementById(
+        "networkNodeCount"
+    ).textContent =
+        centrality.length;
+
+
+    const map =
+        L.map(
+            "networkMap"
+        ).setView(
+            [
+                19.2,
+                75.0
+            ],
+            6
+        );
+
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution:
+                "&copy; OpenStreetMap contributors"
+        }
+    ).addTo(map);
+
+
+    /*
+       Network centrality file does not contain coordinates.
+       We therefore display critical network banks in the
+       table and use geographic vulnerability coordinates
+       when available.
+    */
+
+
+    const geoData =
+        await getJSON(
+            "/api/gis/vulnerability"
+        );
+
+
+    const geoRows =
+        rowsFrom(
+            geoData,
+            [
+                "data",
+                "rows"
+            ]
+        );
+
+
+    const geoLookup =
+        new Map(
+            geoRows.map(
+                row => [
+                    String(
+                        row.hospital_code
+                    ),
+                    row
+                ]
+            )
+        );
+
+
+    const topNodes =
+        centrality
+        .slice()
+        .sort(
+            (
+                a,
+                b
+            ) =>
+                Number(
+                    b.betweenness_centrality
+                    ??
+                    0
+                )
+                -
+                Number(
+                    a.betweenness_centrality
+                    ??
+                    0
+                )
+        )
+        .slice(
+            0,
+            50
+        );
+
+
+    topNodes.forEach(
+        row => {
+
+            const geo =
+                geoLookup.get(
+                    String(
+                        row.hospital_code
+                    )
+                );
+
+
+            if (!geo) {
+                return;
+            }
+
+
+            L.circleMarker(
+
+                [
+                    Number(
+                        geo.latitude
+                    ),
+
+                    Number(
+                        geo.longitude
+                    )
+
+                ],
+
+                {
+
+                    radius:
+                        7,
+
+                    fillColor:
+                        "#7f1d1d",
+
+                    color:
+                        "#ffffff",
+
+                    weight:
+                        1,
+
+                    fillOpacity:
+                        0.85
+
+                }
+
+            )
+
+            .bindPopup(`
+
+                <strong>
+                    ${
+                        row.blood_bank_name
+                        ??
+                        "Blood Bank"
+                    }
+                </strong>
+
+                <br>
+
+                District:
+                ${
+                    row.district
+                    ??
+                    "—"
+                }
+
+                <br>
+
+                Betweenness:
+                ${
+                    Number(
+                        row.betweenness_centrality
+                        ??
+                        0
+                    ).toFixed(5)
+                }
+
+                <br>
+
+                Degree:
+                ${
+                    Number(
+                        row.degree_centrality
+                        ??
+                        0
+                    ).toFixed(5)
+                }
+
+            `)
+
+            .addTo(map);
+
+        }
+    );
+
+
+    const table =
+        document.getElementById(
+            "criticalNodesTable"
+        );
+
+
+    table.innerHTML =
+        critical
+        .slice(
+            0,
+            20
+        )
+        .map(
+            row => `
+
+                <tr>
+
+                    <td>
+                        ${
+                            row.blood_bank_name
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            row.district
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${
+                                Number(
+                                    row.network_criticality
+                                    ??
+                                    row.centrality_score
+                                    ??
+                                    0
+                                ).toFixed(2)
+                            }
+                        </strong>
+                    </td>
+
+                </tr>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   OBJECTIVE 10
+========================================================= */
+
+async function loadRedistribution() {
+
+    const data =
+        await getJSON(
+            "/api/gis/redistribution"
+        );
+
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "data",
+                "rows"
+            ]
+        );
+
+
+    document.getElementById(
+        "transferCount"
+    ).textContent =
+        rows.length;
+
+
+    const totalUnits =
+        rows.reduce(
+            (
+                total,
+                row
+            ) =>
+                total
+                +
+                Number(
+                    row.optimized_units
+                    ??
+                    row.recommended_units
+                    ??
+                    0
+                ),
+            0
+        );
+
+
+    const distances =
+        rows
+        .map(
+            row =>
+                Number(
+                    row.distance_km
+                    ??
+                    0
+                )
+        )
+        .filter(
+            Number.isFinite
+        );
+
+
+    const averageDistance =
+        distances.length
+
+            ? distances.reduce(
+                (
+                    total,
+                    value
+                ) =>
+                    total + value,
+                0
+            )
+            /
+            distances.length
+
+            : 0;
+
+
+    document.getElementById(
+        "redistributionRows"
+    ).textContent =
+        rows.length;
+
+
+    document.getElementById(
+        "redistributionUnits"
+    ).textContent =
+        totalUnits.toFixed(0);
+
+
+    document.getElementById(
+        "redistributionDistance"
+    ).textContent =
+        `${averageDistance.toFixed(2)} km`;
+
+
+    const table =
+        document.getElementById(
+            "redistributionTable"
+        );
+
+
+    table.innerHTML =
+        rows
+        .slice(
+            0,
+            50
+        )
+        .map(
+            row => `
+
+                <tr>
+
+                    <td>
+                        ${
+                            row.blood_group
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            row.donor_name
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            row.recipient_name
+                            ??
+                            "—"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                row.distance_km
+                                ??
+                                0
+                            ).toFixed(2)
+                        }
+                        km
+                    </td>
+
+                    <td>
+                        ${
+                            Number(
+                                row.optimized_units
+                                ??
+                                row.recommended_units
+                                ??
+                                0
+                            ).toFixed(0)
+                        }
+                    </td>
+
+                </tr>
+
+            `
+        )
+        .join("");
+
+
+    const vulnerability =
+        await getJSON(
+            "/api/gis/vulnerability"
+        );
+
+
+    const geoRows =
+        rowsFrom(
+            vulnerability,
+            [
+                "data",
+                "rows"
+            ]
+        );
+
+
+    const lookup =
+        new Map(
+            geoRows.map(
+                row => [
+
+                    String(
+                        row.hospital_code
+                    ),
+
+                    row
+
+                ]
+            )
+        );
+
+
+    const map =
+        L.map(
+            "redistributionMap"
+        ).setView(
+            [
+                19.2,
+                75.0
+            ],
+            6
+        );
+
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution:
+                "&copy; OpenStreetMap contributors"
+        }
+    ).addTo(map);
+
+
+    rows
+    .slice(
+        0,
+        100
+    )
+    .forEach(
+        row => {
+
+            const donor =
+                lookup.get(
+                    String(
+                        row.donor_code
+                    )
+                );
+
+
+            const recipient =
+                lookup.get(
+                    String(
+                        row.recipient_code
+                    )
+                );
+
+
+            if (
+                !donor
+                ||
+                !recipient
+            ) {
+
+                return;
+
+            }
+
+
+            const donorLat =
+                Number(
+                    donor.latitude
+                );
+
+            const donorLng =
+                Number(
+                    donor.longitude
+                );
+
+
+            const recipientLat =
+                Number(
+                    recipient.latitude
+                );
+
+            const recipientLng =
+                Number(
+                    recipient.longitude
+                );
+
+
+            if (
+                !Number.isFinite(
+                    donorLat
+                )
+                ||
+                !Number.isFinite(
+                    donorLng
+                )
+                ||
+                !Number.isFinite(
+                    recipientLat
+                )
+                ||
+                !Number.isFinite(
+                    recipientLng
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            L.polyline(
+
+                [
+
+                    [
+                        donorLat,
+                        donorLng
+                    ],
+
+                    [
+                        recipientLat,
+                        recipientLng
+                    ]
+
+                ],
+
+                {
+
+                    color:
+                        "#dc2626",
+
+                    weight:
+                        2,
+
+                    opacity:
+                        0.55
+
+                }
+
+            )
+
+            .bindTooltip(
+
+                `${
+                    row.blood_group
+                }: ${
+                    Number(
+                        row.optimized_units
+                        ??
+                        row.recommended_units
+                        ??
+                        0
+                    ).toFixed(0)
+                } units`
+
+            )
+
+            .addTo(map);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        try {
+
+            await loadDBARI();
+
+        }
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                "DBARI:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadVulnerability();
+
+        }
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                "Vulnerability:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadNetwork();
+
+        }
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                "Network:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadRedistribution();
+
+        }
+
+        catch (
+            error
+        ) {
+
+            console.error(
+                "Redistribution:",
+                error
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

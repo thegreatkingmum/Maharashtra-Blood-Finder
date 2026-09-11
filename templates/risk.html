@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Risk & Prediction | Maharashtra Blood Finder
+    </title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+<div class="container-fluid py-4">
+
+    <div class="container">
+
+        <!-- ==================================================
+             HEADER
+        =================================================== -->
+
+        <div class="mb-4">
+
+            <span class="badge bg-danger mb-2">
+                OBJECTIVES 2, 6 & 7
+            </span>
+
+            <h1 class="fw-bold">
+                Risk & Prediction
+            </h1>
+
+            <p class="text-muted">
+                Blood Bank Risk Index and short-horizon
+                stockout prediction using historical
+                blood-stock observations.
+            </p>
+
+        </div>
+
+
+        <!-- ==================================================
+             BBRI SUMMARY
+        =================================================== -->
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm border-0 h-100">
+
+                    <div class="card-body">
+
+                        <p class="text-muted mb-1">
+                            Blood Banks
+                        </p>
+
+                        <h2 id="bankCount">
+                            —
+                        </h2>
+
+                        <small class="text-muted">
+                            Banks scored by BBRI
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm border-0 h-100">
+
+                    <div class="card-body">
+
+                        <p class="text-muted mb-1">
+                            Average BBRI
+                        </p>
+
+                        <h2 id="averageBBRI">
+                            —
+                        </h2>
+
+                        <small class="text-muted">
+                            Maharashtra-wide average
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card shadow-sm border-0 h-100">
+
+                    <div class="card-body">
+
+                        <p class="text-muted mb-1">
+                            Median BBRI
+                        </p>
+
+                        <h2 id="medianBBRI">
+                            —
+                        </h2>
+
+                        <small class="text-muted">
+                            Distribution midpoint
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             BBRI TABLE
+        =================================================== -->
+
+        <div class="card shadow-sm border-0 mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h4 class="fw-bold mb-1">
+                            Blood Bank Risk Index
+                        </h4>
+
+                        <p class="text-muted mb-0">
+
+                            Risk based on stockout frequency,
+                            low-stock frequency, volatility
+                            and recovery behaviour.
+
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 2
+                    </span>
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table
+                        class="table table-hover align-middle"
+                    >
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Rank
+                                </th>
+
+                                <th>
+                                    Blood Bank
+                                </th>
+
+                                <th>
+                                    District
+                                </th>
+
+                                <th>
+                                    BBRI
+                                </th>
+
+                                <th>
+                                    Risk
+                                </th>
+
+                                <th>
+                                    Stockout
+                                </th>
+
+                                <th>
+                                    Low Stock
+                                </th>
+
+                                <th>
+                                    Volatility
+                                </th>
+
+                                <th>
+                                    Recovery
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="bbriTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="9"
+                                    class="text-center py-4"
+                                >
+                                    Loading BBRI...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             PREDICTION
+        =================================================== -->
+
+        <div class="card shadow-sm border-0 mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-4"
+                >
+
+                    <div>
+
+                        <h4 class="fw-bold mb-1">
+                            Short-Horizon Stockout Prediction
+                        </h4>
+
+                        <p class="text-muted mb-0">
+                            HistGradientBoosting prediction
+                            based on recent stock behaviour.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-danger">
+                        Objective 6
+                    </span>
+
+                </div>
+
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+                            Blood Bank
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="predictionBank"
+                        >
+
+                            <option value="">
+                                Loading blood banks...
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+
+                        <label
+                            class="form-label fw-semibold"
+                        >
+                            Blood Group
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="predictionGroup"
+                        >
+
+                            <option value="">
+                                Select group
+                            </option>
+
+                            <option>
+                                A+
+                            </option>
+
+                            <option>
+                                A-
+                            </option>
+
+                            <option>
+                                B+
+                            </option>
+
+                            <option>
+                                B-
+                            </option>
+
+                            <option>
+                                O+
+                            </option>
+
+                            <option>
+                                O-
+                            </option>
+
+                            <option>
+                                AB+
+                            </option>
+
+                            <option>
+                                AB-
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-2 d-flex align-items-end">
+
+                        <button
+                            class="btn btn-danger w-100"
+                            id="predictBtn"
+                        >
+                            Predict
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="predictionResult"
+                    class="mt-4"
+                >
+
+                    <div class="alert alert-light border">
+
+                        Select a blood bank and blood group
+                        to generate a stockout-risk prediction.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             MODEL PERFORMANCE
+        =================================================== -->
+
+        <div class="card shadow-sm border-0 mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h4 class="fw-bold mb-1">
+                            Model Performance
+                        </h4>
+
+                        <p class="text-muted mb-0">
+                            Comparison of the trained
+                            stockout models.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 6
+                    </span>
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Model
+                                </th>
+
+                                <th>
+                                    Accuracy
+                                </th>
+
+                                <th>
+                                    Precision
+                                </th>
+
+                                <th>
+                                    Recall
+                                </th>
+
+                                <th>
+                                    F1
+                                </th>
+
+                                <th>
+                                    ROC-AUC
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="modelTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="text-center py-4"
+                                >
+                                    Loading...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             FEATURE IMPORTANCE
+        =================================================== -->
+
+        <div class="card shadow-sm border-0 mb-5">
+
+            <div class="card-body">
+
+                <div
+                    class="d-flex justify-content-between align-items-center mb-3"
+                >
+
+                    <div>
+
+                        <h4 class="fw-bold mb-1">
+                            Risk Drivers
+                        </h4>
+
+                        <p class="text-muted mb-0">
+                            Features contributing to
+                            model-based stockout risk.
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-dark">
+                        Objective 7
+                    </span>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-lg-7">
+
+                        <canvas
+                            id="importanceChart"
+                            height="160"
+                        ></canvas>
+
+                    </div>
+
+
+                    <div class="col-lg-5">
+
+                        <div
+                            class="table-responsive"
+                            style="
+                                max-height:350px;
+                                overflow:auto;
+                            "
+                        >
+
+                            <table
+                                class="table table-sm"
+                            >
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Feature
+                                        </th>
+
+                                        <th>
+                                            Importance
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody
+                                    id="importanceTable"
+                                >
+
+                                    <tr>
+
+                                        <td
+                                            colspan="2"
+                                            class="text-center"
+                                        >
+                                            Loading...
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================================
+   HELPERS
+========================================================== */
+
+async function getJSON(
+    url,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            url,
+            options
+        );
+
+    if (!response.ok) {
+
+        throw new Error(
+            `${url} failed: ${response.status}`
+        );
+
+    }
+
+    return await response.json();
+
+}
+
+
+function rowsFrom(
+    data,
+    keys = []
+) {
+
+    if (Array.isArray(data)) {
+
+        return data;
+
+    }
+
+    for (
+        const key of keys
+    ) {
+
+        if (
+            Array.isArray(
+                data?.[key]
+            )
+        ) {
+
+            return data[key];
+
+        }
+
+    }
+
+    return [];
+
+}
+
+
+function formatMetric(value) {
+
+    const number =
+        Number(value);
+
+    if (
+        !Number.isFinite(number)
+    ) {
+
+        return "—";
+
+    }
+
+    return number <= 1
+        ? `${(
+            number * 100
+        ).toFixed(2)}%`
+        : `${number.toFixed(2)}`;
+
+}
+
+
+function riskBadge(
+    risk
+) {
+
+    const text =
+        String(
+            risk || ""
+        ).toLowerCase();
+
+    if (
+        text.includes("critical")
+        ||
+        text.includes("very high")
+    ) {
+
+        return "bg-danger";
+
+    }
+
+    if (
+        text.includes("high")
+    ) {
+
+        return "bg-warning text-dark";
+
+    }
+
+    if (
+        text.includes("moderate")
+    ) {
+
+        return "bg-info text-dark";
+
+    }
+
+    if (
+        text.includes("low")
+    ) {
+
+        return "bg-success";
+
+    }
+
+    return "bg-secondary";
+
+}
+
+
+/* ==========================================================
+   BBRI
+========================================================== */
+
+async function loadBBRI() {
+
+    const data =
+        await getJSON(
+            "/api/risk/bbri"
+        );
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "data",
+                "rows",
+                "banks",
+                "bbri"
+            ]
+        );
+
+    const table =
+        document.getElementById(
+            "bbriTable"
+        );
+
+    if (
+        !rows.length
+    ) {
+
+        table.innerHTML = `
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="text-center text-danger py-4"
+                >
+                    No BBRI data available.
+                </td>
+
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        rows
+        .map(
+            (
+                row,
+                index
+            ) => {
+
+                const bbri =
+                    Number(
+                        row.BBRI
+                        ??
+                        row.bbri
+                        ??
+                        row.bbri_score
+                        ??
+                        0
+                    );
+
+                const risk =
+                    row.risk_class
+                    ??
+                    row.risk_category
+                    ??
+                    row["Risk Category"]
+                    ??
+                    "Unknown";
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${
+                                    row.blood_bank_name
+                                    ??
+                                    row["Blood Bank Name"]
+                                    ??
+                                    "—"
+                                }
+                            </strong>
+
+                            <br>
+
+                            <small
+                                class="text-muted"
+                            >
+                                ${
+                                    row.hospital_code
+                                    ??
+                                    row["Hospital Code"]
+                                    ??
+                                    ""
+                                }
+                            </small>
+
+                        </td>
+
+
+                        <td>
+                            ${
+                                row.district
+                                ??
+                                row.District
+                                ??
+                                "—"
+                            }
+                        </td>
+
+
+                        <td>
+
+                            <strong>
+                                ${bbri.toFixed(2)}
+                            </strong>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="badge ${
+                                    riskBadge(risk)
+                                }"
+                            >
+                                ${risk}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            ${
+                                (
+                                    Number(
+                                        row.stockout_frequency
+                                        ??
+                                        0
+                                    ) * 100
+                                ).toFixed(1)
+                            }%
+                        </td>
+
+
+                        <td>
+                            ${
+                                (
+                                    Number(
+                                        row.low_stock_frequency
+                                        ??
+                                        0
+                                    ) * 100
+                                ).toFixed(1)
+                            }%
+                        </td>
+
+
+                        <td>
+                            ${
+                                Number(
+                                    row.stock_volatility
+                                    ??
+                                    0
+                                ).toFixed(3)
+                            }
+                        </td>
+
+
+                        <td>
+                            ${
+                                (
+                                    Number(
+                                        row.recovery_rate
+                                        ??
+                                        0
+                                    ) * 100
+                                ).toFixed(1)
+                            }%
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        )
+        .join("");
+
+
+    const values =
+        rows
+        .map(
+            row =>
+                Number(
+                    row.BBRI
+                    ??
+                    row.bbri
+                    ??
+                    row.bbri_score
+                )
+        )
+        .filter(
+            Number.isFinite
+        )
+        .sort(
+            (
+                a,
+                b
+            ) => a - b
+        );
+
+
+    document.getElementById(
+        "bankCount"
+    ).textContent =
+        values.length;
+
+
+    document.getElementById(
+        "averageBBRI"
+    ).textContent =
+
+        (
+            values.reduce(
+                (
+                    total,
+                    value
+                ) => total + value,
+                0
+            )
+            /
+            values.length
+        ).toFixed(2);
+
+
+    const middle =
+        Math.floor(
+            values.length / 2
+        );
+
+
+    const median =
+        values.length % 2
+
+            ? values[middle]
+
+            : (
+                values[middle - 1]
+                +
+                values[middle]
+            ) / 2;
+
+
+    document.getElementById(
+        "medianBBRI"
+    ).textContent =
+        median.toFixed(2);
+
+}
+
+
+/* ==========================================================
+   BLOOD BANK DROPDOWN
+========================================================== */
+
+async function loadBanks() {
+
+    const data =
+        await getJSON(
+            "/api/risk/banks"
+        );
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "banks",
+                "data",
+                "rows"
+            ]
+        );
+
+    const select =
+        document.getElementById(
+            "predictionBank"
+        );
+
+
+    select.innerHTML = `
+        <option value="">
+            Select a blood bank
+        </option>
+    `;
+
+
+    rows.forEach(
+        row => {
+
+            const code =
+                row.hospital_code
+                ??
+                row.code;
+
+            const name =
+                row.blood_bank_name
+                ??
+                row.name
+                ??
+                "Blood Bank";
+
+
+            if (
+                code !== undefined
+                &&
+                code !== null
+            ) {
+
+                select.insertAdjacentHTML(
+                    "beforeend",
+                    `
+                    <option
+                        value="${code}"
+                    >
+                        ${name} (${code})
+                    </option>
+                    `
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   MODEL COMPARISON
+========================================================== */
+
+async function loadModels() {
+
+    const data =
+        await getJSON(
+            "/api/risk/model-comparison"
+        );
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "data",
+                "rows",
+                "models"
+            ]
+        );
+
+    const table =
+        document.getElementById(
+            "modelTable"
+        );
+
+
+    if (
+        !rows.length
+    ) {
+
+        table.innerHTML = `
+            <tr>
+
+                <td
+                    colspan="6"
+                    class="text-center"
+                >
+                    No model results found.
+                </td>
+
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML =
+        rows
+        .map(
+            row => `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            ${
+                                row.model
+                                ??
+                                row.name
+                                ??
+                                "—"
+                            }
+                        </strong>
+
+                    </td>
+
+                    <td>
+                        ${
+                            formatMetric(
+                                row.accuracy
+                            )
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            formatMetric(
+                                row.precision
+                            )
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            formatMetric(
+                                row.recall
+                            )
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            formatMetric(
+                                row.f1
+                            )
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            formatMetric(
+                                row.roc_auc
+                            )
+                        }
+                    </td>
+
+                </tr>
+
+            `
+        )
+        .join("");
+
+}
+
+
+/* ==========================================================
+   OBJECTIVE 7 — FEATURE IMPORTANCE
+========================================================== */
+
+async function loadImportance() {
+
+    const data =
+        await getJSON(
+            "/api/risk/feature-importance"
+        );
+
+    const rows =
+        rowsFrom(
+            data,
+            [
+                "data",
+                "rows",
+                "features",
+                "importance"
+            ]
+        );
+
+
+    const table =
+        document.getElementById(
+            "importanceTable"
+        );
+
+
+    table.innerHTML =
+        rows
+        .map(
+            row => {
+
+                const feature =
+                    row.feature
+                    ??
+                    row.Feature
+                    ??
+                    "—";
+
+                const importance =
+                    Number(
+                        row.importance_mean
+                        ??
+                        row.importance
+                        ??
+                        row.permutation_importance
+                        ??
+                        row.mean_importance
+                        ??
+                        0
+                    );
+
+
+                return `
+
+                    <tr>
+
+                        <td>
+                            ${feature}
+                        </td>
+
+                        <td>
+                            ${importance.toFixed(4)}
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        )
+        .join("");
+
+
+    if (
+        rows.length
+        &&
+        typeof Chart !== "undefined"
+    ) {
+
+        const labels =
+            rows.map(
+                row =>
+                    row.feature
+                    ??
+                    row.Feature
+                    ??
+                    "Unknown"
+            );
+
+
+        const values =
+            rows.map(
+                row =>
+                    Number(
+                        row.importance_mean
+                        ??
+                        row.importance
+                        ??
+                        row.permutation_importance
+                        ??
+                        row.mean_importance
+                        ??
+                        0
+                    )
+            );
+
+
+        new Chart(
+            document.getElementById(
+                "importanceChart"
+            ),
+            {
+
+                type: "bar",
+
+                data: {
+
+                    labels:
+                        labels,
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Importance",
+
+                            data:
+                                values
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    plugins: {
+
+                        legend: {
+
+                            display: false
+
+                        }
+
+                    }
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   PREDICTION
+========================================================== */
+
+async function predictStockout() {
+
+    const bank =
+        document.getElementById(
+            "predictionBank"
+        ).value;
+
+
+    const group =
+        document.getElementById(
+            "predictionGroup"
+        ).value;
+
+
+    const result =
+        document.getElementById(
+            "predictionResult"
+        );
+
+
+    if (
+        !bank
+        ||
+        !group
+    ) {
+
+        result.innerHTML = `
+
+            <div class="alert alert-warning">
+
+                Please select a blood bank
+                and blood group.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    result.innerHTML = `
+
+        <div class="alert alert-info">
+
+            Calculating prediction...
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const data =
+            await getJSON(
+                "/api/risk/predict",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            hospital_code:
+                                bank,
+
+                            blood_group:
+                                group
+
+                        })
+
+                }
+            );
+
+
+        const probability =
+            Number(
+                data.stockout_probability
+                ??
+                (
+                    Number(
+                        data.probability
+                    )
+                    *
+                    100
+                )
+            );
+
+
+        const risk =
+            data.risk_level
+            ??
+            data.risk
+            ??
+            data.risk_label
+            ??
+            "Unknown";
+
+
+        result.innerHTML = `
+
+            <div
+                class="card border-0 bg-light"
+            >
+
+                <div
+                    class="card-body"
+                >
+
+                    <h5 class="fw-bold">
+                        Prediction Result
+                    </h5>
+
+
+                    <p class="mb-1">
+
+                        <strong>
+                            Blood Group:
+                        </strong>
+
+                        ${group}
+
+                    </p>
+
+
+                    <p class="mb-1">
+
+                        <strong>
+                            Stockout Probability:
+                        </strong>
+
+                        <span
+                            class="fs-4"
+                        >
+
+                            ${
+                                Number.isFinite(
+                                    probability
+                                )
+                                ?
+                                probability.toFixed(1)
+                                :
+                                "—"
+                            }%
+
+                        </span>
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Risk Level:
+                        </strong>
+
+                        <span
+                            class="badge ${
+                                riskBadge(risk)
+                            }"
+                        >
+                            ${risk}
+                        </span>
+
+                    </p>
+
+
+                    <p class="mb-0">
+
+                        <strong>
+                            Historical observations:
+                        </strong>
+
+                        ${
+                            data.observations
+                            ??
+                            "—"
+                        }
+
+                    </p>
+
+
+                    <hr>
+
+
+                    <h6>
+                        Risk Drivers
+                    </h6>
+
+
+                    <ul>
+
+                        ${
+                            (
+                                data.reasons
+                                ||
+                                []
+                            )
+                            .map(
+                                reason =>
+                                    `
+                                    <li>
+                                        ${reason}
+                                    </li>
+                                    `
+                            )
+                            .join("")
+                        }
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Prediction error:",
+            error
+        );
+
+
+        result.innerHTML = `
+
+            <div
+                class="alert alert-danger"
+            >
+
+                <strong>
+                    Prediction failed.
+                </strong>
+
+                <br>
+
+                ${error.message}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==========================================================
+   START
+========================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+
+        try {
+
+            await loadBBRI();
+
+        } catch (error) {
+
+            console.error(
+                "BBRI:",
+                error
+            );
+
+            document.getElementById(
+                "bbriTable"
+            ).innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="9"
+                        class="text-center text-danger"
+                    >
+                        Failed to load BBRI.
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+
+
+        try {
+
+            await loadBanks();
+
+        } catch (error) {
+
+            console.error(
+                "Banks:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadModels();
+
+        } catch (error) {
+
+            console.error(
+                "Models:",
+                error
+            );
+
+        }
+
+
+        try {
+
+            await loadImportance();
+
+        } catch (error) {
+
+            console.error(
+                "Importance:",
+                error
+            );
+
+        }
+
+
+        document
+            .getElementById(
+                "predictBtn"
+            )
+            .addEventListener(
+                "click",
+                predictStockout
+            );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

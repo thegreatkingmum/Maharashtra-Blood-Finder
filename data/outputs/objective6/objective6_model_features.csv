@@ -1,0 +1,11 @@
+feature
+stock
+previous_stock
+stock_change
+rolling_mean_3
+rolling_std_3
+previous_stockout
+previous_low_stock
+stock_vs_rolling_mean
+trend
+recovered_from_previous_stockout
