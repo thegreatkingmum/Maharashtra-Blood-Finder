@@ -1,331 +1,331 @@
 hospital_code,blood_bank_name,district,degree,degree_centrality,betweenness_centrality,closeness_centrality
-18014,Bombay Hospital Trust Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.009850773197736667
-18256,M/S Late Dr. Sadanandji Burma Trust Blood Centre,Amravati,3,0.00911854103343465,0.0,0.00029083558544799773
-18136,M/S. Global Hospital-Super Speciality Andtransplant Centre,Mumbai,74,0.22492401215805471,0.0,0.012013759845636011
-18015,"P.D. Hinduja Hospital And Medical Research, Blood Centre",Mumbai,74,0.22492401215805471,0.0,0.01289321664638549
-18257,"Sant Gadgebaba Blood Centre And Component Centre, Badnera",Amravati,4,0.0121580547112462,0.0,0.0005988944612010591
-18137,"Padmashri Dr. Vitthalrao Vikhe Patil Foundation Ahmednagar Medical College Hospital, Blood Bank",Ahmadnagar,9,0.02735562310030395,0.00012973533990659058,0.0009568340815184049
-18258,"Dr Mankar Memorial Trust, Late. Dr. B.P. Thakre Memorial Component Blood Centre",Akola,3,0.00911854103343465,0.0,0.0023143584959127604
-18016,K.E.M. Hospital Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.01210994722330755
-18017,Masina Hospital Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.011117412609051108
-18138,Jankalyan Blood Centre,Ahmadnagar,9,0.02735562310030395,0.0,0.0008951375665406847
-18252,"Dean, Govt. Medical College Hospital Blood Centre Aurangabad",Aurangabad,11,0.03343465045592705,0.0,0.0024019879847418046
-18131,"Azad Panchi Groups, M/S Siddheshwar Blood Centre, Solapur",Solapur,10,0.030395136778115502,0.0,0.01650579608575697
-18011,General Hospital Blood Centre,Chandrapur,4,0.0121580547112462,0.0,0.0008547964471981866
-18253,"Shri Balaji Blood Centre , Blood Component Lab And Blood Transfusion Center",Amravati,5,0.015197568389057751,0.0,0.0009654831646772354
-18132,Jeevandhara Blood Centre,Kolhapur,24,0.0729483282674772,0.0,0.0019400927355859793
-18134,"Azad Panchi Groups, Miraj Serological Institute Blood Centre",Sangli,24,0.0729483282674772,0.0,0.0023539103128453268
-18130,"Shri Basaveshwar Manav Vikas, Grameen Sevabhavi Sanstha, Adarsh Blood Centre",Sangli,25,0.07598784194528875,0.0,0.002266489523028965
-18251,"Blood Center Government Medical College And Hospital, Osmanabad",Osmanabad,2,0.0060790273556231,0.0,0.0003206974411876935
-284454,"Bhavar Blood Centre, Badlapur (E), Taluka Ambernath, Dist. Thane",Thane,70,0.2127659574468085,0.0,0.011774238518003789
-18139,Pravara Medical Trusts Blood Centre,Ahmadnagar,5,0.015197568389057751,0.0,0.0011384261872652436
-18018,N.M Wadia Hospital Blood Centre Parel Mumbai,Mumbai,74,0.22492401215805471,7.413447994662318e-05,0.012828098663130387
-18025,"S. L. Raheja Hospital. Blood Centre, Mahim",Mumbai,74,0.22492401215805471,1.8533619986655795e-05,0.013258565537850885
-18267,Sau. Kantadevi Dale Blood Centre,Washim,3,0.00911854103343465,0.0,0.00033503621248454616
-18146,Sanjeevani Blood Centre,Ahmadnagar,4,0.0121580547112462,0.0,0.0008817895600801044
-18147,Anandrushiji Blood Centre,Ahmadnagar,9,0.02735562310030395,1.8533619986655795e-05,0.0008819053631854098
-18026,"Shri Balyogi Shikshan Prasarak Mandal Charitable Trust, Sai Jeewan Blood Centre",Akola,3,0.00911854103343465,0.0,0.004315291535621012
-18268,Arpan Blood Centre Blood Component And Apheresis Centre,Latur,8,0.0243161094224924,0.0,0.0009222761020716436
+18014,Bombay Hospital Trust Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0098507731977366
+18256,M/S Late Dr. Sadanandji Burma Trust Blood Centre,Amravati,3,0.0091185410334346,0.0,0.0002908355854479
+18136,M/S. Global Hospital-Super Speciality Andtransplant Centre,Mumbai,74,0.2249240121580547,0.0,0.012013759845636
+18015,"P.D. Hinduja Hospital And Medical Research, Blood Centre",Mumbai,74,0.2249240121580547,0.0,0.0128932166463854
+18257,"Sant Gadgebaba Blood Centre And Component Centre, Badnera",Amravati,4,0.0121580547112462,0.0,0.000598894461201
+18137,"Padmashri Dr. Vitthalrao Vikhe Patil Foundation Ahmednagar Medical College Hospital, Blood Bank",Ahmadnagar,9,0.0273556231003039,0.0001297353399065,0.0009568340815184
+18258,"Dr Mankar Memorial Trust, Late. Dr. B.P. Thakre Memorial Component Blood Centre",Akola,3,0.0091185410334346,0.0,0.0023143584959127
+18016,K.E.M. Hospital Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0121099472233075
+18017,Masina Hospital Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0111174126090511
+18138,Jankalyan Blood Centre,Ahmadnagar,9,0.0273556231003039,0.0,0.0008951375665406
+18252,"Dean, Govt. Medical College Hospital Blood Centre Aurangabad",Aurangabad,11,0.033434650455927,0.0,0.0024019879847418
+18131,"Azad Panchi Groups, M/S Siddheshwar Blood Centre, Solapur",Solapur,10,0.0303951367781155,0.0,0.0165057960857569
+18011,General Hospital Blood Centre,Chandrapur,4,0.0121580547112462,0.0,0.0008547964471981
+18253,"Shri Balaji Blood Centre , Blood Component Lab And Blood Transfusion Center",Amravati,5,0.0151975683890577,0.0,0.0009654831646772
+18132,Jeevandhara Blood Centre,Kolhapur,24,0.0729483282674772,0.0,0.0019400927355859
+18134,"Azad Panchi Groups, Miraj Serological Institute Blood Centre",Sangli,24,0.0729483282674772,0.0,0.0023539103128453
+18130,"Shri Basaveshwar Manav Vikas, Grameen Sevabhavi Sanstha, Adarsh Blood Centre",Sangli,25,0.0759878419452887,0.0,0.0022664895230289
+18251,"Blood Center Government Medical College And Hospital, Osmanabad",Osmanabad,2,0.0060790273556231,0.0,0.0003206974411876
+284454,"Bhavar Blood Centre, Badlapur (E), Taluka Ambernath, Dist. Thane",Thane,70,0.2127659574468085,0.0,0.0117742385180037
+18139,Pravara Medical Trusts Blood Centre,Ahmadnagar,5,0.0151975683890577,0.0,0.0011384261872652
+18018,N.M Wadia Hospital Blood Centre Parel Mumbai,Mumbai,74,0.2249240121580547,7.413447994662318e-05,0.0128280986631303
+18025,"S. L. Raheja Hospital. Blood Centre, Mahim",Mumbai,74,0.2249240121580547,1.8533619986655795e-05,0.0132585655378508
+18267,Sau. Kantadevi Dale Blood Centre,Washim,3,0.0091185410334346,0.0,0.0003350362124845
+18146,Sanjeevani Blood Centre,Ahmadnagar,4,0.0121580547112462,0.0,0.0008817895600801
+18147,Anandrushiji Blood Centre,Ahmadnagar,9,0.0273556231003039,1.8533619986655795e-05,0.0008819053631854
+18026,"Shri Balyogi Shikshan Prasarak Mandal Charitable Trust, Sai Jeewan Blood Centre",Akola,3,0.0091185410334346,0.0,0.004315291535621
+18268,Arpan Blood Centre Blood Component And Apheresis Centre,Latur,8,0.0243161094224924,0.0,0.0009222761020716
 18027,M/S Beed Blood Centre,Beed,0,0.0,0.0,0.0
-18149,Laksh Foundation New Arpan Voluntary Blood Centre Ahmednagar,Ahmadnagar,11,0.03343465045592705,0.0,0.0009905777135431322
-18142,"Civil Surgeon, General Hospital, Blood Centre",Ahmadnagar,9,0.02735562310030395,0.0,0.0009054509619287756
-18022,Sir H N Hospital And Research Centre Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.010314424847328791
-18143,Dr. JondhaleS Nityaseva Blood Centre,Ahmadnagar,6,0.0182370820668693,0.0,0.0010063968701616037
-18144,Ashtavinayak Blood Bank,Ahmadnagar,9,0.02735562310030395,0.0003521387797464601,0.000910815040913634
-18265,"Nandkishor Education Society Trust, Arpan Voluntary Blood Centre",Nagpur,18,0.0547112462006079,0.0,0.002241557583678075
-18023,Shushrusha Citizens Co-Op Hospital Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.012640491915665585
-18266,"Adarsh Sanskaar Mandal Sanchalit, Dr. Hedgewar Rakta Pedhi, Blood Centre",Akola,18,0.0547112462006079,0.0,0.0022535056527875465
-18024,Smt. Kapoorben Vasanji Lathiya Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.013322869757597356
-18145,"Rotary Blood Centre, Rahuri Charitable Trust",Ahmadnagar,12,0.0364741641337386,0.0026873748980650904,0.0010744434382120014
-18140,Shri Sainath Blood Centre,Ahmadnagar,5,0.015197568389057751,0.00018533619986655796,0.0010046919776459447
-18261,Akola Diagnostic Centre Blood Centre And Component Lab,Akola,3,0.00911854103343465,0.0,0.0044706359660434585
-18141,Ahmednagar Municipal Council Blood Centre,Ahmadnagar,9,0.02735562310030395,0.0,0.0008926891962041072
-18262,"Civil Surgeon, District General Hospital Blood Centre",Parbhani,1,0.00303951367781155,0.0,0.0024346715712381564
-284448,"Shwas Foundation Poona Blood Centre, Narayangaon, Tal- Junnar, Dist. Pune",Pune,30,0.0911854103343465,0.0,0.01588380147723642
-284443,"Maharashtra Blood Centre, Waluj Midc, Dist. Chh. Sambhaji Nagar (Aurangabad)",Aurangabad,11,0.03343465045592705,0.0,0.0016624956274845172
-18234,Sanjivan Blood Centre,Chandrapur,4,0.0121580547112462,1.8533619986655795e-05,0.0008539550009748017
-18113,M/S Jeevan Jyot Charitable TrustS Solapur Blood Centre,Solapur,10,0.030395136778115502,0.0,0.013837172858435302
-18114,Akshay Blood Centre,Solapur,10,0.030395136778115502,0.0,0.01748436757594462
-18236,"Indian Red Cross Society, Dr. Bhalchandra Blood Centre",Latur,7,0.02127659574468085,0.0,0.000915303016048209
-18115,"Athar Blood Centre, Solapur",Solapur,9,0.02735562310030395,0.0,0.02002958351572879
-18116,Rajashri Chatrapati Shahu Maharaj Govt. Medical College And Chatrapati Pramilaraje General Hospita,Kolhapur,24,0.0729483282674772,0.0,0.0018749295060391774
-18237,"Dean, Maeer,S Smt.Saraswati Karad Blood Centre",Latur,8,0.0243161094224924,5.560085995996738e-05,0.0009321570881337377
-18230,Jeevandhara Buldana Urban Blood Centre Run And Managed By Shree Charitable Trust,Buldana,3,0.00911854103343465,0.0,0.000509091857940076
-18231,"Dean, Swami Ramanand Tirtha Rural Medical College. And Hospital, Blood Centre",Bid,8,0.0243161094224924,0.0,0.0006238965187599586
-18232,Vaidyanath Blood Centre,Bid,8,0.0243161094224924,0.0002965379197864927,0.0006157540349181107
-18111,"Indian Red Cross Society Blood Centre, Shriman Rambhai Shah Blood Centre",Solapur,2,0.0060790273556231,0.0,0.00016549544412657925
-18112,"Smbt Institute Of Medical Science And Research Centre, Blood Centre And Component",Nashik,11,0.03343465045592705,0.0,0.0009117527868217344
-284555,M/S. Freedom Foundation Sanchlit Lifeline Blood Centre,Pune,38,0.11550151975683891,0.0,0.004714298354972891
-284433,"Ayush Blood Centre, Vaduj, Tal. Khatav, Dist. Satara",Satara,19,0.057750759878419454,0.0008247460894061829,0.001454204836982838
-284432,"City Blood Centre, Component And Apheresis Centre, Beed",Jalna,5,0.015197568389057751,0.0003706723997331159,0.00043925172381860297
-18117,Leelavati Blood Centre,Buldana,3,0.00911854103343465,0.0,0.0005079456439192631
-18238,"Ircs Nagappa Ambarkhane Blood Centre, Udgir",Latur,1,0.00303951367781155,0.0,0.0002617505270944717
+18149,Laksh Foundation New Arpan Voluntary Blood Centre Ahmednagar,Ahmadnagar,11,0.033434650455927,0.0,0.0009905777135431
+18142,"Civil Surgeon, General Hospital, Blood Centre",Ahmadnagar,9,0.0273556231003039,0.0,0.0009054509619287
+18022,Sir H N Hospital And Research Centre Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0103144248473287
+18143,Dr. JondhaleS Nityaseva Blood Centre,Ahmadnagar,6,0.0182370820668693,0.0,0.0010063968701616
+18144,Ashtavinayak Blood Bank,Ahmadnagar,9,0.0273556231003039,0.0003521387797464,0.0009108150409136
+18265,"Nandkishor Education Society Trust, Arpan Voluntary Blood Centre",Nagpur,18,0.0547112462006079,0.0,0.002241557583678
+18023,Shushrusha Citizens Co-Op Hospital Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0126404919156655
+18266,"Adarsh Sanskaar Mandal Sanchalit, Dr. Hedgewar Rakta Pedhi, Blood Centre",Akola,18,0.0547112462006079,0.0,0.0022535056527875
+18024,Smt. Kapoorben Vasanji Lathiya Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0133228697575973
+18145,"Rotary Blood Centre, Rahuri Charitable Trust",Ahmadnagar,12,0.0364741641337386,0.002687374898065,0.001074443438212
+18140,Shri Sainath Blood Centre,Ahmadnagar,5,0.0151975683890577,0.0001853361998665,0.0010046919776459
+18261,Akola Diagnostic Centre Blood Centre And Component Lab,Akola,3,0.0091185410334346,0.0,0.0044706359660434
+18141,Ahmednagar Municipal Council Blood Centre,Ahmadnagar,9,0.0273556231003039,0.0,0.0008926891962041
+18262,"Civil Surgeon, District General Hospital Blood Centre",Parbhani,1,0.0030395136778115,0.0,0.0024346715712381
+284448,"Shwas Foundation Poona Blood Centre, Narayangaon, Tal- Junnar, Dist. Pune",Pune,30,0.0911854103343465,0.0,0.0158838014772364
+284443,"Maharashtra Blood Centre, Waluj Midc, Dist. Chh. Sambhaji Nagar (Aurangabad)",Aurangabad,11,0.033434650455927,0.0,0.0016624956274845
+18234,Sanjivan Blood Centre,Chandrapur,4,0.0121580547112462,1.8533619986655795e-05,0.0008539550009748
+18113,M/S Jeevan Jyot Charitable TrustS Solapur Blood Centre,Solapur,10,0.0303951367781155,0.0,0.0138371728584353
+18114,Akshay Blood Centre,Solapur,10,0.0303951367781155,0.0,0.0174843675759446
+18236,"Indian Red Cross Society, Dr. Bhalchandra Blood Centre",Latur,7,0.0212765957446808,0.0,0.0009153030160482
+18115,"Athar Blood Centre, Solapur",Solapur,9,0.0273556231003039,0.0,0.0200295835157287
+18116,Rajashri Chatrapati Shahu Maharaj Govt. Medical College And Chatrapati Pramilaraje General Hospita,Kolhapur,24,0.0729483282674772,0.0,0.0018749295060391
+18237,"Dean, Maeer,S Smt.Saraswati Karad Blood Centre",Latur,8,0.0243161094224924,5.560085995996738e-05,0.0009321570881337
+18230,Jeevandhara Buldana Urban Blood Centre Run And Managed By Shree Charitable Trust,Buldana,3,0.0091185410334346,0.0,0.00050909185794
+18231,"Dean, Swami Ramanand Tirtha Rural Medical College. And Hospital, Blood Centre",Beed,8,0.0243161094224924,0.0,0.0006238965187599
+18232,Vaidyanath Blood Centre,Beed,8,0.0243161094224924,0.0002965379197864,0.0006157540349181
+18111,"Indian Red Cross Society Blood Centre, Shriman Rambhai Shah Blood Centre",Solapur,2,0.0060790273556231,0.0,0.0001654954441265
+18112,"Smbt Institute Of Medical Science And Research Centre, Blood Centre And Component",Nashik,11,0.033434650455927,0.0,0.0009117527868217
+284555,M/S. Freedom Foundation Sanchlit Lifeline Blood Centre,Pune,38,0.1155015197568389,0.0,0.0047142983549728
+284433,"Ayush Blood Centre, Vaduj, Tal. Khatav, Dist. Satara",Satara,19,0.0577507598784194,0.0008247460894061,0.0014542048369828
+284432,"City Blood Centre, Component And Apheresis Centre, Beed",Jalna,5,0.0151975683890577,0.0003706723997331,0.0004392517238186
+18117,Leelavati Blood Centre,Buldana,3,0.0091185410334346,0.0,0.0005079456439192
+18238,"Ircs Nagappa Ambarkhane Blood Centre, Udgir",Latur,1,0.0030395136778115,0.0,0.0002617505270944
 18118,Annasaheb Galatge Lions Blood Centre Run By Gadhinglaj Lions Welfare Association,Kolhapur,0,0.0,0.0,0.0
-18124,Acharya Shree Tulsi Blood Centre,Kolhapur,25,0.07598784194528875,0.0,0.0022756968990467973
-18003,"Byl Nair Hospital, Blood Centre",Mumbai,74,0.22492401215805471,0.0,0.010863816033797038
-18125,"Arpan Blood Centre, Blood Component And Apheresis Centre Kolhapur",Kolhapur,24,0.0729483282674772,0.0,0.001965674292467399
-18004,Goodwill Social ClubS Amruta Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.002398823511996204
-18005,Breach Candy Hospital Trust Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.010378671893017005
-18247,Navjivan Blood Centre Mged By Saraswati Vidyaprasarak Foundation,Mumbai,73,0.22188449848024316,0.0,0.010189686284899116
-18006,St. GeorgeS Hospital And Regional Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.0099250753622639
-18248,Noor Hospital Blood Centre,Jalna,14,0.0425531914893617,0.00020386981985321374,0.0013274603640049977
-18120,"Late Balasaheb Datye, Lions Blood Centre, Ichalkaranji",Kolhapur,24,0.0729483282674772,0.0,0.002059353021896457
+18124,Acharya Shree Tulsi Blood Centre,Kolhapur,25,0.0759878419452887,0.0,0.0022756968990467
+18003,"Byl Nair Hospital, Blood Centre",Mumbai,74,0.2249240121580547,0.0,0.010863816033797
+18125,"Arpan Blood Centre, Blood Component And Apheresis Centre Kolhapur",Kolhapur,24,0.0729483282674772,0.0,0.0019656742924673
+18004,Goodwill Social ClubS Amruta Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0023988235119962
+18005,Breach Candy Hospital Trust Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.010378671893017
+18247,Navjivan Blood Centre Mged By Saraswati Vidyaprasarak Foundation,Mumbai,73,0.2218844984802431,0.0,0.0101896862848991
+18006,St. GeorgeS Hospital And Regional Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0099250753622639
+18248,Noor Hospital Blood Centre,Jalna,14,0.0425531914893617,0.0002038698198532,0.0013274603640049
+18120,"Late Balasaheb Datye, Lions Blood Centre, Ichalkaranji",Kolhapur,24,0.0729483282674772,0.0,0.0020593530218964
 18241,Shrikrishna Blood Center,Osmanabad,0,0.0,0.0,0.0
-18121,"Mahatma Gandhi Hospital Blood Centre, New Pargaon",Kolhapur,28,0.0851063829787234,0.0012232189191192825,0.002123155635381697
-18001,"Jaslok Hospital And Research Centre, Blood Centre",Mumbai,74,0.22492401215805471,0.0,0.010494397076960912
-18122,Dr. D.Y Patil Hospital Blood Centre,Kolhapur,24,0.0729483282674772,0.0,0.0020030741463853466
-18243,"Indian Red Cross Society Blood Centre, Nanded",Nanded,6,0.0182370820668693,0.0,0.011806934762141806
-18244,Golwalkari Guruji Blood Centre,Nanded,6,0.0182370820668693,0.0,0.006451071249576377
-18123,Rajarshi Shahu Indian Red Cross Blood Centre,Kolhapur,24,0.0729483282674772,0.0,0.0019393458765359637
-18240,"Ankur Hospital Blood Centre, Chandrapur",Chandrapur,4,0.0121580547112462,0.0,0.0007840343452164644
-283459,"Azad Panchi Groups Sanchalit, Janseva Blood Centre, Hinjewadi Phase-1, Pune",Pune,38,0.11550151975683891,0.0,0.006297743326568787
-281039,General Hospital Malegaon Blood Centre,Nashik,7,0.02127659574468085,0.0,0.0005884120333913819
-18007,Saifee Hospital Trust Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.010065018289590446
-18008,"Cama And Albles Hosp., Abdul Fazalbhoy Blood Centre",Mumbai,74,0.22492401215805471,0.0,0.009923463924990699
-18129,Chattrapati Shahu Maharaj Aadhar Blood Centre,Pune,38,0.11550151975683891,0.0,0.010322387935456673
-18009,Bombay Red Cross Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.00922165952809817
-284140,Arpan Blood Centre Nanded,Nanded,3,0.00911854103343465,0.0011120171991993476,0.0008992721468896848
+18121,"Mahatma Gandhi Hospital Blood Centre, New Pargaon",Kolhapur,28,0.0851063829787234,0.0012232189191192,0.0021231556353816
+18001,"Jaslok Hospital And Research Centre, Blood Centre",Mumbai,74,0.2249240121580547,0.0,0.0104943970769609
+18122,Dr. D.Y Patil Hospital Blood Centre,Kolhapur,24,0.0729483282674772,0.0,0.0020030741463853
+18243,"Indian Red Cross Society Blood Centre, Nanded",Nanded,6,0.0182370820668693,0.0,0.0118069347621418
+18244,Golwalkari Guruji Blood Centre,Nanded,6,0.0182370820668693,0.0,0.0064510712495763
+18123,Rajarshi Shahu Indian Red Cross Blood Centre,Kolhapur,24,0.0729483282674772,0.0,0.0019393458765359
+18240,"Ankur Hospital Blood Centre, Chandrapur",Chandrapur,4,0.0121580547112462,0.0,0.0007840343452164
+283459,"Azad Panchi Groups Sanchalit, Janseva Blood Centre, Hinjewadi Phase-1, Pune",Pune,38,0.1155015197568389,0.0,0.0062977433265687
+281039,General Hospital Malegaon Blood Centre,Nashik,7,0.0212765957446808,0.0,0.0005884120333913
+18007,Saifee Hospital Trust Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0100650182895904
+18008,"Cama And Albles Hosp., Abdul Fazalbhoy Blood Centre",Mumbai,74,0.2249240121580547,0.0,0.0099234639249906
+18129,Chattrapati Shahu Maharaj Aadhar Blood Centre,Pune,38,0.1155015197568389,0.0,0.0103223879354566
+18009,Bombay Red Cross Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0092216595280981
+284140,Arpan Blood Centre Nanded,Nanded,3,0.0091185410334346,0.0011120171991993,0.0008992721468896
 18214,"Kakasaheb Chitle Memorial Centre Sanchalit, Jankalyan Blood Centre",Raigarh,0,0.0,0.0,0.0
-18215,"Shree Sai Medical TrustS, Shree Sai Blood Centre, Old Panvel",Raigarh,73,0.22188449848024316,0.0,0.008058471270283266
-284016,"Dr. R.N.Cooper Hospital Blood Centre Vile Parle (W) Mumbai,",Mumbai,73,0.22188449848024316,9.266809993327898e-06,0.014144392564238994
-284015,Aai Bahuuddeshiya Sevabhavi Sanstha Shourya Blood Centre Yavatmal,Yavatmal,4,0.0121580547112462,0.0,0.0003784310890661547
-284499,"M/S.Uaims Advanced Blood Centre, Ushahkal Abhinav Institute Of Medical Sciences(Uaims), Sangli. (A U",Sangli,25,0.07598784194528875,0.0,0.0023490587050176257
-284014,"Shri Kamala Bhavani Blood Centre, Karmala",Solapur,1,0.00303951367781155,0.0,0.00010759434350301984
-284254,Blood Center District Hospital Aurangabad,Aurangabad,13,0.03951367781155015,0.0003706723997331159,0.0022197330380833605
-18216,Rotary Club New Panvel Charitable Trust S Late Dr. B.V. Limaye Blood Centre,Raigarh,73,0.22188449848024316,0.0,0.00806350602588548
-283286,Raigad Hospital Blood Centre Of Saraswati Education Society,Raigarh,1,0.00303951367781155,0.0,0.00010759434350301984
-18223,Dattaji Bhale Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.0024664791605112112
-18102,"Krishna Hospital And Medical Research Centre, Blood Centre",Satara,8,0.0243161094224924,0.002983912817851583,0.0017419407203040297
-18103,Mauli Blood Centre satara,Satara,7,0.02127659574468085,0.0,0.0011266934562779878
-18225,Adarsh Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.0024514670763614737
-18104,Phaltan Medical FoundationS Blood Centre,Satara,3,0.00911854103343465,0.0012602861590925941,0.0008654065527476908
-18105,Yashwantrao Chavan Blood Centre,Satara,8,0.0243161094224924,0.0,0.0017493500644562127
-18226,Lions Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.0023980791419414118
-18220,"Mauli Blood Centre, Latur",Latur,8,0.0243161094224924,0.0,0.0009247453094470594
-18221,Shri Sai Seva Medical Foundation Sanchalit Nirnay Janseva Blood Centre,Dhule,8,0.0243161094224924,0.0,0.000837967589703538
-18227,Jankalyan Blood Centre,Jalna,4,0.0121580547112462,0.0,0.0008915121152143033
-18107,Dr. Hegdewar Rakta Pedhi,Solapur,10,0.030395136778115502,0.0,0.016549987146450666
-18228,"Civil Surgeon, General Hospital, Blood Centre",Jalna,4,0.0121580547112462,0.0,0.0009012789597612572
-18108,"Ima, Sahakar Maharshi Shankarrao Mohite Patil Blood Centre",Solapur,3,0.00911854103343465,0.0,0.00029408864029312654
-18229,Kalpataru Bahuuddeshiya Sansthas Lokmanya Blood Centre Gondia,Gondiya,1,0.00303951367781155,0.0,0.012105191639135858
-18109,"Indian Red Cross Society Blood Centre, Bai Gopabai Damani Blood Centre, Solapur",Solapur,10,0.030395136778115502,0.0,0.01425627570352133
-284361,"Laksh Foundation, Lifeline Blood Centre, Nashik",Nashik,11,0.03343465045592705,0.0,0.0009864860215621038
-284360,"Criticare Asia Hospital Blood Centre, Pvt. Ltd., Kurla (W), Mumbai",Mumbai,73,0.22188449848024316,9.266809993327898e-06,0.014144392564238994
-27146,"Govt. Medical College Blood Centre, Nagpur",Nagpur,18,0.0547112462006079,0.0,0.002308005139156857
-284359,"Maha Victory Charitable Trust, Lifeline Blood Centre, Bapgaon, Tal. Bhiwandi, Dist. Thane",Thane,70,0.2127659574468085,0.0,0.011774238518003789
-284358,"Poona Medical Relief And Research Foundation, Kai Madhukar Sakharam Bidkar Blood Centre, Pune",Pune,30,0.0911854103343465,0.0,0.01588380147723642
-27145,"Civil Surgeon, District General Hospital Blood Centre & Blood Component Unit Hingoli",Hingoli,4,0.0121580547112462,0.0,0.0003116518183431019
-284112,Mahalaxmi Blood Centre,Kolhapur,3,0.00911854103343465,0.0,0.00035189581156768417
-284350,Manipal Hospitals Pvt Ltd Blood Centre,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-18201,"Dr. D.Y. Patil Hospital And Research Centre, Blood Centre",Thane,74,0.22492401215805471,1.8533619986655795e-05,0.010722048784349354
-283260,Samarpit Bahuddeshiya Sevabhavi Sanshta Tarpan Blood Centre,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-18203,"Jai Matadi Bahuuddeshiya Sevabhavi Sasthas Guru Gobindsinghji Blood Centre, Blood Comp And Aphs Nand",Nanded,6,0.0182370820668693,0.0,0.010740476246793034
-18204,Bhiwandi Blood Centre,Thane,74,0.22492401215805471,0.0011120171991993476,0.007459483337256001
-27154,"Sir, J.J. Group Hospital Blood Centre, Byculla Mumbai",Mumbai,74,0.22492401215805471,0.0,0.010678145931058435
-27152,Bai Gangabai Ladies Hospital Blood Centre Gondiya,Gondiya,1,0.00303951367781155,0.0,0.012105191639135858
+18215,"Shree Sai Medical TrustS, Shree Sai Blood Centre, Old Panvel",Raigarh,73,0.2218844984802431,0.0,0.0080584712702832
+284016,"Dr. R.N.Cooper Hospital Blood Centre Vile Parle (W) Mumbai,",Mumbai,73,0.2218844984802431,9.266809993327898e-06,0.0141443925642389
+284015,Aai Bahuuddeshiya Sevabhavi Sanstha Shourya Blood Centre Yavatmal,Yavatmal,4,0.0121580547112462,0.0,0.0003784310890661
+284499,"M/S.Uaims Advanced Blood Centre, Ushahkal Abhinav Institute Of Medical Sciences(Uaims), Sangli. (A U",Sangli,25,0.0759878419452887,0.0,0.0023490587050176
+284014,"Shri Kamala Bhavani Blood Centre, Karmala",Solapur,1,0.0030395136778115,0.0,0.000107594343503
+284254,Blood Center District Hospital Aurangabad,Aurangabad,13,0.0395136778115501,0.0003706723997331,0.0022197330380833
+18216,Rotary Club New Panvel Charitable Trust S Late Dr. B.V. Limaye Blood Centre,Raigarh,73,0.2218844984802431,0.0,0.0080635060258854
+283286,Raigad Hospital Blood Centre Of Saraswati Education Society,Raigarh,1,0.0030395136778115,0.0,0.000107594343503
+18223,Dattaji Bhale Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0024664791605112
+18102,"Krishna Hospital And Medical Research Centre, Blood Centre",Satara,8,0.0243161094224924,0.0029839128178515,0.001741940720304
+18103,Mauli Blood Centre satara,Satara,7,0.0212765957446808,0.0,0.0011266934562779
+18225,Adarsh Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0024514670763614
+18104,Phaltan Medical FoundationS Blood Centre,Satara,3,0.0091185410334346,0.0012602861590925,0.0008654065527476
+18105,Yashwantrao Chavan Blood Centre,Satara,8,0.0243161094224924,0.0,0.0017493500644562
+18226,Lions Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0023980791419414
+18220,"Mauli Blood Centre, Latur",Latur,8,0.0243161094224924,0.0,0.000924745309447
+18221,Shri Sai Seva Medical Foundation Sanchalit Nirnay Janseva Blood Centre,Dhule,8,0.0243161094224924,0.0,0.0008379675897035
+18227,Jankalyan Blood Centre,Jalna,4,0.0121580547112462,0.0,0.0008915121152143
+18107,Dr. Hegdewar Rakta Pedhi,Solapur,10,0.0303951367781155,0.0,0.0165499871464506
+18228,"Civil Surgeon, General Hospital, Blood Centre",Jalna,4,0.0121580547112462,0.0,0.0009012789597612
+18108,"Ima, Sahakar Maharshi Shankarrao Mohite Patil Blood Centre",Solapur,3,0.0091185410334346,0.0,0.0002940886402931
+18229,Kalpataru Bahuuddeshiya Sansthas Lokmanya Blood Centre Gondia,Gondiya,1,0.0030395136778115,0.0,0.0121051916391358
+18109,"Indian Red Cross Society Blood Centre, Bai Gopabai Damani Blood Centre, Solapur",Solapur,10,0.0303951367781155,0.0,0.0142562757035213
+284361,"Laksh Foundation, Lifeline Blood Centre, Nashik",Nashik,11,0.033434650455927,0.0,0.0009864860215621
+284360,"Criticare Asia Hospital Blood Centre, Pvt. Ltd., Kurla (W), Mumbai",Mumbai,73,0.2218844984802431,9.266809993327898e-06,0.0141443925642389
+27146,"Govt. Medical College Blood Centre, Nagpur",Nagpur,18,0.0547112462006079,0.0,0.0023080051391568
+284359,"Maha Victory Charitable Trust, Lifeline Blood Centre, Bapgaon, Tal. Bhiwandi, Dist. Thane",Thane,70,0.2127659574468085,0.0,0.0117742385180037
+284358,"Poona Medical Relief And Research Foundation, Kai Madhukar Sakharam Bidkar Blood Centre, Pune",Pune,30,0.0911854103343465,0.0,0.0158838014772364
+27145,"Civil Surgeon, District General Hospital Blood Centre & Blood Component Unit Hingoli",Hingoli,4,0.0121580547112462,0.0,0.0003116518183431
+284112,Mahalaxmi Blood Centre,Kolhapur,3,0.0091185410334346,0.0,0.0003518958115676
+284350,Manipal Hospitals Pvt Ltd Blood Centre,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+18201,"Dr. D.Y. Patil Hospital And Research Centre, Blood Centre",Thane,74,0.2249240121580547,1.8533619986655795e-05,0.0107220487843493
+283260,Samarpit Bahuddeshiya Sevabhavi Sanshta Tarpan Blood Centre,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+18203,"Jai Matadi Bahuuddeshiya Sevabhavi Sasthas Guru Gobindsinghji Blood Centre, Blood Comp And Aphs Nand",Nanded,6,0.0182370820668693,0.0,0.010740476246793
+18204,Bhiwandi Blood Centre,Thane,74,0.2249240121580547,0.0011120171991993,0.007459483337256
+27154,"Sir, J.J. Group Hospital Blood Centre, Byculla Mumbai",Mumbai,74,0.2249240121580547,0.0,0.0106781459310584
+27152,Bai Gangabai Ladies Hospital Blood Centre Gondiya,Gondiya,1,0.0030395136778115,0.0,0.0121051916391358
 284589,M/S. Jai Mata Di Bahuddeshiya SansthaS Melghat Blood Centre,Amravati,0,0.0,0.0,0.0
-18209,Vijayee Blood Centre Vasai (W),Palghar,75,0.22796352583586627,0.003706723997331159,0.006718760809555208
-284467,"Mahalaxmi Blood Centre, Kagal,Kolhapur",Kolhapur,3,0.00911854103343465,0.0,0.00035189581156768417
-18205,Mira Bhayandar Muncipal Corporation Rajeev Gandhi Blood Centre,Thane,76,0.23100303951367782,0.0005560085995996738,0.00942245675449783
-27150,"Sub -Dist Cottage Hospital, Blood Centre , Sawantwadi, Sindhudurg",Sindhudurg,2,0.0060790273556231,0.0,0.00021148944969841615
-18208,M/S. Shri Hazur Saheb Blood Centre,Nanded,6,0.0182370820668693,0.0,0.010520919079682842
-18098,"Akshay Blood Centre, Miraj",Sangli,25,0.07598784194528875,1.8533619986655795e-05,0.0022065715434889115
-18094,Vasantdada Patil Blood Centre And Haematology Research Centre,Sangli,24,0.0729483282674772,0.0,0.002171713687557719
-18095,"Hindratna Prakashbapu Patil Blood Centre, Sangli",Sangli,25,0.07598784194528875,1.8533619986655795e-05,0.002352590855706574
-18096,Bharati Vidyapeeth University Medical College And Hospital Blood Centre,Sangli,25,0.07598784194528875,0.0,0.0022715324992322265
-18097,"Miraj Serological Institute Blood Centre, Miraj",Sangli,24,0.0729483282674772,0.0,0.002171713687557719
-18090,"Islampur Medical Foundations, Rajaram Bapu Blood Centre , Islampur",Sangli,28,0.0851063829787234,0.0036696567573578473,0.002165113735371241
-18091,Smt. Anila Kantilal Kothari Blood Centre And Dept. Of Hemato Oncology,Sangli,25,0.07598784194528875,0.0,0.0022316360038434424
-18076,"Abhinav Sikshan MandalS, Sanjeevan Blood Centre",Kolhapur,24,0.0729483282674772,0.0,0.001962387964729972
-18078,Noble Charitable TrustS Noble Blood Centre,Pune,38,0.11550151975683891,0.0,0.009108709161361509
-18199,"Navi Mumbai Muncipal Corporation, Blood Centre",Thane,73,0.22188449848024316,0.0,0.012069258428087783
-18079,Pimpari Serological Institute Blood Centre,Pune,38,0.11550151975683891,0.0,0.009708824018398721
-18193,Chidanand Charitable Trust Blood Centre,Thane,73,0.22188449848024316,0.0,0.008589845928175119
-18072,"Metro Blood Centre,Civil Hospital Aundh Pune",Pune,38,0.11550151975683891,0.0,0.01284767314221989
-18073,"Grant Medical Foundation, A.H. Wadia Trust Blood Centre",Pune,38,0.11550151975683891,0.0,0.013976374911336431
-18195,Kalyan Dombivali Muncipal Corporation Sponsered Nandakishore Educaation Society Arpan Blood Bank,Thane,74,0.22492401215805471,1.8533619986655795e-05,0.0073672240344397335
-18196,Ishwar Seva Trusts Dombivali Blood Center,Thane,73,0.22188449848024316,0.0,0.008412582627333088
-18190,Kai Wamanrao Oka Rakta Kendra,Thane,73,0.22188449848024316,0.0,0.01189325610984503
-18070,Jehangir Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.006225205040753594
-18071,Kem Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.015063765087814257
-285061,Pachpande Multispeciality Hospital Blood Storage Center,Jalgaon,10,0.030395136778115502,0.0024093705982652534,0.0010918205480824365
-284150,"Shri Dhaneshwari Manav Vikas Mandals, Shantai Blood Centre, Pedgaon, Dist. Parbhani",Parbhani,1,0.00303951367781155,0.0,0.0024346715712381564
-18088,Cristanand Education Society Blood Centre,Chandrapur,3,0.00911854103343465,0.0007784120394395433,0.000770297519329729
-18089,"Civil Surgeon, General Hospital Blood Centre, Gadchiroli",Gadchiroli,2,0.0060790273556231,0.0,0.0005203909358489414
-18083,Smt Kashibai Navale General Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.00929931025154302
-18084,Chakan Blood Centre,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-18085,"Indian Red Cross Society, (Late Manikbai Chandulal Saraf ) Blood Centre, Pune",Pune,2,0.0060790273556231,0.0,0.0007380054056711885
-18086,Central India Institute Of Haematology And OncologyS Blood And Blood Component Bank And Apheresis U,Nagpur,18,0.0547112462006079,0.0,0.002314838627123744
-18080,Konkan Mitra Mandal Medical TrustS Sahyadri Speaciality Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.014411003321192122
-18081,Aditya Birla Memorial Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.008616356302446653
-18082,Rakesh Jain Memorial Blood Centre,Pune,38,0.11550151975683891,0.0,0.01450333141646662
-18179,"Nashik Blood Bank And Transfusion Research Institute Blood Bank(Jijau Mahila Sewabhavi Sanstha, Nash",Nashik,11,0.03343465045592705,0.0,0.000989135996697548
-18058,Sion Blood Centre,Mumbai,74,0.22492401215805471,1.8533619986655795e-05,0.013499154988506389
-18059,Bharatratna Dr Babasaheb Ambedkar Mun. Gen. Hospital Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.010945962121911106
-18175,Ndmvps Medical College And Hospital Blood Centre,Nashik,11,0.03343465045592705,0.0,0.0009771764708568639
-18055,"Meenatai Thackeray Blood Centre, Goregaon, Mumbai, Managed By Prabodhan Goregaon",Mumbai,73,0.22188449848024316,0.0,0.012135236451715105
-18176,"Late. Dr. G.M. Bhavsar Charitable TrustS,Malegaon Blood Centre",Nashik,7,0.02127659574468085,0.0,0.0005875178345291372
-18177,"Shri Sai Seva Medical Foundation Sanchalit, Sanjeevani Blood Centre",Nashik,11,0.03343465045592705,0.0,0.0010115775581962842
-18057,Suburban Hi-Tech Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.011655054142607665
-18178,"Medical Superintendent, Regional Referal Hospital Blood Bank,(Superspeciality Hospital) Nashik",Nashik,11,0.03343465045592705,0.0,0.0009934827328852932
-18050,Sevenhills Healthcare Private Limited Hospital Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.013911955099831971
-18292,"Kasturba Health SocietyS, Blood Centre, Sevagram(Mgims)",Wardha,2,0.0060790273556231,0.0,0.000796785262705668
-18171,"Jankalyan Blood Centre, Nashik",Nashik,11,0.03343465045592705,0.0,0.0009739782789582116
-18051,V.N. Desai Municipal General Hospital Blood Centre,Mumbai,74,0.22492401215805471,3.706723997331159e-05,0.013545192522897294
-18293,Jawaharlal Nehru Medical College Blood Centre,Wardha,2,0.0060790273556231,0.0,0.0009331181281973313
-18173,DevaS Health And Devlopment Foundation Samta Blood Centre,Nashik,11,0.03343465045592705,0.0,0.0010061774265357252
-18052,Holy Spirit Hospital Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.013530355757992323
-18295,"Arpan Blood Centre,Blood Component Lab. And Aphersis Centre",Ahmadnagar,6,0.0182370820668693,0.0031136481577581734,0.001161783643499929
-280738,Superitendent Gokuldas Tejpal Hospital,Mumbai,74,0.22492401215805471,0.0,0.010022593262169558
-18290,Dean Government Medical College And Super Speciality Hospital Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.002294276352042109
-18291,"District - Civil Surgeon, General Hospital Blood Centre Wardha",Wardha,2,0.0060790273556231,0.0,0.0012429521115160215
-18069,Jankalyan Raktapedhi Pune,Pune,38,0.11550151975683891,0.0,0.013824261532069275
-18065,"Deenanath Mangeshkar Hospital, Blood Centre",Pune,38,0.11550151975683891,0.0,0.01345950849579881
-18186,Lokamanya Tssia Blood Centre,Thane,73,0.22188449848024316,7.413447994662318e-05,0.011954728782062348
-18187,Chhatrapati Shivaji Maharaj Hospital Blood Centre Csm,Thane,73,0.22188449848024316,0.0,0.01145870704001677
-18188,M/S Balasaheb Thackerey Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.012964792836670997
-18189,Jupiter Hospital Blood Centre,Thane,73,0.22188449848024316,0.00011120171991993476,0.01189529395139871
-18068,"Sadhu Vaswani Mission Medical Complex, Inlaks And Budharani Hospital Blood Centre, Pune",Pune,38,0.11550151975683891,0.0,0.012938819259671283
-18183,"Mahatma Gandhi Blood Centre, Operated By Task",Thane,73,0.22188449848024316,0.0,0.012022963306406589
-18062,Akshay Blood Centre,Pune,38,0.11550151975683891,0.0,0.0067937731253382315
-18184,"Vitthal Sayanna General Hospital (Civil Hospital) Blood Centre, Thane",Thane,73,0.22188449848024316,0.0,0.011488048672142372
-18064,M/S Bharati Vidyapeeth Medical Foundations Bharati Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.009780638752895778
-18185,Navjeevan Blood Centre Mangaed By Spvf,Thane,73,0.22188449848024316,0.0,0.012016821781974442
-18181,"Shree Swami Samartha Vaidyakiya Shaikshanik And Sanshodhan Sanstha, Late Shri Mukeshbai Patel Blo",Dhule,1,0.00303951367781155,0.0,0.0006460094353992523
-280723,Mahalakshmi Blood Centre,Satara,8,0.0243161094224924,0.0003892060197197717,0.0017510567373373257
-18157,Civil Hospital Blood Centre,Jalgaon,9,0.02735562310030395,0.0,0.0010941353086127332
-18278,Dr. Murlidhar Kharche Memorial Jeevan Jyoti Blood Centre,Buldana,5,0.015197568389057751,0.0011120171991993476,0.0006568973728518787
-18037,Deepak Foundations Anviksha Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.014198709091167478
-18158,Indian Red Cross Society Sanchalit Askaran Tarachand Jain Blood Centre,Jalgaon,9,0.02735562310030395,0.0,0.0010974469886832843
-284084,"Washim Blood Centre (Trust), Washim Managed By Ocean Bahuuddeshiya Sanstha, Pusad, Dist. Yavtmal",Washim,4,0.0121580547112462,0.00022240343983986953,0.00035168693478350866
-18038,"K.B.Bhabha Muncipal General Hospital, Blood Centre",Mumbai,74,0.22492401215805471,0.0,0.013114032689300063
-18159,Jeevanshri Raktapedi,Jalgaon,7,0.02127659574468085,0.0024835050782118766,0.0009762332885134712
-18039,Lilavati Hospital And Research Centre Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.01289330876585376
-18153,Jeevan Jyoti Blood Centre,Dhule,8,0.0243161094224924,0.0,0.0008370048605540971
-18154,Shree Navjeevan Blood Centre Dhule,Dhule,8,0.0243161094224924,0.0,0.000827855759875886
-18275,Shri Gajanan Blood Centre And Components,Yavatmal,4,0.0121580547112462,0.0,0.00038632897141012814
-18033,Bhabha Atomic Research Centre Hospital Blood Centre,Mumbai,74,0.22492401215805471,0.00025947067981318115,0.013399293256699623
-18034,"Seth V.C.Gandhi And M.A.Vora Municipal General Hospital, Rajawadi ,Ghatkopar",Mumbai,74,0.22492401215805471,1.8533619986655795e-05,0.014203349055225118
-18155,Dhanwantri Blood Centre,Jalgaon,10,0.030395136778115502,0.0013344206390392172,0.0009407082360548779
-18035,"Sushilaben R. Mehta And Sir. Kikabai Cardiac Institute, Blood Centre",Mumbai,74,0.22492401215805471,3.706723997331159e-05,0.013304261098465506
-18156,Keshavsmruti Pratishthan Sanchalit Madhavrao Golwalkar Swayamsevi Raktpedhi,Jalgaon,9,0.02735562310030395,0.0,0.0010961887238959255
-18277,"Civil Surgeon, District General Hospital Blood Centre",Buldana,3,0.00911854103343465,0.0,0.0005065254028981037
-18150,Shri Bhausaheb Hire Govt. Medical College And Hospital Blood Centre Dhule,Dhule,8,0.0243161094224924,0.0008896137593594781,0.0008178743603738814
-18030,K.J.Somaiya Medical College And Hospital Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.01377987632703065
-280719,Swami Vivekanand Blood Centre,Nanded,6,0.0182370820668693,0.0,0.008170447308890104
-18031,"L.T.M.G., Municipal Hospital Blood Centre",Mumbai,74,0.22492401215805471,0.0,0.01362626717578495
-18152,Jawahar Medical Foundation Blood Centre,Dhule,8,0.0243161094224924,0.0,0.0008175312684228986
-18047,Fortis Hospital Blood Centre,Mumbai,73,0.22188449848024316,0.0,0.01296233012716532
-18289,Rainbow Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.002311109957628736
-18168,Arpan Blood Centre And Blood Component Laboratory And Research Centre Nashik,Nashik,11,0.03343465045592705,0.0,0.0009905779194102576
-18169,Civil Hospital Blood Centre Nashik,Nashik,11,0.03343465045592705,0.0,0.0009889580826385014
-18049,Rotary D.G Goenka Blood Centre( Municipal Gen. Hospital),Mumbai,73,0.22188449848024316,0.0,0.013175469396612497
-18164,"Civil Surgeon, District General Hospital Blood Centre, Nandurbar",Nandurbar,1,0.00303951367781155,0.0,0.0015542698901172076
-18285,Sainath Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.0023004900907980376
-18043,Poona Serological Institute Blood Centre,Pune,38,0.11550151975683891,0.0,0.014961425901106941
-18044,Bandra Holly Family Hospital Society Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.012873575113635464
-18286,Jeevan Jyoti Blood Centre And Component,Nagpur,18,0.0547112462006079,0.0,0.0022570590750928803
-18045,"Dr. L. H. Hiranandani Hospital, Blood Centre",Mumbai,73,0.22188449848024316,0.0,0.013926923621050767
-18166,Ashirwad Medical Foundations Gsk Blood Centre And Components,Nagpur,18,0.0547112462006079,0.0,0.0023154943633902883
-18287,Ayush Blood Centre And Component Lab Ramdaspeth Nagpur,Nagpur,18,0.0547112462006079,0.0,0.002308653100774024
-18167,Seva Blood Centre,Nashik,7,0.02127659574468085,0.0,0.0005743728284802127
-18288,Lifeline Blood Centre Nagpur,Nagpur,18,0.0547112462006079,0.0,0.0023099101340015513
-18160,Jeevan Surabhi Blood Centre,Jalgaon,9,0.02735562310030395,0.0,0.0010968048522035257
-18040,Sant Nirankari Blood Centre,Mumbai Suburban,73,0.22188449848024316,0.0,0.013636667991209954
-18161,Indian Red Cross Society Blood Centre Jalgaon,Jalgaon,9,0.02735562310030395,0.0,0.0010948379065154408
-18162,Godavari FoundationS Dr.Ulhas Patil Medical College And Hospital Blood Centre,Jalgaon,9,0.02735562310030395,0.0,0.000999969981924704
-18283,Dr. Hegdewar Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.002255454589685772
-18284,"Nkp Salve Inst.Of Med.Sci. And Res.Center.Lata Mangeshkar Hosp, Blood Centre",Nagpur,18,0.0547112462006079,0.0,0.0019796147794420727
-18042,"Matoshri Valbai Mulji Shah, Arpan Blood Centre",Mumbai,73,0.22188449848024316,0.0,0.013434196647535878
-280536,Apollo Hospital Charitable Trusts' Apollo Hospital Blood Centre,Raigarh,74,0.22492401215805471,1.8533619986655795e-05,0.010655455309863417
-280537,M/S. Sri. Bhagwant Blood Centre,Solapur,3,0.00911854103343465,0.0,0.0003556537142198863
-280535,Jupiter Lifeline Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.01125849165790075
-280770,Jeevan Adhar Blood Centre Nanded,Nanded,6,0.0182370820668693,0.0,0.005404434822452815
-280768,Sanjeevani Blood Centre Bhosari,Pune,38,0.11550151975683891,0.0,0.010285450905142442
-280765,Sspm Medical College Lifetime Hospital Blood Centre,Sindhudurg,2,0.0060790273556231,0.0,0.00038220158724204046
-280520,Mgm Medical College And Hospital Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.002444825437582868
-280516,"Sadguru Gajanan Maharaj Education Society, Paramedical Inst., Revneel Blood Centre",Solapur,3,0.00911854103343465,0.0,0.00025168571112752625
-280757,Nh Srcc ChildrenS Hospital Blood Centre,Mumbai,74,0.22492401215805471,0.0,0.010791553124447958
-283609,Aiims Nagpur Blood Center,Nagpur,18,0.0547112462006079,0.0,0.0019216767686226954
-280696,Shaswat Blood Centre Sangli,Sangli,25,0.07598784194528875,3.706723997331159e-05,0.002199190546585564
-283840,"Radhai Blood Centre, Components Laboratory And Apheresis Centre, Udgir, Dist. Latur",Latur,8,0.0243161094224924,0.0,0.0009204500547021899
-280694,Medicare Blood Centre,Yavatmal,3,0.00911854103343465,0.0003706723997331159,0.0004392517238186031
-282733,Rotary Blood Centre,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-282612,Red Plus Blood Center Jalgaon,Jalgaon,9,0.02735562310030395,0.0,0.0010943600883127544
-280674,Pandharpur Blood Centre,Solapur,4,0.0121580547112462,3.706723997331159e-05,0.0004422824608457436
-282601,Symbiosis University Hospital And Research Center Blood Centre Of Symbiosis Trust,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-280662,Mimer Medical College And Garware Blood Centre,Pune,38,0.11550151975683891,0.0,0.004173651322778061
-27129,"Dean, Govt. Medical College Hospital Blood Centre Akola",Akola,3,0.00911854103343465,0.0,0.003395521907610378
-27126,Civil Hospital Sindhudurg,Sindhudurg,2,0.0060790273556231,0.0,0.000407963242509587
-27127,"Blood Centre, Govt.Medical College, General Hospital Latur",Latur,7,0.02127659574468085,1.8533619986655795e-05,0.0009088240899821423
-27120,Sasoon Blood Centre Pune,Pune,38,0.11550151975683891,0.0006672103195196086,0.015944638553998348
-27121,"Government Medical College And Hospital ,Blood Centre, Miraj",Sangli,25,0.07598784194528875,0.0,0.002162911688169123
-280138,Irrapanna N Bolli Blood Centre,Solapur,10,0.030395136778115502,0.0,0.012240881827844118
-27124,"Central Hospital Blood Centre, Ulhasnagar, Thane",Thane,73,0.22188449848024316,0.0,0.006792966047934171
-27122,Indira Gandhi Medical College & Hospital Nagpur,Nagpur,18,0.0547112462006079,0.0,0.002213789446719748
-27123,Civil Hospital Washim,Washim,3,0.00911854103343465,0.0,0.0003403085695736629
-280132,Prakash Blood Centre And Blood Component Seperation Unit,Sangli,24,0.0729483282674772,0.0,0.0023539103128453268
-280133,"S. S.Venutai Y. Chavan Sub-District Hospital, Blood Centre Karad",Satara,8,0.0243161094224924,0.0,0.0017403500018723082
-280130,"Indian Red Cross Society, Dr. Shirgaonkar Blood Centre",Sangli,25,0.07598784194528875,0.0003521387797464601,0.002362059174381916
-280131,"Padma Bhushan Vasantdada Patil (Civil Surgeon), Govt. General Hospital Blood Centre, Sangli",Sangli,25,0.07598784194528875,0.0,0.002362780849765161
-282670,Pimpri Chinchwad Municipal CorporationS Y.C.M. Hospital Blood Centre,Pune,38,0.11550151975683891,0.0,0.00997081720223116
-27131,Dr.Shankarrao Chavan Government Medical College And Hospital Blood Centre Nanded,Nanded,6,0.0182370820668693,0.0,0.012322092937254649
-282668,Lokmanya Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.0023389678553959177
-27130,"Medical Supritentent Sub-District (Rural) Hospital Blood Centre, Gadchiroli Aheri",Gadchiroli,2,0.0060790273556231,0.0,0.0005243249706105363
-280128,M/S Navi Mumbai Blood Centre,Raigarh,74,0.22492401215805471,3.706723997331159e-05,0.009531733757883003
-280125,Red Plus Blood Centre Pune,Pune,38,0.11550151975683891,0.0,0.008843256463840326
-284844,"Civil Hospital Palghar Blood Centre, Palghar",Palghar,5,0.015197568389057751,0.0,0.0034341158576142138
-280126,Morya Blood Centre,Pune,38,0.11550151975683891,0.0,0.009639763915900441
-280123,M/S Vidyashree Charitable Trusts Om Blood Centre,Pune,38,0.11550151975683891,0.0,0.014947339564353946
-284843,"Government Medical College And General Hospital Blood Centre, Baramati, District Pune",Pune,2,0.0060790273556231,0.0,0.0007351129808402147
-280124,M/S Pimpri Chinchwad Blood Centre,Pune,38,0.11550151975683891,0.0,0.009970904619049845
-284721,"Kranti Mitra Mandal Public Charitable Trusts, Om Blood Centre, Shirur.",Pune,6,0.0182370820668693,0.0,0.0005909163754733175
-284720,"Dr. D.Y. Patil Medical College Hospital And Research Centre Blood Centre, Pimpri, Pune.",Pune,38,0.11550151975683891,0.0,0.009910992586152023
+18209,Vijayee Blood Centre Vasai (W),Palghar,75,0.2279635258358662,0.0037067239973311,0.0067187608095552
+284467,"Mahalaxmi Blood Centre, Kagal,Kolhapur",Kolhapur,3,0.0091185410334346,0.0,0.0003518958115676
+18205,Mira Bhayandar Muncipal Corporation Rajeev Gandhi Blood Centre,Thane,76,0.2310030395136778,0.0005560085995996,0.0094224567544978
+27150,"Sub -Dist Cottage Hospital, Blood Centre , Sawantwadi, Sindhudurg",Sindhudurg,2,0.0060790273556231,0.0,0.0002114894496984
+18208,M/S. Shri Hazur Saheb Blood Centre,Nanded,6,0.0182370820668693,0.0,0.0105209190796828
+18098,"Akshay Blood Centre, Miraj",Sangli,25,0.0759878419452887,1.8533619986655795e-05,0.0022065715434889
+18094,Vasantdada Patil Blood Centre And Haematology Research Centre,Sangli,24,0.0729483282674772,0.0,0.0021717136875577
+18095,"Hindratna Prakashbapu Patil Blood Centre, Sangli",Sangli,25,0.0759878419452887,1.8533619986655795e-05,0.0023525908557065
+18096,Bharati Vidyapeeth University Medical College And Hospital Blood Centre,Sangli,25,0.0759878419452887,0.0,0.0022715324992322
+18097,"Miraj Serological Institute Blood Centre, Miraj",Sangli,24,0.0729483282674772,0.0,0.0021717136875577
+18090,"Islampur Medical Foundations, Rajaram Bapu Blood Centre , Islampur",Sangli,28,0.0851063829787234,0.0036696567573578,0.0021651137353712
+18091,Smt. Anila Kantilal Kothari Blood Centre And Dept. Of Hemato Oncology,Sangli,25,0.0759878419452887,0.0,0.0022316360038434
+18076,"Abhinav Sikshan MandalS, Sanjeevan Blood Centre",Kolhapur,24,0.0729483282674772,0.0,0.0019623879647299
+18078,Noble Charitable TrustS Noble Blood Centre,Pune,38,0.1155015197568389,0.0,0.0091087091613615
+18199,"Navi Mumbai Muncipal Corporation, Blood Centre",Thane,73,0.2218844984802431,0.0,0.0120692584280877
+18079,Pimpari Serological Institute Blood Centre,Pune,38,0.1155015197568389,0.0,0.0097088240183987
+18193,Chidanand Charitable Trust Blood Centre,Thane,73,0.2218844984802431,0.0,0.0085898459281751
+18072,"Metro Blood Centre,Civil Hospital Aundh Pune",Pune,38,0.1155015197568389,0.0,0.0128476731422198
+18073,"Grant Medical Foundation, A.H. Wadia Trust Blood Centre",Pune,38,0.1155015197568389,0.0,0.0139763749113364
+18195,Kalyan Dombivali Muncipal Corporation Sponsered Nandakishore Educaation Society Arpan Blood Bank,Thane,74,0.2249240121580547,1.8533619986655795e-05,0.0073672240344397
+18196,Ishwar Seva Trusts Dombivali Blood Center,Thane,73,0.2218844984802431,0.0,0.008412582627333
+18190,Kai Wamanrao Oka Rakta Kendra,Thane,73,0.2218844984802431,0.0,0.011893256109845
+18070,Jehangir Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0062252050407535
+18071,Kem Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0150637650878142
+285061,Pachpande Multispeciality Hospital Blood Storage Center,Jalgaon,10,0.0303951367781155,0.0024093705982652,0.0010918205480824
+284150,"Shri Dhaneshwari Manav Vikas Mandals, Shantai Blood Centre, Pedgaon, Dist. Parbhani",Parbhani,1,0.0030395136778115,0.0,0.0024346715712381
+18088,Cristanand Education Society Blood Centre,Chandrapur,3,0.0091185410334346,0.0007784120394395,0.0007702975193297
+18089,"Civil Surgeon, General Hospital Blood Centre, Gadchiroli",Gadchiroli,2,0.0060790273556231,0.0,0.0005203909358489
+18083,Smt Kashibai Navale General Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.009299310251543
+18084,Chakan Blood Centre,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+18085,"Indian Red Cross Society, (Late Manikbai Chandulal Saraf ) Blood Centre, Pune",Pune,2,0.0060790273556231,0.0,0.0007380054056711
+18086,Central India Institute Of Haematology And OncologyS Blood And Blood Component Bank And Apheresis U,Nagpur,18,0.0547112462006079,0.0,0.0023148386271237
+18080,Konkan Mitra Mandal Medical TrustS Sahyadri Speaciality Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0144110033211921
+18081,Aditya Birla Memorial Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0086163563024466
+18082,Rakesh Jain Memorial Blood Centre,Pune,38,0.1155015197568389,0.0,0.0145033314164666
+18179,"Nashik Blood Bank And Transfusion Research Institute Blood Bank(Jijau Mahila Sewabhavi Sanstha, Nash",Nashik,11,0.033434650455927,0.0,0.0009891359966975
+18058,Sion Blood Centre,Mumbai,74,0.2249240121580547,1.8533619986655795e-05,0.0134991549885063
+18059,Bharatratna Dr Babasaheb Ambedkar Mun. Gen. Hospital Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0109459621219111
+18175,Ndmvps Medical College And Hospital Blood Centre,Nashik,11,0.033434650455927,0.0,0.0009771764708568
+18055,"Meenatai Thackeray Blood Centre, Goregaon, Mumbai, Managed By Prabodhan Goregaon",Mumbai,73,0.2218844984802431,0.0,0.0121352364517151
+18176,"Late. Dr. G.M. Bhavsar Charitable TrustS,Malegaon Blood Centre",Nashik,7,0.0212765957446808,0.0,0.0005875178345291
+18177,"Shri Sai Seva Medical Foundation Sanchalit, Sanjeevani Blood Centre",Nashik,11,0.033434650455927,0.0,0.0010115775581962
+18057,Suburban Hi-Tech Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0116550541426076
+18178,"Medical Superintendent, Regional Referal Hospital Blood Bank,(Superspeciality Hospital) Nashik",Nashik,11,0.033434650455927,0.0,0.0009934827328852
+18050,Sevenhills Healthcare Private Limited Hospital Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0139119550998319
+18292,"Kasturba Health SocietyS, Blood Centre, Sevagram(Mgims)",Wardha,2,0.0060790273556231,0.0,0.0007967852627056
+18171,"Jankalyan Blood Centre, Nashik",Nashik,11,0.033434650455927,0.0,0.0009739782789582
+18051,V.N. Desai Municipal General Hospital Blood Centre,Mumbai,74,0.2249240121580547,3.706723997331159e-05,0.0135451925228972
+18293,Jawaharlal Nehru Medical College Blood Centre,Wardha,2,0.0060790273556231,0.0,0.0009331181281973
+18173,DevaS Health And Devlopment Foundation Samta Blood Centre,Nashik,11,0.033434650455927,0.0,0.0010061774265357
+18052,Holy Spirit Hospital Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0135303557579923
+18295,"Arpan Blood Centre,Blood Component Lab. And Aphersis Centre",Ahmadnagar,6,0.0182370820668693,0.0031136481577581,0.0011617836434999
+280738,Superitendent Gokuldas Tejpal Hospital,Mumbai,74,0.2249240121580547,0.0,0.0100225932621695
+18290,Dean Government Medical College And Super Speciality Hospital Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.0022942763520421
+18291,"District - Civil Surgeon, General Hospital Blood Centre Wardha",Wardha,2,0.0060790273556231,0.0,0.001242952111516
+18069,Jankalyan Raktapedhi Pune,Pune,38,0.1155015197568389,0.0,0.0138242615320692
+18065,"Deenanath Mangeshkar Hospital, Blood Centre",Pune,38,0.1155015197568389,0.0,0.0134595084957988
+18186,Lokamanya Tssia Blood Centre,Thane,73,0.2218844984802431,7.413447994662318e-05,0.0119547287820623
+18187,Chhatrapati Shivaji Maharaj Hospital Blood Centre Csm,Thane,73,0.2218844984802431,0.0,0.0114587070400167
+18188,M/S Balasaheb Thackerey Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0129647928366709
+18189,Jupiter Hospital Blood Centre,Thane,73,0.2218844984802431,0.0001112017199199,0.0118952939513987
+18068,"Sadhu Vaswani Mission Medical Complex, Inlaks And Budharani Hospital Blood Centre, Pune",Pune,38,0.1155015197568389,0.0,0.0129388192596712
+18183,"Mahatma Gandhi Blood Centre, Operated By Task",Thane,73,0.2218844984802431,0.0,0.0120229633064065
+18062,Akshay Blood Centre,Pune,38,0.1155015197568389,0.0,0.0067937731253382
+18184,"Vitthal Sayanna General Hospital (Civil Hospital) Blood Centre, Thane",Thane,73,0.2218844984802431,0.0,0.0114880486721423
+18064,M/S Bharati Vidyapeeth Medical Foundations Bharati Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0097806387528957
+18185,Navjeevan Blood Centre Mangaed By Spvf,Thane,73,0.2218844984802431,0.0,0.0120168217819744
+18181,"Shree Swami Samartha Vaidyakiya Shaikshanik And Sanshodhan Sanstha, Late Shri Mukeshbai Patel Blo",Dhule,1,0.0030395136778115,0.0,0.0006460094353992
+280723,Mahalakshmi Blood Centre,Satara,8,0.0243161094224924,0.0003892060197197,0.0017510567373373
+18157,Civil Hospital Blood Centre,Jalgaon,9,0.0273556231003039,0.0,0.0010941353086127
+18278,Dr. Murlidhar Kharche Memorial Jeevan Jyoti Blood Centre,Buldana,5,0.0151975683890577,0.0011120171991993,0.0006568973728518
+18037,Deepak Foundations Anviksha Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0141987090911674
+18158,Indian Red Cross Society Sanchalit Askaran Tarachand Jain Blood Centre,Jalgaon,9,0.0273556231003039,0.0,0.0010974469886832
+284084,"Washim Blood Centre (Trust), Washim Managed By Ocean Bahuuddeshiya Sanstha, Pusad, Dist. Yavtmal",Washim,4,0.0121580547112462,0.0002224034398398,0.0003516869347835
+18038,"K.B.Bhabha Muncipal General Hospital, Blood Centre",Mumbai,74,0.2249240121580547,0.0,0.0131140326893
+18159,Jeevanshri Raktapedi,Jalgaon,7,0.0212765957446808,0.0024835050782118,0.0009762332885134
+18039,Lilavati Hospital And Research Centre Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0128933087658537
+18153,Jeevan Jyoti Blood Centre,Dhule,8,0.0243161094224924,0.0,0.000837004860554
+18154,Shree Navjeevan Blood Centre Dhule,Dhule,8,0.0243161094224924,0.0,0.0008278557598758
+18275,Shri Gajanan Blood Centre And Components,Yavatmal,4,0.0121580547112462,0.0,0.0003863289714101
+18033,Bhabha Atomic Research Centre Hospital Blood Centre,Mumbai,74,0.2249240121580547,0.0002594706798131,0.0133992932566996
+18034,"Seth V.C.Gandhi And M.A.Vora Municipal General Hospital, Rajawadi ,Ghatkopar",Mumbai,74,0.2249240121580547,1.8533619986655795e-05,0.0142033490552251
+18155,Dhanwantri Blood Centre,Jalgaon,10,0.0303951367781155,0.0013344206390392,0.0009407082360548
+18035,"Sushilaben R. Mehta And Sir. Kikabai Cardiac Institute, Blood Centre",Mumbai,74,0.2249240121580547,3.706723997331159e-05,0.0133042610984655
+18156,Keshavsmruti Pratishthan Sanchalit Madhavrao Golwalkar Swayamsevi Raktpedhi,Jalgaon,9,0.0273556231003039,0.0,0.0010961887238959
+18277,"Civil Surgeon, District General Hospital Blood Centre",Buldana,3,0.0091185410334346,0.0,0.0005065254028981
+18150,Shri Bhausaheb Hire Govt. Medical College And Hospital Blood Centre Dhule,Dhule,8,0.0243161094224924,0.0008896137593594,0.0008178743603738
+18030,K.J.Somaiya Medical College And Hospital Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0137798763270306
+280719,Swami Vivekanand Blood Centre,Nanded,6,0.0182370820668693,0.0,0.0081704473088901
+18031,"L.T.M.G., Municipal Hospital Blood Centre",Mumbai,74,0.2249240121580547,0.0,0.0136262671757849
+18152,Jawahar Medical Foundation Blood Centre,Dhule,8,0.0243161094224924,0.0,0.0008175312684228
+18047,Fortis Hospital Blood Centre,Mumbai,73,0.2218844984802431,0.0,0.0129623301271653
+18289,Rainbow Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.0023111099576287
+18168,Arpan Blood Centre And Blood Component Laboratory And Research Centre Nashik,Nashik,11,0.033434650455927,0.0,0.0009905779194102
+18169,Civil Hospital Blood Centre Nashik,Nashik,11,0.033434650455927,0.0,0.0009889580826385
+18049,Rotary D.G Goenka Blood Centre( Municipal Gen. Hospital),Mumbai,73,0.2218844984802431,0.0,0.0131754693966124
+18164,"Civil Surgeon, District General Hospital Blood Centre, Nandurbar",Nandurbar,1,0.0030395136778115,0.0,0.0015542698901172
+18285,Sainath Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.002300490090798
+18043,Poona Serological Institute Blood Centre,Pune,38,0.1155015197568389,0.0,0.0149614259011069
+18044,Bandra Holly Family Hospital Society Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0128735751136354
+18286,Jeevan Jyoti Blood Centre And Component,Nagpur,18,0.0547112462006079,0.0,0.0022570590750928
+18045,"Dr. L. H. Hiranandani Hospital, Blood Centre",Mumbai,73,0.2218844984802431,0.0,0.0139269236210507
+18166,Ashirwad Medical Foundations Gsk Blood Centre And Components,Nagpur,18,0.0547112462006079,0.0,0.0023154943633902
+18287,Ayush Blood Centre And Component Lab Ramdaspeth Nagpur,Nagpur,18,0.0547112462006079,0.0,0.002308653100774
+18167,Seva Blood Centre,Nashik,7,0.0212765957446808,0.0,0.0005743728284802
+18288,Lifeline Blood Centre Nagpur,Nagpur,18,0.0547112462006079,0.0,0.0023099101340015
+18160,Jeevan Surabhi Blood Centre,Jalgaon,9,0.0273556231003039,0.0,0.0010968048522035
+18040,Sant Nirankari Blood Centre,Mumbai Suburban,73,0.2218844984802431,0.0,0.0136366679912099
+18161,Indian Red Cross Society Blood Centre Jalgaon,Jalgaon,9,0.0273556231003039,0.0,0.0010948379065154
+18162,Godavari FoundationS Dr.Ulhas Patil Medical College And Hospital Blood Centre,Jalgaon,9,0.0273556231003039,0.0,0.0009999699819247
+18283,Dr. Hegdewar Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.0022554545896857
+18284,"Nkp Salve Inst.Of Med.Sci. And Res.Center.Lata Mangeshkar Hosp, Blood Centre",Nagpur,18,0.0547112462006079,0.0,0.001979614779442
+18042,"Matoshri Valbai Mulji Shah, Arpan Blood Centre",Mumbai,73,0.2218844984802431,0.0,0.0134341966475358
+280536,Apollo Hospital Charitable Trusts' Apollo Hospital Blood Centre,Raigarh,74,0.2249240121580547,1.8533619986655795e-05,0.0106554553098634
+280537,M/S. Sri. Bhagwant Blood Centre,Solapur,3,0.0091185410334346,0.0,0.0003556537142198
+280535,Jupiter Lifeline Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0112584916579007
+280770,Jeevan Adhar Blood Centre Nanded,Nanded,6,0.0182370820668693,0.0,0.0054044348224528
+280768,Sanjeevani Blood Centre Bhosari,Pune,38,0.1155015197568389,0.0,0.0102854509051424
+280765,Sspm Medical College Lifetime Hospital Blood Centre,Sindhudurg,2,0.0060790273556231,0.0,0.000382201587242
+280520,Mgm Medical College And Hospital Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0024448254375828
+280516,"Sadguru Gajanan Maharaj Education Society, Paramedical Inst., Revneel Blood Centre",Solapur,3,0.0091185410334346,0.0,0.0002516857111275
+280757,Nh Srcc ChildrenS Hospital Blood Centre,Mumbai,74,0.2249240121580547,0.0,0.0107915531244479
+283609,Aiims Nagpur Blood Center,Nagpur,18,0.0547112462006079,0.0,0.0019216767686226
+280696,Shaswat Blood Centre Sangli,Sangli,25,0.0759878419452887,3.706723997331159e-05,0.0021991905465855
+283840,"Radhai Blood Centre, Components Laboratory And Apheresis Centre, Udgir, Dist. Latur",Latur,8,0.0243161094224924,0.0,0.0009204500547021
+280694,Medicare Blood Centre,Yavatmal,3,0.0091185410334346,0.0003706723997331,0.0004392517238186
+282733,Rotary Blood Centre,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+282612,Red Plus Blood Center Jalgaon,Jalgaon,9,0.0273556231003039,0.0,0.0010943600883127
+280674,Pandharpur Blood Centre,Solapur,4,0.0121580547112462,3.706723997331159e-05,0.0004422824608457
+282601,Symbiosis University Hospital And Research Center Blood Centre Of Symbiosis Trust,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+280662,Mimer Medical College And Garware Blood Centre,Pune,38,0.1155015197568389,0.0,0.004173651322778
+27129,"Dean, Govt. Medical College Hospital Blood Centre Akola",Akola,3,0.0091185410334346,0.0,0.0033955219076103
+27126,Civil Hospital Sindhudurg,Sindhudurg,2,0.0060790273556231,0.0,0.0004079632425095
+27127,"Blood Centre, Govt.Medical College, General Hospital Latur",Latur,7,0.0212765957446808,1.8533619986655795e-05,0.0009088240899821
+27120,Sasoon Blood Centre Pune,Pune,38,0.1155015197568389,0.0006672103195196,0.0159446385539983
+27121,"Government Medical College And Hospital ,Blood Centre, Miraj",Sangli,25,0.0759878419452887,0.0,0.0021629116881691
+280138,Irrapanna N Bolli Blood Centre,Solapur,10,0.0303951367781155,0.0,0.0122408818278441
+27124,"Central Hospital Blood Centre, Ulhasnagar, Thane",Thane,73,0.2218844984802431,0.0,0.0067929660479341
+27122,Indira Gandhi Medical College & Hospital Nagpur,Nagpur,18,0.0547112462006079,0.0,0.0022137894467197
+27123,Civil Hospital Washim,Washim,3,0.0091185410334346,0.0,0.0003403085695736
+280132,Prakash Blood Centre And Blood Component Seperation Unit,Sangli,24,0.0729483282674772,0.0,0.0023539103128453
+280133,"S. S.Venutai Y. Chavan Sub-District Hospital, Blood Centre Karad",Satara,8,0.0243161094224924,0.0,0.0017403500018723
+280130,"Indian Red Cross Society, Dr. Shirgaonkar Blood Centre",Sangli,25,0.0759878419452887,0.0003521387797464,0.0023620591743819
+280131,"Padma Bhushan Vasantdada Patil (Civil Surgeon), Govt. General Hospital Blood Centre, Sangli",Sangli,25,0.0759878419452887,0.0,0.0023627808497651
+282670,Pimpri Chinchwad Municipal CorporationS Y.C.M. Hospital Blood Centre,Pune,38,0.1155015197568389,0.0,0.0099708172022311
+27131,Dr.Shankarrao Chavan Government Medical College And Hospital Blood Centre Nanded,Nanded,6,0.0182370820668693,0.0,0.0123220929372546
+282668,Lokmanya Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0023389678553959
+27130,"Medical Supritentent Sub-District (Rural) Hospital Blood Centre, Gadchiroli Aheri",Gadchiroli,2,0.0060790273556231,0.0,0.0005243249706105
+280128,M/S Navi Mumbai Blood Centre,Raigarh,74,0.2249240121580547,3.706723997331159e-05,0.009531733757883
+280125,Red Plus Blood Centre Pune,Pune,38,0.1155015197568389,0.0,0.0088432564638403
+284844,"Civil Hospital Palghar Blood Centre, Palghar",Palghar,5,0.0151975683890577,0.0,0.0034341158576142
+280126,Morya Blood Centre,Pune,38,0.1155015197568389,0.0,0.0096397639159004
+280123,M/S Vidyashree Charitable Trusts Om Blood Centre,Pune,38,0.1155015197568389,0.0,0.0149473395643539
+284843,"Government Medical College And General Hospital Blood Centre, Baramati, District Pune",Pune,2,0.0060790273556231,0.0,0.0007351129808402
+280124,M/S Pimpri Chinchwad Blood Centre,Pune,38,0.1155015197568389,0.0,0.0099709046190498
+284721,"Kranti Mitra Mandal Public Charitable Trusts, Om Blood Centre, Shirur.",Pune,6,0.0182370820668693,0.0,0.0005909163754733
+284720,"Dr. D.Y. Patil Medical College Hospital And Research Centre Blood Centre, Pimpri, Pune.",Pune,38,0.1155015197568389,0.0,0.009910992586152
 280120,Shree Swami Samarth Blood Centre,Ratnagiri,0,0.0,0.0,0.0
-27107,TATA MEMORIAL CENTRE-ACTREC,Mumbai,74,0.22492401215805471,7.413447994662318e-05,0.012233366880641503
-27104,Sanjeevani Blood Centre,Aurangabad,11,0.03343465045592705,0.0,0.0024680795565924897
-27105,Indian Red Cross Society Blood Bank Ratnagiri,Ratnagiri,1,0.00303951367781155,0.0,0.03277578336897756
-27108,Jankalyan Blood Center,Nandurbar,1,0.00303951367781155,0.0,0.0015542698901172076
-27109,District General Hospital Blood Bank Satara,Satara,3,0.00911854103343465,0.0,0.0010906286702159803
-284835,"Shaurya Blood Centre, Blood Component And Apheresis Centre, Ahmedpur, Dist. Latur",Latur,2,0.0060790273556231,0.00016680257987990215,0.00037510765879833404
-27117,"Blood Bank Civil Hospital, Bhandara",Bhandara,2,0.0060790273556231,1.8533619986655795e-05,0.0008946186799020426
-27118,"Blood Bank Civil Hospital, Ratnagiri",Ratnagiri,1,0.00303951367781155,0.0,0.03277578336897756
-27115,"Blood Bank Civil Hospital, Beed",Bid,0,0.0,0.0,0.0
-27116,"Blood Bank Civil Hospital, Alibag",Raigarh,39,0.11854103343465046,0.0,0.0043320796249631185
-27119,"Blood Bank Civil Hospital, Solapur",Solapur,9,0.02735562310030395,0.0,0.02002958351572879
-27114,"Blood Bank Civil Hospital, Amravati",Amravati,5,0.015197568389057751,1.8533619986655795e-05,0.0009582012379330922
-27111,Shwas foundation kavathemahankal trust sanchalit maha blood centre and comprehensive thalassemia day,Pune,15,0.04559270516717325,0.0,0.0014001855894767348
-283208,Support Multipurpose Society Aadhar Blood Centre,Ahmadnagar,8,0.0243161094224924,0.0,0.000872500924405922
-283207,Muktai Blood Centre Of Shivpooja Bahuudeshiya Shikhan Prasarak Mandal Solapur,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-282598,Dnyandeep Blood Center Of Modern Institute Of Technology,Solapur,10,0.030395136778115502,1.8533619986655795e-05,0.020030219271339366
-282599,Dean Datta Meghe Medical Collecge M.S.Dattatraya Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.001853242353454375
-284529,Spandan Blood Centre,Pune,38,0.11550151975683891,0.0,0.01471998375296226
-284765,"Shree Sainath Blood Centre, Sinnar, Tal. Sinnar, Dist. Nashik",Nashik,12,0.0364741641337386,0.003058047297798206,0.0010881248751647794
-284764,"Blood Centre And Component Separation Unit, Sub-District Hospital, Dharni, District Amravati",Amravati,5,0.015197568389057751,1.8533619986655795e-05,0.0008891588587177207
-282586,"Varad Charitable And Medical Trust, Balaji Blood Centre, Satara",Satara,8,0.0243161094224924,0.0018348283786789237,0.001205063694033966
-283795,Autus Blood Centre,Pune,30,0.0911854103343465,0.0,0.01588380147723642
-284763,"Balaji Blood Centre, Lonand, Khandala Taluk, Dist. Satara",Satara,7,0.02127659574468085,0.0005560085995996738,0.0011093039808993772
-283310,Renuka Blood Centre Component And Apheresis Centre,Osmanabad,2,0.0060790273556231,0.0,0.0003261830482618311
-283307,Sant Jagnnath Maharaj Anjalekar Bahuuudeshiya Sansthas Sanjivani Blood Centre,Jalgaon,10,0.030395136778115502,0.0,0.0008345543406948609
-283306,Jalna Blood Centre Components And Apheresis Centre,Jalna,3,0.00911854103343465,0.0,0.0008883272596635031
-283305,Surabhi Hospital Pvt.Ltd. Surabhi Blood Centre,Ahmadnagar,73,0.22188449848024316,0.0,0.010610245054500369
-284514,M/S . Ideal Foundations Ideal Blood Centre,Palghar,6,0.0182370820668693,0.0,0.0034570332337672985
-282577,"Welfare And Educational Trust Of Nmrcw, Chemist Blood Centre",Thane,70,0.2127659574468085,0.0,0.011774238518003789
-284510,"Saiseva Blood Cantre, Blood Components And Apheresis Centre",Ahmadnagar,9,0.02735562310030395,0.0,0.0009028706174075027
-282570,Sankalp Blood Centre,Thane,70,0.2127659574468085,0.0,0.011774238518003789
-282571,"Shri Manoharpant Sapate Bahuuddeshiya Samajseva Sansthan TrustS, M/S. Medicare Blood Centre",Solapur,3,0.00911854103343465,0.0,0.0003556537142198863
-284509,Sankalp Blood Centre,Satara,19,0.057750759878419454,0.0008247460894061829,0.001454204836982838
-284508,Dr.Rajendra Gode Blood Centre And Component Lab,Amravati,4,0.0121580547112462,0.0,0.0006908998694397638
-280149,Advanced Centre For Treatment Reasearch And Education In Cancer,Raigarh,73,0.22188449848024316,7.413447994662318e-05,0.009788291927484235
-280147,"Ocean Bahuuddeshiy Sanstha, M/S Ekneel Blood Centre",Yavatmal,4,0.0121580547112462,0.0,0.0003878840773933038
-280148,"M/S Adhar Blood Centre, Ichalkaranji",Kolhapur,24,0.0729483282674772,0.0,0.0020534937840358423
-282568,Vbss Sanchalit Latur Blood Centre And Components Latur,Latur,7,0.02127659574468085,0.0,0.000915303016048209
-280145,Terna Blood Centre,Thane,74,0.22492401215805471,0.00011120171991993476,0.010882473882711793
-282565,"Sathiya Educational SocietyS Sathiya Trust Blood Centre, Nalasopara, Palghar",Palghar,5,0.015197568389057751,0.0,0.0034199207021736833
-280146,Blood Centre Shri Vasantrao Naik Govt. Medical College And Hospital,Yavatmal,4,0.0121580547112462,0.0,0.00038652488870357434
-284864,"Sahyaadrie Blood Centre, Midc Waluj Industrial Area, Vadgaon Kolhati, Chh. Sambhajinagar.",Aurangabad,11,0.03343465045592705,0.0,0.0016336927441927415
-282564,M/S Aman Blood Centre Gandhibag Nagpur,Nagpur,18,0.0547112462006079,0.0,0.002275768918771456
-280141,Mallikarjun Blood Centre,Solapur,10,0.030395136778115502,0.0,0.019352068019241313
-280142,"Maharashtra Bloodbank, Component And Apheresis Center",Palghar,5,0.015197568389057751,0.0,0.003442032316951599
-282562,Kokilaben Dhirubhai Ambani Hospital Navi Mumbai Blood Centre,Thane,73,0.22188449848024316,0.0,0.010905133483899718
-280140,"M.M.Patel Public Charitable Trust, Ashwini Rural Medical College And Hospital Blood Centre",Solapur,10,0.030395136778115502,0.0,0.003659732201868923
+27107,TATA MEMORIAL CENTRE-ACTREC,Mumbai,74,0.2249240121580547,7.413447994662318e-05,0.0122333668806415
+27104,Sanjeevani Blood Centre,Aurangabad,11,0.033434650455927,0.0,0.0024680795565924
+27105,Indian Red Cross Society Blood Bank Ratnagiri,Ratnagiri,1,0.0030395136778115,0.0,0.0327757833689775
+27108,Jankalyan Blood Center,Nandurbar,1,0.0030395136778115,0.0,0.0015542698901172
+27109,District General Hospital Blood Bank Satara,Satara,3,0.0091185410334346,0.0,0.0010906286702159
+284835,"Shaurya Blood Centre, Blood Component And Apheresis Centre, Ahmedpur, Dist. Latur",Latur,2,0.0060790273556231,0.0001668025798799,0.0003751076587983
+27117,"Blood Bank Civil Hospital, Bhandara",Bhandara,2,0.0060790273556231,1.8533619986655795e-05,0.000894618679902
+27118,"Blood Bank Civil Hospital, Ratnagiri",Ratnagiri,1,0.0030395136778115,0.0,0.0327757833689775
+27115,"Blood Bank Civil Hospital, Beed",Beed,0,0.0,0.0,0.0
+27116,"Blood Bank Civil Hospital, Alibag",Raigarh,39,0.1185410334346504,0.0,0.0043320796249631
+27119,"Blood Bank Civil Hospital, Solapur",Solapur,9,0.0273556231003039,0.0,0.0200295835157287
+27114,"Blood Bank Civil Hospital, Amravati",Amravati,5,0.0151975683890577,1.8533619986655795e-05,0.000958201237933
+27111,Shwas foundation kavathemahankal trust sanchalit maha blood centre and comprehensive thalassemia day,Pune,15,0.0455927051671732,0.0,0.0014001855894767
+283208,Support Multipurpose Society Aadhar Blood Centre,Ahmadnagar,8,0.0243161094224924,0.0,0.0008725009244059
+283207,Muktai Blood Centre Of Shivpooja Bahuudeshiya Shikhan Prasarak Mandal Solapur,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+282598,Dnyandeep Blood Center Of Modern Institute Of Technology,Solapur,10,0.0303951367781155,1.8533619986655795e-05,0.0200302192713393
+282599,Dean Datta Meghe Medical Collecge M.S.Dattatraya Blood Centre,Nagpur,18,0.0547112462006079,0.0,0.0018532423534543
+284529,Spandan Blood Centre,Pune,38,0.1155015197568389,0.0,0.0147199837529622
+284765,"Shree Sainath Blood Centre, Sinnar, Tal. Sinnar, Dist. Nashik",Nashik,12,0.0364741641337386,0.0030580472977982,0.0010881248751647
+284764,"Blood Centre And Component Separation Unit, Sub-District Hospital, Dharni, District Amravati",Amravati,5,0.0151975683890577,1.8533619986655795e-05,0.0008891588587177
+282586,"Varad Charitable And Medical Trust, Balaji Blood Centre, Satara",Satara,8,0.0243161094224924,0.0018348283786789,0.0012050636940339
+283795,Autus Blood Centre,Pune,30,0.0911854103343465,0.0,0.0158838014772364
+284763,"Balaji Blood Centre, Lonand, Khandala Taluk, Dist. Satara",Satara,7,0.0212765957446808,0.0005560085995996,0.0011093039808993
+283310,Renuka Blood Centre Component And Apheresis Centre,Osmanabad,2,0.0060790273556231,0.0,0.0003261830482618
+283307,Sant Jagnnath Maharaj Anjalekar Bahuuudeshiya Sansthas Sanjivani Blood Centre,Jalgaon,10,0.0303951367781155,0.0,0.0008345543406948
+283306,Jalna Blood Centre Components And Apheresis Centre,Jalna,3,0.0091185410334346,0.0,0.0008883272596635
+283305,Surabhi Hospital Pvt.Ltd. Surabhi Blood Centre,Ahmadnagar,73,0.2218844984802431,0.0,0.0106102450545003
+284514,M/S . Ideal Foundations Ideal Blood Centre,Palghar,6,0.0182370820668693,0.0,0.0034570332337672
+282577,"Welfare And Educational Trust Of Nmrcw, Chemist Blood Centre",Thane,70,0.2127659574468085,0.0,0.0117742385180037
+284510,"Saiseva Blood Cantre, Blood Components And Apheresis Centre",Ahmadnagar,9,0.0273556231003039,0.0,0.0009028706174075
+282570,Sankalp Blood Centre,Thane,70,0.2127659574468085,0.0,0.0117742385180037
+282571,"Shri Manoharpant Sapate Bahuuddeshiya Samajseva Sansthan TrustS, M/S. Medicare Blood Centre",Solapur,3,0.0091185410334346,0.0,0.0003556537142198
+284509,Sankalp Blood Centre,Satara,19,0.0577507598784194,0.0008247460894061,0.0014542048369828
+284508,Dr.Rajendra Gode Blood Centre And Component Lab,Amravati,4,0.0121580547112462,0.0,0.0006908998694397
+280149,Advanced Centre For Treatment Reasearch And Education In Cancer,Raigarh,73,0.2218844984802431,7.413447994662318e-05,0.0097882919274842
+280147,"Ocean Bahuuddeshiy Sanstha, M/S Ekneel Blood Centre",Yavatmal,4,0.0121580547112462,0.0,0.0003878840773933
+280148,"M/S Adhar Blood Centre, Ichalkaranji",Kolhapur,24,0.0729483282674772,0.0,0.0020534937840358
+282568,Vbss Sanchalit Latur Blood Centre And Components Latur,Latur,7,0.0212765957446808,0.0,0.0009153030160482
+280145,Terna Blood Centre,Thane,74,0.2249240121580547,0.0001112017199199,0.0108824738827117
+282565,"Sathiya Educational SocietyS Sathiya Trust Blood Centre, Nalasopara, Palghar",Palghar,5,0.0151975683890577,0.0,0.0034199207021736
+280146,Blood Centre Shri Vasantrao Naik Govt. Medical College And Hospital,Yavatmal,4,0.0121580547112462,0.0,0.0003865248887035
+284864,"Sahyaadrie Blood Centre, Midc Waluj Industrial Area, Vadgaon Kolhati, Chh. Sambhajinagar.",Aurangabad,11,0.033434650455927,0.0,0.0016336927441927
+282564,M/S Aman Blood Centre Gandhibag Nagpur,Nagpur,18,0.0547112462006079,0.0,0.0022757689187714
+280141,Mallikarjun Blood Centre,Solapur,10,0.0303951367781155,0.0,0.0193520680192413
+280142,"Maharashtra Bloodbank, Component And Apheresis Center",Palghar,5,0.0151975683890577,0.0,0.0034420323169515
+282562,Kokilaben Dhirubhai Ambani Hospital Navi Mumbai Blood Centre,Thane,73,0.2218844984802431,0.0,0.0109051334838997
+280140,"M.M.Patel Public Charitable Trust, Ashwini Rural Medical College And Hospital Blood Centre",Solapur,10,0.0303951367781155,0.0,0.0036597322018689
