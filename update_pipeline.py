@@ -59,6 +59,16 @@ try:
 except ImportError:
     SKLEARN_AVAILABLE = False
 
+try:
+    from scipy.optimize import linprog
+    from scipy.sparse import lil_matrix, csr_matrix
+    SCIPY_AVAILABLE = True
+except ImportError:
+    linprog = None
+    lil_matrix = None
+    csr_matrix = None
+    SCIPY_AVAILABLE = False
+
 
 # ============================================================
 # PATHS
@@ -759,106 +769,78 @@ def find_record_start(text, marker_position):
 
 def extract_source_records(text):
     """
-    Extract the complete list of e-RaktKosh blood-bank records from
-    PDF-extracted JSON text.
+    Extract the complete e-RaktKosh blood-bank record array from PDF text.
 
-    PDF extraction may corrupt the outer JSON array because page
-    boundaries introduce extra text. We therefore use two strategies:
+    The exported PDFs are visually JSON, but PDF text extraction introduces:
+      * page-break newlines inside JSON strings (for example ``O-\nVe``)
+      * literal control characters in some addresses
+      * the repeated text ``Pretty print`` at page boundaries
 
-    1. Decode the complete JSON array when possible.
-    2. Otherwise locate every top-level { "hospitalCode": ... } object
-       independently and decode it with balanced braces.
-
-    This is intentionally PDF-only in the main pipeline.
+    We normalize those PDF artifacts first and then decode the whole array.
+    This is much safer than trying to reconstruct each record independently,
+    because the source itself contains nested JSON objects.
     """
 
     if not text:
         return []
 
     # --------------------------------------------------------
-    # Method 1 — complete JSON array.
+    # PDF-text normalization
     # --------------------------------------------------------
-    hospital_match = re.search(
-        r'"hospitalCode"\s*:',
-        text,
-        flags=re.IGNORECASE
-    )
+    cleaned = text.replace("Pretty print", " ")
+    cleaned = cleaned.replace("\r", " ").replace("\n", " ").replace("\t", " ")
 
-    if hospital_match:
-        # Prefer the nearest '[' before the first hospitalCode.
-        array_start = text.rfind(
-            "[",
-            0,
-            hospital_match.start()
+    # Remove remaining ASCII control characters that pypdf can expose from
+    # the source PDF. Keep ordinary printable Unicode intact.
+    cleaned = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", " ", cleaned)
+
+    # --------------------------------------------------------
+    # Decode the JSON array itself.
+    # --------------------------------------------------------
+    array_start = cleaned.find("[")
+    if array_start < 0:
+        return []
+
+    try:
+        decoder = json.JSONDecoder()
+        parsed, _ = decoder.raw_decode(cleaned[array_start:])
+    except Exception:
+        parsed = None
+
+    if isinstance(parsed, list):
+        valid = [
+            item
+            for item in parsed
+            if isinstance(item, dict)
+            and normalize_code(item.get("hospitalCode"))
+        ]
+
+        marker_count = len(
+            re.findall(
+                r'"hospitalCode"\s*:',
+                cleaned,
+                flags=re.IGNORECASE
+            )
         )
 
-        if array_start >= 0:
-            try:
-                decoder = json.JSONDecoder()
-
-                parsed, _ = decoder.raw_decode(
-                    text[array_start:]
-                )
-
-                if isinstance(parsed, list):
-                    valid = [
-                        item
-                        for item in parsed
-                        if (
-                            isinstance(item, dict)
-                            and normalize_code(
-                                item.get("hospitalCode")
-                            )
-                        )
-                    ]
-
-                    if valid:
-                        # pypdf can return only the first page-level JSON
-                        # array and then stop at a page boundary. In that
-                        # case raw_decode() may falsely look successful.
-                        # Accept the complete-array result only when the
-                        # number of decoded hospital records matches the
-                        # number of hospitalCode markers in the text.
-                        marker_count = len(
-                            re.findall(
-                                r'"hospitalCode"\s*:',
-                                text,
-                                flags=re.IGNORECASE
-                            )
-                        )
-
-                        if len(valid) == marker_count:
-                            return valid
-
-            except Exception:
-                pass
+        if valid and len(valid) == marker_count:
+            return valid
 
     # --------------------------------------------------------
-    # Method 2 — direct top-level record starts.
-    #
-    # This is the critical fix for PDFs where page extraction
-    # breaks the outer array.
+    # Conservative fallback: locate top-level objects beginning with
+    # bldgrpcode1. This handles a future PDF whose outer array is damaged.
     # --------------------------------------------------------
-    start_matches = list(
-        re.finditer(
-            r'\{\s*"hospitalCode"\s*:',
-            text,
-            flags=re.IGNORECASE
-        )
-    )
-
     records = []
     seen_codes = set()
 
-    for match in start_matches:
+    record_starts = re.finditer(
+        r'\{\s*"bldgrpcode1"\s*:',
+        cleaned,
+        flags=re.IGNORECASE
+    )
 
-        start = match.start()
-
-        candidate = extract_json_object_at(
-            text,
-            start
-        )
-
+    for match in record_starts:
+        candidate = extract_json_object_at(cleaned, match.start())
         if candidate is None:
             continue
 
@@ -870,47 +852,29 @@ def extract_source_records(text):
         if not isinstance(obj, dict):
             continue
 
-        code = normalize_code(
-            obj.get("hospitalCode")
-        )
-
-        if not code:
-            continue
-
-        if code in seen_codes:
+        code = normalize_code(obj.get("hospitalCode"))
+        if not code or code in seen_codes:
             continue
 
         seen_codes.add(code)
         records.append(obj)
 
-    # --------------------------------------------------------
-    # Method 3 — final fallback using hospitalCode markers.
-    # --------------------------------------------------------
+    # Last-resort marker-based recovery retained for unusual source changes.
     if not records:
-
         matches = list(
             re.finditer(
                 r'"hospitalCode"\s*:',
-                text,
+                cleaned,
                 flags=re.IGNORECASE
             )
         )
 
         for match in matches:
-
-            start = find_record_start(
-                text,
-                match.start()
-            )
-
+            start = find_record_start(cleaned, match.start())
             if start is None:
                 continue
 
-            candidate = extract_json_object_at(
-                text,
-                start
-            )
-
+            candidate = extract_json_object_at(cleaned, start)
             if candidate is None:
                 continue
 
@@ -922,10 +886,7 @@ def extract_source_records(text):
             if not isinstance(obj, dict):
                 continue
 
-            code = normalize_code(
-                obj.get("hospitalCode")
-            )
-
+            code = normalize_code(obj.get("hospitalCode"))
             if not code or code in seen_codes:
                 continue
 
@@ -1017,29 +978,31 @@ def determine_snapshot_date(
 
 GROUP_PATTERNS = {
 
+    # PDF extraction sometimes inserts a space/newline between the sign
+    # and the "Ve" suffix, e.g. ``O-\nVe``. Allow optional whitespace.
     "A+":
-        r"A\+Ve",
+        r"A\+\s*Ve",
 
     "A-":
-        r"A-Ve",
+        r"A-\s*Ve",
 
     "B+":
-        r"B\+Ve",
+        r"B\+\s*Ve",
 
     "B-":
-        r"B-Ve",
+        r"B-\s*Ve",
 
     "O+":
-        r"O\+Ve",
+        r"O\+\s*Ve",
 
     "O-":
-        r"O-Ve",
+        r"O-\s*Ve",
 
     "AB+":
-        r"AB\+Ve",
+        r"AB\+\s*Ve",
 
     "AB-":
-        r"AB-Ve"
+        r"AB-\s*Ve"
 
 }
 
@@ -4264,45 +4227,85 @@ def objective10(
     )
 
     if latest.empty:
+        print("No latest-stock data available for redistribution.")
+        return pd.DataFrame()
 
-        return
+    if not SCIPY_AVAILABLE:
+        print("scipy unavailable. Install it with: pip install scipy")
+        return pd.DataFrame()
 
-    # Coordinates are authoritative from Objective 5 / coordinates.csv.
-    # latest already contains latitude/longitude, so exclude them before
-    # merging to avoid pandas creating latitude_x/latitude_y columns.
-    latest_for_merge = latest.drop(
-        columns=[
-            "latitude",
-            "longitude"
-        ],
-        errors="ignore"
+    # ------------------------------------------------------------
+    # Use coordinate-valid, non-anomalous banks only.
+    # The optimization is same-blood-group, safety-floor based,
+    # and constrained to the selected 150 km operational radius.
+    # ------------------------------------------------------------
+    coord_cols = [
+        "hospital_code",
+        "latitude",
+        "longitude"
+    ]
+
+    if geo.empty or not all(
+        column in geo.columns
+        for column in coord_cols
+    ):
+        print("Geographic coordinate data unavailable for redistribution.")
+        return pd.DataFrame()
+
+    coordinates = (
+        geo[coord_cols]
+        .copy()
+        .drop_duplicates("hospital_code")
     )
 
-    working = latest_for_merge.merge(
+    coordinates["hospital_code"] = coordinates["hospital_code"].map(
+        normalize_code
+    )
 
-        geo[
-            [
-                "hospital_code",
-                "latitude",
-                "longitude"
-            ]
+    working = latest.drop(
+        columns=[
+            column
+            for column in ["latitude", "longitude"]
+            if column in latest.columns
         ],
+        errors="ignore"
+    ).copy()
 
+    working["hospital_code"] = working["hospital_code"].map(
+        normalize_code
+    )
+
+    working = working.merge(
+        coordinates,
         on="hospital_code",
-
         how="inner"
-
     )
 
     working = working[
         ~working[
             "hospital_code"
-        ].isin(
-            BAD_COORDINATE_CODES
-        )
+        ].isin(BAD_COORDINATE_CODES)
+    ].copy()
+
+    working["latitude"] = pd.to_numeric(
+        working["latitude"],
+        errors="coerce"
+    )
+    working["longitude"] = pd.to_numeric(
+        working["longitude"],
+        errors="coerce"
+    )
+
+    working = working[
+        working["latitude"].notna()
+        & working["longitude"].notna()
+        & (working["latitude"] != 0)
+        & (working["longitude"] != 0)
     ].copy()
 
     recommendations = []
+    safety_floor = float(SAFETY_STOCK)
+    shortage_penalty = 10000.0
 
     for group in BLOOD_GROUPS:
 
@@ -4311,263 +4314,187 @@ def objective10(
                 "hospital_code",
                 "blood_bank_name",
                 "district",
+                "city",
                 "latitude",
                 "longitude",
                 group
             ]
         ].copy()
 
-        group_df[
-            "surplus"
-        ] = (
-            group_df[
-                group
-            ]
-            -
-            SAFETY_STOCK
-        ).clip(
-            lower=0
-        )
+        group_df["stock"] = pd.to_numeric(
+            group_df[group],
+            errors="coerce"
+        ).fillna(0).clip(lower=0)
 
-        group_df[
-            "deficit"
-        ] = (
-            SAFETY_STOCK
-            -
-            group_df[
-                group
-            ]
-        ).clip(
-            lower=0
-        )
+        group_df["surplus"] = (
+            group_df["stock"] - safety_floor
+        ).clip(lower=0)
+
+        group_df["deficit"] = (
+            safety_floor - group_df["stock"]
+        ).clip(lower=0)
 
         donors = group_df[
-            group_df[
-                "surplus"
-            ] > 0
-        ]
+            group_df["surplus"] > 0
+        ].reset_index(drop=True)
 
         recipients = group_df[
-            group_df[
-                "deficit"
-            ] > 0
-        ]
+            group_df["deficit"] > 0
+        ].reset_index(drop=True)
 
         if donors.empty or recipients.empty:
-
             continue
 
+        # Candidate transfer variables: donor -> recipient.
         pairs = []
+        for donor_idx, donor in donors.iterrows():
+            for recipient_idx, recipient in recipients.iterrows():
 
-        for _, donor in donors.iterrows():
-
-            for _, recipient in recipients.iterrows():
-
-                distance = haversine_km(
-
-                    donor[
-                        "latitude"
-                    ],
-
-                    donor[
-                        "longitude"
-                    ],
-
-                    recipient[
-                        "latitude"
-                    ],
-
-                    recipient[
-                        "longitude"
-                    ]
-
+                distance = float(
+                    haversine_km(
+                        float(donor["latitude"]),
+                        float(donor["longitude"]),
+                        float(recipient["latitude"]),
+                        float(recipient["longitude"])
+                    )
                 )
 
-                if (
-                    distance <=
-                    REDISTRIBUTION_RADIUS_KM
-                    and
-                    distance > 0
-                ):
+                # Same location is intentionally excluded from an
+                # actionable transfer: it is not a meaningful physical
+                # redistribution route for this objective.
+                if distance <= 0:
+                    continue
 
-                    pairs.append({
+                if distance > REDISTRIBUTION_RADIUS_KM:
+                    continue
 
-                        "blood_group":
-                            group,
+                pairs.append({
+                    "donor_idx": donor_idx,
+                    "recipient_idx": recipient_idx,
+                    "distance_km": distance
+                })
 
-                        "donor_code":
-                            donor[
-                                "hospital_code"
-                            ],
+        if not pairs:
+            continue
 
-                        "donor_name":
-                            donor[
-                                "blood_bank_name"
-                            ],
+        # Variables = every feasible transfer + one unmet-deficit
+        # variable per recipient.
+        transfer_count = len(pairs)
+        unmet_offset = transfer_count
+        variable_count = transfer_count + len(recipients)
 
-                        "donor_district":
-                            donor[
-                                "district"
-                            ],
+        objective = np.zeros(variable_count, dtype=float)
 
-                        "recipient_code":
-                            recipient[
-                                "hospital_code"
-                            ],
+        for i, pair in enumerate(pairs):
+            objective[i] = pair["distance_km"]
 
-                        "recipient_name":
-                            recipient[
-                                "blood_bank_name"
-                            ],
+        objective[unmet_offset:] = shortage_penalty
 
-                        "recipient_district":
-                            recipient[
-                                "district"
-                            ],
+        # Donor capacity constraints: sum outgoing <= surplus.
+        donor_constraints = []
+        donor_rhs = []
 
-                        "distance_km":
-                            float(
-                                distance
-                            ),
+        for donor_idx, donor in donors.iterrows():
+            row = np.zeros(variable_count, dtype=float)
+            for i, pair in enumerate(pairs):
+                if pair["donor_idx"] == donor_idx:
+                    row[i] = 1.0
+            donor_constraints.append(row)
+            donor_rhs.append(float(donor["surplus"]))
 
-                        "possible_units":
-                            min(
-                                float(
-                                    donor[
-                                        "surplus"
-                                    ]
-                                ),
-                                float(
-                                    recipient[
-                                        "deficit"
-                                    ]
-                                )
-                            )
+        # Recipient balance equations:
+        # incoming transfer + unmet deficit = full deficit.
+        recipient_constraints = []
+        recipient_rhs = []
 
-                    })
+        for recipient_idx, recipient in recipients.iterrows():
+            row = np.zeros(variable_count, dtype=float)
+            for i, pair in enumerate(pairs):
+                if pair["recipient_idx"] == recipient_idx:
+                    row[i] = 1.0
+            row[unmet_offset + recipient_idx] = 1.0
+            recipient_constraints.append(row)
+            recipient_rhs.append(float(recipient["deficit"]))
 
-        pairs = sorted(
+        A_ub = np.vstack(donor_constraints) if donor_constraints else None
+        b_ub = np.array(donor_rhs, dtype=float) if donor_rhs else None
+        A_eq = np.vstack(recipient_constraints) if recipient_constraints else None
+        b_eq = np.array(recipient_rhs, dtype=float) if recipient_rhs else None
 
-            pairs,
+        bounds = [
+            (0, None)
+            for _ in range(variable_count)
+        ]
 
-            key=lambda row: (
-
-                -row[
-                    "possible_units"
-                ],
-
-                row[
-                    "distance_km"
-                ]
-
-            )
-
+        solved = linprog(
+            c=objective,
+            A_ub=A_ub,
+            b_ub=b_ub,
+            A_eq=A_eq,
+            b_eq=b_eq,
+            bounds=bounds,
+            method="highs"
         )
 
-        donor_remaining = {
-
-            normalize_code(
-                row[
-                    "hospital_code"
-                ]
-            ):
-
-            float(
-                row[
-                    "surplus"
-                ]
+        if not solved.success:
+            print(
+                f"Objective 10: optimization failed for {group}: "
+                f"{solved.message}"
             )
+            continue
 
-            for _, row in donors.iterrows()
+        x = np.maximum(
+            solved.x,
+            0
+        )
 
-        }
+        for i, pair in enumerate(pairs):
+            units = float(x[i])
 
-        recipient_remaining = {
-
-            normalize_code(
-                row[
-                    "hospital_code"
-                ]
-            ):
-
-            float(
-                row[
-                    "deficit"
-                ]
-            )
-
-            for _, row in recipients.iterrows()
-
-        }
-
-        for pair in pairs:
-
-            donor_code = normalize_code(
-                pair[
-                    "donor_code"
-                ]
-            )
-
-            recipient_code = normalize_code(
-                pair[
-                    "recipient_code"
-                ]
-            )
-
-            units = min(
-
-                donor_remaining[
-                    donor_code
-                ],
-
-                recipient_remaining[
-                    recipient_code
-                ]
-
-            )
-
-            if units <= 0:
+            if units <= 1e-9:
                 continue
 
-            donor_remaining[
-                donor_code
-            ] -= units
+            units_int = int(np.floor(units + 1e-9))
+            if units_int <= 0:
+                continue
 
-            recipient_remaining[
-                recipient_code
-            ] -= units
+            donor = donors.iloc[
+                pair["donor_idx"]
+            ]
+            recipient = recipients.iloc[
+                pair["recipient_idx"]
+            ]
 
-            pair[
-                "optimized_units"
-            ] = int(
-                units
-            )
-
-            pair[
-                "transport_km_units"
-            ] = (
-                pair[
-                    "distance_km"
-                ]
-                *
-                pair[
-                    "optimized_units"
-                ]
-            )
-
-            recommendations.append(
-                pair
-            )
+            recommendations.append({
+                "blood_group": group,
+                "donor_code": normalize_code(
+                    donor["hospital_code"]
+                ),
+                "donor_name": donor["blood_bank_name"],
+                "donor_district": donor["district"],
+                "recipient_code": normalize_code(
+                    recipient["hospital_code"]
+                ),
+                "recipient_name": recipient["blood_bank_name"],
+                "recipient_district": recipient["district"],
+                "distance_km": round(
+                    pair["distance_km"],
+                    6
+                ),
+                "optimized_units": units_int,
+                "transport_km_units": round(
+                    pair["distance_km"] * units_int,
+                    6
+                )
+            })
 
     result = pd.DataFrame(
         recommendations
     )
 
     if result.empty:
-
         result = pd.DataFrame(
             columns=[
-
                 "blood_group",
                 "donor_code",
                 "donor_name",
@@ -4578,106 +4505,77 @@ def objective10(
                 "distance_km",
                 "optimized_units",
                 "transport_km_units"
-
             ]
         )
 
+    result = result.sort_values(
+        [
+            "blood_group",
+            "distance_km",
+            "donor_code",
+            "recipient_code"
+        ]
+    ).reset_index(drop=True)
+
+    output_folder = OUTPUT_DIR / "objective10"
+
     result.to_csv(
-
-        OUTPUT_DIR /
-        "objective10" /
+        output_folder /
         "objective10_optimized_redistribution.csv",
-
         index=False
-
     )
 
     result.to_csv(
-
-        OUTPUT_DIR /
-        "objective10" /
+        output_folder /
         "objective10_feasible_transfers_network_aware.csv",
-
         index=False
-
     )
 
     summary = pd.DataFrame({
-
         "metric": [
-
             "transfer_rows",
             "total_units",
             "average_distance_km",
             "maximum_distance_km",
             "zero_distance_transfers"
-
         ],
-
         "value": [
-
             len(result),
-
             (
-                result[
-                    "optimized_units"
-                ].sum()
+                result["optimized_units"].sum()
                 if not result.empty
                 else 0
             ),
-
             (
-                result[
-                    "distance_km"
-                ].mean()
+                result["distance_km"].mean()
                 if not result.empty
                 else 0
             ),
-
             (
-                result[
-                    "distance_km"
-                ].max()
+                result["distance_km"].max()
                 if not result.empty
                 else 0
             ),
-
             (
-                (
-                    result[
-                        "distance_km"
-                    ] == 0
-                ).sum()
+                (result["distance_km"] == 0).sum()
                 if not result.empty
                 else 0
             )
-
         ]
-
     })
 
     summary.to_csv(
-
-        OUTPUT_DIR /
-        "objective10" /
+        output_folder /
         "objective10_redistribution_summary.csv",
-
         index=False
-
     )
 
     result[
-        result[
-            "distance_km"
-        ] == 0
+        result["distance_km"] == 0
     ].to_csv(
-
-        OUTPUT_DIR /
-        "objective10" /
+        output_folder /
         "objective10_zero_distance_check.csv",
-
         index=False
-
     )
 
     print(
@@ -4688,13 +4586,31 @@ def objective10(
     print(
         "Redistribution units:",
         int(
-            result[
-                "optimized_units"
-            ].sum()
-        )
-        if not result.empty
-        else 0
+            result["optimized_units"].sum()
+        ) if not result.empty else 0
     )
+
+    print(
+        "Average redistribution distance km:",
+        round(
+            float(
+                result["distance_km"].mean()
+            ),
+            2
+        ) if not result.empty else 0
+    )
+
+    print(
+        "Maximum redistribution distance km:",
+        round(
+            float(
+                result["distance_km"].max()
+            ),
+            2
+        ) if not result.empty else 0
+    )
+
+    return result
 
 
 # ============================================================
@@ -4703,8 +4619,10 @@ def objective10(
 
 def objective11(
     latest,
+    long_df,
     bbri,
-    geo
+    geo,
+    model_result
 ):
 
     step(
@@ -4712,305 +4630,539 @@ def objective11(
     )
 
     if latest.empty:
+        print("No latest-stock data available for Objective 11.")
+        return pd.DataFrame()
 
-        return
+    # ------------------------------------------------------------
+    # Coordinate-valid population. Keep geography authoritative.
+    # ------------------------------------------------------------
+    if geo.empty:
+        print("Geographic data unavailable for Objective 11.")
+        return pd.DataFrame()
 
-    current = latest.merge(
-
-        bbri[
-            [
-                "hospital_code",
-                "BBRI"
-            ]
-        ],
-
-        on="hospital_code",
-
-        how="left"
-
+    geo_coords = geo[
+        [
+            "hospital_code",
+            "latitude",
+            "longitude"
+        ]
+    ].copy().drop_duplicates(
+        "hospital_code"
     )
 
-    current = current.merge(
+    geo_coords["hospital_code"] = geo_coords["hospital_code"].map(
+        normalize_code
+    )
 
-        geo[
-            [
-                "hospital_code",
+    current = latest.drop(
+        columns=[
+            column
+            for column in [
                 "latitude",
                 "longitude"
             ]
+            if column in latest.columns
         ],
+        errors="ignore"
+    ).copy()
 
+    current["hospital_code"] = current["hospital_code"].map(
+        normalize_code
+    )
+
+    bbri_merge = bbri[
+        [
+            "hospital_code",
+            "BBRI"
+        ]
+    ].copy().drop_duplicates("hospital_code")
+
+    bbri_merge["hospital_code"] = bbri_merge["hospital_code"].map(
+        normalize_code
+    )
+
+    current = current.merge(
+        bbri_merge,
         on="hospital_code",
+        how="left"
+    )
 
+    current = current.merge(
+        geo_coords,
+        on="hospital_code",
         how="inner"
-
     )
 
     current = current[
         ~current[
             "hospital_code"
-        ].isin(
-            BAD_COORDINATE_CODES
-        )
+        ].isin(BAD_COORDINATE_CODES)
     ].copy()
 
-    rows = []
+    current["latitude"] = pd.to_numeric(
+        current["latitude"],
+        errors="coerce"
+    )
+    current["longitude"] = pd.to_numeric(
+        current["longitude"],
+        errors="coerce"
+    )
 
-    for _, origin in current.iterrows():
+    current = current[
+        current["latitude"].notna()
+        & current["longitude"].notna()
+        & (current["latitude"] != 0)
+        & (current["longitude"] != 0)
+    ].copy()
 
-        origin_code = normalize_code(
-            origin[
-                "hospital_code"
+    # ------------------------------------------------------------
+    # Build a true current-snapshot HGB stockout probability.
+    # We use the same rolling/previous-stock feature recipe as Obj 6,
+    # but keep the latest observation (which prepare_model_dataset
+    # intentionally removes because it has no future target).
+    # ------------------------------------------------------------
+    probability_lookup = {}
+
+    if (
+        model_result is not None
+        and model_result.get("hgb") is not None
+        and not long_df.empty
+    ):
+        prediction_base = (
+            long_df
+            .sort_values(
+                [
+                    "hospital_code",
+                    "blood_group",
+                    "snapshot_date"
+                ]
+            )
+            .copy()
+        )
+
+        grouped = prediction_base.groupby(
+            [
+                "hospital_code",
+                "blood_group"
             ]
         )
+
+        prediction_base["previous_stock"] = grouped["stock"].shift(1)
+        prediction_base["stock_change"] = (
+            prediction_base["stock"]
+            - prediction_base["previous_stock"]
+        )
+        prediction_base["rolling_mean_3"] = grouped["stock"].transform(
+            lambda x: x.rolling(3, min_periods=1).mean()
+        )
+        prediction_base["rolling_std_3"] = grouped["stock"].transform(
+            lambda x: x.rolling(3, min_periods=1).std()
+        ).fillna(0)
+        prediction_base["previous_stockout"] = (
+            prediction_base["previous_stock"]
+            .fillna(-1)
+            .eq(0)
+            .astype(int)
+        )
+        prediction_base["previous_low_stock"] = (
+            prediction_base["previous_stock"]
+            .fillna(-1)
+            .between(1, LOW_STOCK_MAX)
+            .astype(int)
+        )
+        prediction_base["stock_vs_rolling_mean"] = (
+            prediction_base["stock"]
+            - prediction_base["rolling_mean_3"]
+        )
+        prediction_base["trend"] = (
+            prediction_base["stock_change"]
+            .fillna(0)
+        )
+        prediction_base["recovered_from_previous_stockout"] = (
+            (prediction_base["previous_stockout"] == 1)
+            & (prediction_base["stock"] > 0)
+        ).astype(int)
+
+        latest_feature_rows = (
+            prediction_base
+            .sort_values("snapshot_date")
+            .groupby(
+                [
+                    "hospital_code",
+                    "blood_group"
+                ],
+                as_index=False
+            )
+            .tail(1)
+            .copy()
+        )
+
+        latest_feature_rows[MODEL_FEATURES] = (
+            latest_feature_rows[MODEL_FEATURES]
+            .replace(
+                [
+                    np.inf,
+                    -np.inf
+                ],
+                np.nan
+            )
+            .fillna(0)
+        )
+
+        try:
+            probabilities = model_result[
+                "hgb"
+            ].predict_proba(
+                latest_feature_rows[MODEL_FEATURES].astype(float)
+            )[:, 1]
+
+            for row, probability in zip(
+                latest_feature_rows.itertuples(index=False),
+                probabilities
+            ):
+                probability_lookup[
+                    (
+                        normalize_code(row.hospital_code),
+                        str(row.blood_group)
+                    )
+                ] = float(probability)
+
+        except Exception as exc:
+            print(
+                "Objective 11 prediction warning:",
+                exc
+            )
+
+    # Score weights validated in the saved Objective 11 artifact:
+    # 35% availability + 25% predicted safety + 20% lower BBRI
+    # + 20% proximity.
+    weight_availability = 0.35
+    weight_safety = 0.25
+    weight_bbri = 0.20
+    weight_proximity = 0.20
+
+    # Precompute vectorized alternative-bank arrays once.
+    codes = current["hospital_code"].astype(str).to_numpy()
+    names = current["blood_bank_name"].astype(str).to_numpy()
+    districts = current["district"].astype(str).to_numpy()
+    latitudes = current["latitude"].astype(float).to_numpy()
+    longitudes = current["longitude"].astype(float).to_numpy()
+    bbri_values = pd.to_numeric(
+        current["BBRI"],
+        errors="coerce"
+    ).fillna(50).to_numpy(dtype=float)
+
+    probability_by_key = probability_lookup
+    candidate_frames = []
+
+    for origin_idx, origin in current.reset_index(drop=True).iterrows():
+
+        origin_code = str(
+            normalize_code(
+                origin["hospital_code"]
+            )
+        )
+
+        origin_lat = float(origin["latitude"])
+        origin_lon = float(origin["longitude"])
 
         for group in BLOOD_GROUPS:
 
             origin_stock = float(
-                origin[group]
+                pd.to_numeric(
+                    origin[group],
+                    errors="coerce"
+                )
+                if pd.notna(origin[group])
+                else 0
             )
 
             if origin_stock > SAFETY_STOCK:
-
                 continue
 
-            for _, alternative in current.iterrows():
+            alt_stock = pd.to_numeric(
+                current[group],
+                errors="coerce"
+            ).fillna(0).to_numpy(dtype=float)
 
-                alternative_code = normalize_code(
-                    alternative[
-                        "hospital_code"
-                    ]
-                )
+            base_mask = (
+                (codes != origin_code)
+                & (alt_stock > 0)
+            )
 
-                if (
-                    alternative_code
-                    ==
-                    origin_code
-                ):
+            if not np.any(base_mask):
+                continue
 
-                    continue
+            candidate_idx = np.where(base_mask)[0]
 
-                alternative_stock = float(
-                    alternative[group]
-                )
+            distances = haversine_km(
+                origin_lat,
+                origin_lon,
+                latitudes[candidate_idx],
+                longitudes[candidate_idx]
+            )
+            distances = np.asarray(
+                distances,
+                dtype=float
+            )
 
-                if alternative_stock <= 0:
+            keep = (
+                (distances > 0)
+                & (distances <= REDISTRIBUTION_RADIUS_KM)
+            )
 
-                    continue
+            if not np.any(keep):
+                continue
 
-                distance = haversine_km(
+            candidate_idx = candidate_idx[keep]
+            distances = distances[keep]
+            candidate_stock = alt_stock[candidate_idx]
+            candidate_bbri = bbri_values[candidate_idx]
 
-                    float(
-                        origin[
-                            "latitude"
-                        ]
-                    ),
+            max_stock = max(
+                float(alt_stock.max()),
+                1.0
+            )
 
-                    float(
-                        origin[
-                            "longitude"
-                        ]
-                    ),
+            availability_score = (
+                candidate_stock
+                / max_stock
+                * 100.0
+            )
 
-                    float(
-                        alternative[
-                            "latitude"
-                        ]
-                    ),
-
-                    float(
-                        alternative[
-                            "longitude"
-                        ]
+            probabilities = np.array(
+                [
+                    probability_by_key.get(
+                        (codes[idx], group),
+                        0.5
                     )
+                    for idx in candidate_idx
+                ],
+                dtype=float
+            )
+            probabilities = np.clip(
+                probabilities,
+                0,
+                1
+            )
 
+            safety_score = (
+                1.0 - probabilities
+            ) * 100.0
+
+            bbri_score = np.clip(
+                100.0 - candidate_bbri,
+                0.0,
+                100.0
+            )
+
+            proximity_score = (
+                1.0
+                - distances / REDISTRIBUTION_RADIUS_KM
+            ) * 100.0
+
+            decision_score = (
+                weight_availability * availability_score
+                + weight_safety * safety_score
+                + weight_bbri * bbri_score
+                + weight_proximity * proximity_score
+            )
+
+            frame = pd.DataFrame({
+                "origin_code": origin_code,
+                "origin_bank": str(origin["blood_bank_name"]),
+                "origin_district": str(origin["district"]),
+                "blood_group": group,
+                "origin_stock": origin_stock,
+                "alternative_code": codes[candidate_idx],
+                "alternative_bank": names[candidate_idx],
+                "alternative_district": districts[candidate_idx],
+                "alternative_stock": candidate_stock,
+                "predicted_stockout_probability": probabilities,
+                "alternative_bbri": candidate_bbri,
+                "distance_km": np.round(
+                    distances,
+                    6
+                ),
+                "decision_support_score": np.round(
+                    decision_score,
+                    6
                 )
+            })
 
-                if distance > REDISTRIBUTION_RADIUS_KM:
+            candidate_frames.append(frame)
 
-                    continue
-
-                alt_bbri = alternative.get(
-                    "BBRI"
-                )
-
-                if pd.isna(
-                    alt_bbri
-                ):
-
-                    alt_bbri = 50
-
-                alt_bbri = float(
-                    alt_bbri
-                )
-
-                availability_score = (
-
-                    alternative_stock
-                    /
-                    max(
-                        current[
-                            group
-                        ].max(),
-                        1
-                    )
-                    * 100
-
-                )
-
-                bbri_score = max(
-                    0,
-                    100 - alt_bbri
-                )
-
-                proximity_score = (
-
-                    1
-                    -
-                    distance
-                    /
-                    REDISTRIBUTION_RADIUS_KM
-
-                ) * 100
-
-                decision_score = (
-
-                    0.50
-                    *
-                    availability_score
-
-                    +
-
-                    0.25
-                    *
-                    bbri_score
-
-                    +
-
-                    0.25
-                    *
-                    proximity_score
-
-                )
-
-                rows.append({
-
-                    "Origin Code":
-                        origin_code,
-
-                    "Origin Bank":
-                        origin[
-                            "blood_bank_name"
-                        ],
-
-                    "Origin District":
-                        origin[
-                            "district"
-                        ],
-
-                    "Blood Group":
-                        group,
-
-                    "Origin Stock":
-                        origin_stock,
-
-                    "Alternative Code":
-                        alternative_code,
-
-                    "Alternative Bank":
-                        alternative[
-                            "blood_bank_name"
-                        ],
-
-                    "Alternative District":
-                        alternative[
-                            "district"
-                        ],
-
-                    "Alternative Stock":
-                        alternative_stock,
-
-                    "Predicted Stockout Probability":
-                        np.nan,
-
-                    "Alternative BBRI":
-                        alt_bbri,
-
-                    "Distance km":
-                        distance,
-
-                    "Decision Support Score":
-                        decision_score
-
-                })
-
-    ranking = pd.DataFrame(
-        rows
-    )
-
-    if ranking.empty:
-
+    if candidate_frames:
+        ranking = pd.concat(
+            candidate_frames,
+            ignore_index=True
+        )
+    else:
         ranking = pd.DataFrame(
             columns=[
-
-                "Origin Code",
-                "Origin Bank",
-                "Origin District",
-                "Blood Group",
-                "Origin Stock",
-                "Alternative Code",
-                "Alternative Bank",
-                "Alternative District",
-                "Alternative Stock",
-                "Predicted Stockout Probability",
-                "Alternative BBRI",
-                "Distance km",
-                "Decision Support Score",
-                "Rank"
-
+                "origin_code",
+                "origin_bank",
+                "origin_district",
+                "blood_group",
+                "origin_stock",
+                "alternative_code",
+                "alternative_bank",
+                "alternative_district",
+                "alternative_stock",
+                "predicted_stockout_probability",
+                "alternative_bbri",
+                "distance_km",
+                "decision_support_score"
             ]
         )
 
-    else:
-
-        ranking = (
-            ranking
-            .sort_values(
-                [
-                    "Origin Code",
-                    "Blood Group",
-                    "Decision Support Score"
-                ],
-                ascending=[
-                    True,
-                    True,
-                    False
-                ]
-            )
+    if ranking.empty:
+        ranking = pd.DataFrame(
+            columns=[
+                "origin_code",
+                "origin_bank",
+                "origin_district",
+                "blood_group",
+                "origin_stock",
+                "alternative_code",
+                "alternative_bank",
+                "alternative_district",
+                "alternative_stock",
+                "predicted_stockout_probability",
+                "alternative_bbri",
+                "distance_km",
+                "decision_support_score",
+                "rank"
+            ]
         )
+    else:
+        ranking = ranking.sort_values(
+            [
+                "origin_code",
+                "blood_group",
+                "decision_support_score",
+                "alternative_stock",
+                "distance_km"
+            ],
+            ascending=[
+                True,
+                True,
+                False,
+                False,
+                True
+            ]
+        ).reset_index(drop=True)
 
-        ranking[
-            "Rank"
-        ] = (
+        ranking["rank"] = (
             ranking
             .groupby(
                 [
-                    "Origin Code",
-                    "Blood Group"
+                    "origin_code",
+                    "blood_group"
                 ]
             )
             .cumcount()
             + 1
         )
 
+    output_folder = OUTPUT_DIR / "objective11"
+
+    # Full candidate ranking — primary website/research file.
     ranking.to_csv(
-
-        OUTPUT_DIR /
-        "objective11" /
+        output_folder /
         "Maharashtra_Alternative_Blood_Bank_Ranking.csv",
-
         index=False
+    )
 
+    # Top-5 recommendations per origin/blood group.
+    top5 = ranking[
+        ranking["rank"] <= 5
+    ].copy()
+
+    top5.to_csv(
+        output_folder /
+        "Maharashtra_Alternative_Blood_Bank_Top5.csv",
+        index=False
+    )
+
+    origin_cases = 0
+    cases_with_alt = 0
+
+    if not current.empty:
+        for _, origin in current.iterrows():
+            for group in BLOOD_GROUPS:
+                stock = float(
+                    pd.to_numeric(
+                        origin[group],
+                        errors="coerce"
+                    )
+                    if pd.notna(origin[group])
+                    else 0
+                )
+                if stock <= SAFETY_STOCK:
+                    origin_cases += 1
+                    origin_code = normalize_code(
+                        origin["hospital_code"]
+                    )
+                    has_alt = (
+                        not ranking.empty
+                        and
+                        (
+                            (
+                                ranking["origin_code"].astype(str)
+                                == str(origin_code)
+                            )
+                            &
+                            (
+                                ranking["blood_group"].astype(str)
+                                == group
+                            )
+                        ).any()
+                    )
+                    if has_alt:
+                        cases_with_alt += 1
+
+    coverage = (
+        cases_with_alt / origin_cases
+        if origin_cases
+        else 0
+    )
+
+    summary = pd.DataFrame({
+        "Metric": [
+            "Latest snapshot",
+            "Banks in ranking network",
+            "Operational radius",
+            "Origin bank-group shortage cases (<=5 units)",
+            "Cases with at least one ranked alternative",
+            "Alternative coverage rate",
+            "All candidate rows within 150 km",
+            "Top-5 recommendation rows",
+            "Score"
+        ],
+        "Value": [
+            str(
+                latest["snapshot_date"].max()
+            ) if "snapshot_date" in latest.columns else "",
+            int(
+                current["hospital_code"].nunique()
+            ),
+            int(
+                REDISTRIBUTION_RADIUS_KM
+            ),
+            int(origin_cases),
+            int(cases_with_alt),
+            float(coverage),
+            int(len(ranking)),
+            int(len(top5)),
+            "35% availability + 25% predicted safety + 20% lower BBRI + 20% proximity"
+        ]
+    })
+
+    summary.to_csv(
+        output_folder /
+        "Maharashtra_Alternative_Ranking_Summary.csv",
+        index=False
     )
 
     print(
@@ -5018,93 +5170,69 @@ def objective11(
         len(ranking)
     )
 
+    print(
+        "Objective 11 shortage cases:",
+        origin_cases
+    )
 
+    print(
+        "Objective 11 cases with alternatives:",
+        cases_with_alt
+    )
+
+    print(
+        "Objective 11 coverage:",
+        f"{coverage * 100:.2f}%"
+    )
+
+    return ranking
+
+
+# ============================================================
 # ============================================================
 # UPDATE LOG
 # ============================================================
 
 def write_update_log(
-
     snapshot_date,
-
     source_file,
-
     source_rows,
-
     valid_rows,
-
     new_rows,
-
     status,
-
     message=""
-
 ):
-
-    conn = sqlite3.connect(
-        DATABASE
-    )
-
-    conn.execute(
-        """
-        INSERT INTO update_log (
-
-            run_time,
-            snapshot_date,
-            source_file,
-            source_rows,
-            valid_rows,
-            new_rows,
-            status,
-            message
-
+    """Write one snapshot processing event to SQLite safely."""
+    conn = None
+    try:
+        conn = sqlite3.connect(DATABASE)
+        conn.execute(
+            """
+            INSERT INTO update_log (
+                run_time, snapshot_date, source_file, source_rows,
+                valid_rows, new_rows, status, message
+            )
+            VALUES (datetime('now'), ?, ?, ?, ?, ?, ?, ?)
+            """,
+            [
+                str(snapshot_date or ""),
+                str(source_file or ""),
+                int(source_rows or 0),
+                int(valid_rows or 0),
+                int(new_rows or 0),
+                str(status or ""),
+                str(message or "")
+            ]
         )
+        conn.commit()
+        return True
+    except Exception as exc:
+        print("WARNING: update log write failed:", exc)
+        return False
+    finally:
+        if conn is not None:
+            conn.close()
 
-        VALUES (
-
-            datetime('now'),
-            ?, ?, ?, ?, ?, ?, ?
-
-        )
-        """,
-
-        [
-
-            str(
-                snapshot_date
-                or ""
-            ),
-
-            source_file,
-
-            int(
-                source_rows
-            ),
-
-            int(
-                valid_rows
-            ),
-
-            int(
-                new_rows
-            ),
-
-            status,
-
-            message
-
-        ]
-
-    )
-
-    conn.commit()
-
-    conn.close()
-
-
-# ============================================================
-# MAIN
-# ============================================================
 
 def main():
 
@@ -5324,33 +5452,23 @@ def main():
                 exc
             )
 
-            try:
+            write_update_log(
 
-                write_update_log(
+                "",
 
-                    "",
+                path.name,
 
-                    path.name,
+                0,
 
-                    0,
+                0,
 
-                    0,
+                0,
 
-                    0,
+                "FAILED",
 
-                    "FAILED",
+                str(exc)
 
-                    str(exc)
-
-                )
-
-            except Exception as log_error:
-
-                print(
-                    "WARNING: "
-                    "Could not write failure log:",
-                    log_error
-                )
+            )
 
     # ========================================================
     # REBUILD CURRENT DATA
@@ -5486,9 +5604,13 @@ def main():
 
         latest,
 
+        long_df,
+
         bbri,
 
-        geo
+        geo,
+
+        model_result
 
     )
 
