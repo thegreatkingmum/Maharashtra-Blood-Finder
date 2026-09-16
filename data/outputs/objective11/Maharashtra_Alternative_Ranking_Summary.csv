@@ -1,10 +1,10 @@
 Metric,Value
-Latest snapshot,2026-09-15
-Banks in ranking network,329
+Latest snapshot,2026-09-16
+Banks in ranking network,328
 Operational radius,150
-Origin bank-group shortage cases (<=5 units),1655
-Cases with at least one ranked alternative,1655
+Origin bank-group shortage cases (<=5 units),1645
+Cases with at least one ranked alternative,1645
 Alternative coverage rate,1.0
-All candidate rows within 150 km,83154
-Top-5 recommendation rows,8275
+All candidate rows within 150 km,84277
+Top-5 recommendation rows,8225
 Score,35% availability + 25% predicted safety + 20% lower BBRI + 20% proximity
