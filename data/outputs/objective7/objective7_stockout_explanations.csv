@@ -1,11 +1,11 @@
 feature,importance,rank,interpretation
-stock,0.158882845363509,1,stock permutation importance = 0.1589
-rolling_mean_3,0.019363549062999707,2,rolling_mean_3 permutation importance = 0.0194
-rolling_std_3,0.005376181903166799,3,rolling_std_3 permutation importance = 0.0054
-previous_stock,0.003145456727272955,4,previous_stock permutation importance = 0.0031
-stock_vs_rolling_mean,0.001163037552135937,5,stock_vs_rolling_mean permutation importance = 0.0012
-previous_stockout,0.00034466034681486236,6,previous_stockout permutation importance = 0.0003
-stock_change,0.00031010558857165195,7,stock_change permutation importance = 0.0003
-previous_low_stock,0.0001158763196897672,8,previous_low_stock permutation importance = 0.0001
-recovered_from_previous_stockout,1.3727041628497361e-06,9,recovered_from_previous_stockout permutation importance = 0.0000
-trend,0.0,10,trend permutation importance = 0.0000
+stock,0.17776641427396475,1,stock permutation importance = 0.1778
+rolling_mean_3,0.020131518590178876,2,rolling_mean_3 permutation importance = 0.0201
+rolling_std_3,0.00646816007319404,3,rolling_std_3 permutation importance = 0.0065
+previous_stock,0.0016685505159670156,4,previous_stock permutation importance = 0.0017
+stock_vs_rolling_mean,0.0013510487935275873,5,stock_vs_rolling_mean permutation importance = 0.0014
+previous_stockout,0.00024358734592762056,6,previous_stockout permutation importance = 0.0002
+stock_change,0.00019607513242447805,7,stock_change permutation importance = 0.0002
+trend,0.0,8,trend permutation importance = 0.0000
+recovered_from_previous_stockout,0.0,9,recovered_from_previous_stockout permutation importance = 0.0000
+previous_low_stock,-5.522929822507905e-05,10,previous_low_stock permutation importance = -0.0001
