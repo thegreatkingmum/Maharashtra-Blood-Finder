@@ -799,6 +799,8 @@ async function loadDBARI() {
 
                             ${
                                 Number(
+                                    row.stockout_percentage
+                                    ??
                                     row.stockout_percent
                                     ??
                                     0
@@ -811,6 +813,8 @@ async function loadDBARI() {
 
                             ${
                                 Number(
+                                    row.low_stock_percentage
+                                    ??
                                     row.low_stock_percent
                                     ??
                                     0

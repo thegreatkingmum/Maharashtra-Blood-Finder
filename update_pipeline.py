@@ -2104,17 +2104,291 @@ def recovery_by_bank_group(
 # OBJECTIVE 2
 # ============================================================
 
+# ============================================================
+# OBJECTIVE 2 SUPPORT
+# Corrected episode-based recovery for BBRI
+# ============================================================
+
+def bbri_recovery_metrics(
+    long_df
+):
+
+    """
+    Calculate recovery metrics for BBRI using stockout episodes,
+    not repeated zero-stock observations.
+
+    A stockout episode begins when a bank/blood-group is at zero
+    and was not already in an ongoing zero-stock episode.
+
+    The episode is considered recovered when stock first becomes
+    positive again in a later snapshot.
+
+    Consecutive zero observations therefore belong to one episode.
+    """
+
+    data = (
+        long_df
+        .sort_values(
+            [
+                "hospital_code",
+                "blood_group",
+                "snapshot_date"
+            ]
+        )
+        .copy()
+    )
+
+    episode_rows = []
+
+    for (
+        hospital_code,
+        blood_group
+    ), group in data.groupby(
+        [
+            "hospital_code",
+            "blood_group"
+        ],
+        sort=False
+    ):
+
+        group = (
+            group
+            .sort_values(
+                "snapshot_date"
+            )
+            .reset_index(
+                drop=True
+            )
+        )
+
+        stocks = (
+            pd.to_numeric(
+                group["stock"],
+                errors="coerce"
+            )
+            .fillna(0)
+            .to_numpy()
+        )
+
+        in_episode = False
+        start_index = None
+
+        for i, stock_value in enumerate(
+            stocks
+        ):
+
+            if (
+                stock_value <= 0
+                and not in_episode
+            ):
+
+                in_episode = True
+                start_index = i
+
+                continue
+
+            if (
+                stock_value > 0
+                and in_episode
+                and start_index is not None
+            ):
+
+                duration_snapshots = (
+                    i
+                    -
+                    start_index
+                )
+
+                episode_rows.append({
+
+                    "hospital_code":
+                        hospital_code,
+
+                    "blood_group":
+                        blood_group,
+
+                    "recovered":
+                        1,
+
+                    "recovery_snapshots":
+                        duration_snapshots
+
+                })
+
+                in_episode = False
+                start_index = None
+
+        if (
+            in_episode
+            and start_index is not None
+        ):
+
+            episode_rows.append({
+
+                "hospital_code":
+                    hospital_code,
+
+                "blood_group":
+                    blood_group,
+
+                "recovered":
+                    0,
+
+                "recovery_snapshots":
+                    np.nan
+
+            })
+
+    if not episode_rows:
+
+        return pd.DataFrame(
+            columns=[
+                "hospital_code",
+                "stockout_episodes",
+                "recovered_episodes",
+                "unresolved_stockout_episodes",
+                "recovery_rate",
+                "mean_recovery_snapshots",
+                "median_recovery_snapshots"
+            ]
+        )
+
+    episodes = pd.DataFrame(
+        episode_rows
+    )
+
+    result = (
+        episodes
+        .groupby(
+            "hospital_code"
+        )
+        .agg(
+
+            stockout_episodes=(
+                "recovered",
+                "count"
+            ),
+
+            recovered_episodes=(
+                "recovered",
+                "sum"
+            ),
+
+            mean_recovery_snapshots=(
+                "recovery_snapshots",
+                "mean"
+            ),
+
+            median_recovery_snapshots=(
+                "recovery_snapshots",
+                "median"
+            )
+
+        )
+        .reset_index()
+    )
+
+    result[
+        "unresolved_stockout_episodes"
+    ] = (
+        result[
+            "stockout_episodes"
+        ]
+        -
+        result[
+            "recovered_episodes"
+        ]
+    )
+
+    result[
+        "recovery_rate"
+    ] = np.where(
+
+        result[
+            "stockout_episodes"
+        ] > 0,
+
+        result[
+            "recovered_episodes"
+        ]
+        /
+        result[
+            "stockout_episodes"
+        ]
+        * 100,
+
+        100.0
+
+    )
+
+    return result
+
+
+# ============================================================
+# OBJECTIVE 2
+# Corrected Blood Bank Risk Index (BBRI)
+# ============================================================
+
 def objective2(
     long_df
 ):
 
     step(
-        "OBJECTIVE 2 — BBRI"
+        "OBJECTIVE 2 — BBRI (REWORKED)"
     )
 
-    recovery = recovery_by_bank_group(
-        long_df
-    )
+    # --------------------------------------------------------
+    # Dimension 1: Shortage severity
+    # --------------------------------------------------------
+    # Stock 0..5 is treated as an ordered shortage state.
+    # 0 units = maximum severity (100)
+    # 5 units = minimum shortage severity within the low-stock band
+    # >5 units = no shortage-severity contribution
+    #
+    # This combines stockout + low-stock into ONE dimension,
+    # avoiding double counting them as separate BBRI components.
+    # --------------------------------------------------------
+
+    def shortage_severity_score(series):
+
+        values = (
+            pd.to_numeric(
+                series,
+                errors="coerce"
+            )
+            .fillna(0)
+            .clip(lower=0)
+        )
+
+        severity = np.where(
+
+            values <= LOW_STOCK_MAX,
+
+            (
+                LOW_STOCK_MAX
+                +
+                1
+                -
+                values
+            )
+            /
+            (
+                LOW_STOCK_MAX
+                +
+                1
+            ),
+
+            0.0
+
+        )
+
+        return float(
+            np.mean(
+                severity
+            )
+            *
+            100
+        )
 
     metrics = (
         long_df
@@ -2149,17 +2423,45 @@ def objective2(
                 ).mean()
             ),
 
-            stock_volatility=(
+            shortage_severity_score=(
+                "stock",
+                shortage_severity_score
+            )
+
+        )
+        .reset_index()
+    )
+
+    # --------------------------------------------------------
+    # Dimension 2: inventory volatility
+    # --------------------------------------------------------
+    # Calculate CV separately for each blood group first, then
+    # average the group-level volatility. This prevents a single
+    # high-volume blood group from dominating the bank-level score.
+    # The bounded transform maps CV to 0..100 without using
+    # cross-sectional percentile ranks.
+    # --------------------------------------------------------
+
+    group_volatility = (
+        long_df
+        .groupby(
+            [
+                "hospital_code",
+                "blood_group"
+            ]
+        )
+        .agg(
+
+            mean_stock=(
+                "stock",
+                "mean"
+            ),
+
+            std_stock=(
                 "stock",
                 lambda x:
-                (
-                    x.std(ddof=0)
-                    /
-                    (
-                        x.mean()
-                        if x.mean() != 0
-                        else 1
-                    )
+                x.std(
+                    ddof=0
                 )
             )
 
@@ -2167,65 +2469,116 @@ def objective2(
         .reset_index()
     )
 
-    metrics[
-        "stock_volatility"
-    ] = (
-        metrics[
-            "stock_volatility"
+    group_volatility[
+        "group_cv"
+    ] = np.where(
+
+        group_volatility[
+            "mean_stock"
+        ] > 0,
+
+        group_volatility[
+            "std_stock"
         ]
-        .replace(
-            [
-                np.inf,
-                -np.inf
-            ],
-            np.nan
-        )
-        .fillna(0)
+        /
+        group_volatility[
+            "mean_stock"
+        ],
+
+        0.0
+
     )
 
-    recovery_bank = (
-        recovery
+    group_volatility[
+        "group_volatility_score"
+    ] = (
+        100
+        *
+        group_volatility[
+            "group_cv"
+        ]
+        /
+        (
+            1
+            +
+            group_volatility[
+                "group_cv"
+            ]
+        )
+    )
+
+    volatility = (
+        group_volatility
         .groupby(
             "hospital_code"
         )
         .agg(
-            recovery_rate=(
-                "recovery_rate",
+
+            stock_volatility=(
+                "group_cv",
+                "mean"
+            ),
+
+            volatility_score=(
+                "group_volatility_score",
                 "mean"
             )
+
         )
         .reset_index()
     )
 
     metrics = metrics.merge(
-        recovery_bank,
+        volatility,
         on="hospital_code",
         how="left"
     )
 
-    metrics[
-        "stockout_score"
-    ] = percentile_rank(
-        metrics[
-            "stockout_frequency"
-        ]
+    # --------------------------------------------------------
+    # Dimension 3: recovery weakness
+    # --------------------------------------------------------
+    # Recovery is based on stockout EPISODES rather than counting
+    # every consecutive zero as a separate event.
+    # --------------------------------------------------------
+
+    recovery = bbri_recovery_metrics(
+        long_df
     )
 
-    metrics[
-        "low_stock_score"
-    ] = percentile_rank(
-        metrics[
-            "low_stock_frequency"
-        ]
+    metrics = metrics.merge(
+        recovery,
+        on="hospital_code",
+        how="left"
     )
+
+    for column in [
+        "stock_volatility",
+        "volatility_score",
+        "recovery_rate",
+        "mean_recovery_snapshots",
+        "median_recovery_snapshots",
+        "stockout_episodes",
+        "recovered_episodes",
+        "unresolved_stockout_episodes"
+    ]:
+
+        if column not in metrics.columns:
+
+            metrics[
+                column
+            ] = np.nan
+
+    metrics[
+        "stock_volatility"
+    ] = metrics[
+        "stock_volatility"
+    ].fillna(0)
 
     metrics[
         "volatility_score"
-    ] = percentile_rank(
-        metrics[
-            "stock_volatility"
-        ]
-    )
+    ] = metrics[
+        "volatility_score"
+    ].fillna(0)
 
     metrics[
         "recovery_rate"
@@ -2234,50 +2587,105 @@ def objective2(
     ].fillna(100)
 
     metrics[
-        "recovery_score"
+        "mean_recovery_snapshots"
+    ] = metrics[
+        "mean_recovery_snapshots"
+    ].fillna(0)
+
+    metrics[
+        "median_recovery_snapshots"
+    ] = metrics[
+        "median_recovery_snapshots"
+    ].fillna(0)
+
+    metrics[
+        "stockout_episodes"
+    ] = metrics[
+        "stockout_episodes"
+    ].fillna(0)
+
+    metrics[
+        "recovered_episodes"
+    ] = metrics[
+        "recovered_episodes"
+    ].fillna(0)
+
+    metrics[
+        "unresolved_stockout_episodes"
+    ] = metrics[
+        "unresolved_stockout_episodes"
+    ].fillna(0)
+
+    metrics[
+        "recovery_weakness_score"
     ] = (
         100
         -
         metrics[
             "recovery_rate"
         ]
+    ).clip(
+        lower=0,
+        upper=100
     )
+
+    # --------------------------------------------------------
+    # Corrected BBRI aggregation
+    # --------------------------------------------------------
+    # Three conceptually distinct dimensions receive equal weights:
+    #   1. shortage severity
+    #   2. volatility
+    #   3. recovery weakness
+    #
+    # Equal weighting is used because no empirically validated
+    # clinical/operational weights are available in the source data.
+    # The design avoids separately weighting stockout and low-stock,
+    # which would double-count the same shortage dimension.
+    # --------------------------------------------------------
+
+    metrics[
+        "stockout_score"
+    ] = (
+        metrics[
+            "stockout_frequency"
+        ]
+        *
+        100
+    )
+
+    metrics[
+        "low_stock_score"
+    ] = (
+        metrics[
+            "low_stock_frequency"
+        ]
+        *
+        100
+    )
+
+    metrics[
+        "recovery_score"
+    ] = metrics[
+        "recovery_weakness_score"
+    ]
 
     metrics[
         "BBRI"
     ] = (
 
-        0.35
-        *
         metrics[
-            "stockout_score"
+            "shortage_severity_score"
         ]
-
         +
-
-        0.25
-        *
-        metrics[
-            "low_stock_score"
-        ]
-
-        +
-
-        0.20
-        *
         metrics[
             "volatility_score"
         ]
-
         +
-
-        0.20
-        *
         metrics[
-            "recovery_score"
+            "recovery_weakness_score"
         ]
 
-    )
+    ) / 3.0
 
     metrics[
         "risk_class"
@@ -2295,15 +2703,47 @@ def objective2(
 
         [
 
-            "Low",
-            "Moderate",
-            "High"
+            "Low Risk",
+            "Moderate Risk",
+            "High Risk"
 
         ],
 
-        default="Critical"
+        default="Very High Risk"
 
     )
+
+    output_columns = [
+
+        "hospital_code",
+        "blood_bank_name",
+        "district",
+        "city",
+        "area",
+        "observations",
+        "stockout_frequency",
+        "low_stock_frequency",
+        "stockout_score",
+        "low_stock_score",
+        "shortage_severity_score",
+        "stock_volatility",
+        "volatility_score",
+        "stockout_episodes",
+        "recovered_episodes",
+        "unresolved_stockout_episodes",
+        "recovery_rate",
+        "mean_recovery_snapshots",
+        "median_recovery_snapshots",
+        "recovery_weakness_score",
+        "recovery_score",
+        "BBRI",
+        "risk_class"
+
+    ]
+
+    metrics = metrics[
+        output_columns
+    ].copy()
 
     metrics.to_csv(
 
@@ -2320,11 +2760,17 @@ def objective2(
         len(metrics)
     )
 
+    print(
+        "BBRI methodology:",
+        "equal-weight shortage severity + volatility + recovery weakness"
+    )
+
     return metrics
 
 
 # ============================================================
 # OBJECTIVE 3
+# Corrected District Blood Availability Risk Index (DBARI)
 # ============================================================
 
 def objective3(
@@ -2333,8 +2779,17 @@ def objective3(
 ):
 
     step(
-        "OBJECTIVE 3 — DBARI"
+        "OBJECTIVE 3 — DBARI (REWORKED)"
     )
+
+    # --------------------------------------------------------
+    # District-level aggregation of the corrected bank-level BBRI.
+    #
+    # DBARI is intentionally NOT built by adding stockout and
+    # low-stock components again. Those variables are already
+    # represented inside BBRI's shortage-severity dimension.
+    # Re-adding them would double-count shortage information.
+    # --------------------------------------------------------
 
     district = (
         bbri
@@ -2358,14 +2813,92 @@ def objective3(
                 "max"
             ),
 
+            BBRI_std=(
+                "BBRI",
+                lambda x:
+                x.std(
+                    ddof=0
+                )
+            ),
+
             blood_banks=(
                 "hospital_code",
                 "nunique"
+            ),
+
+            high_risk_banks=(
+                "BBRI",
+                lambda x:
+                int(
+                    (
+                        x >= 50
+                    ).sum()
+                )
+            ),
+
+            very_high_risk_banks=(
+                "BBRI",
+                lambda x:
+                int(
+                    (
+                        x >= 75
+                    ).sum()
+                )
             )
 
         )
         .reset_index()
     )
+
+    district[
+        "high_risk_bank_share"
+    ] = np.where(
+
+        district[
+            "blood_banks"
+        ] > 0,
+
+        district[
+            "high_risk_banks"
+        ]
+        /
+        district[
+            "blood_banks"
+        ]
+        *
+        100,
+
+        0
+
+    )
+
+    district[
+        "very_high_risk_bank_share"
+    ] = np.where(
+
+        district[
+            "blood_banks"
+        ] > 0,
+
+        district[
+            "very_high_risk_banks"
+        ]
+        /
+        district[
+            "blood_banks"
+        ]
+        *
+        100,
+
+        0
+
+    )
+
+    # --------------------------------------------------------
+    # Descriptive district stock indicators.
+    # These are retained for interpretation on the website,
+    # but they are NOT added again to DBARI.
+    # --------------------------------------------------------
 
     stock = (
         long_df
@@ -2374,14 +2907,14 @@ def objective3(
         )
         .agg(
 
-            stockout_percentage=(
+            stockout_percent=(
                 "stock",
                 lambda x:
                 (x == 0).mean()
                 * 100
             ),
 
-            low_stock_percentage=(
+            low_stock_percent=(
                 "stock",
                 lambda x:
                 x.between(
@@ -2401,56 +2934,22 @@ def objective3(
         how="left"
     )
 
-    result[
-        "BBRI_component"
-    ] = percentile_rank(
-        result[
-            "average_BBRI"
-        ]
-    )
-
-    result[
-        "stockout_component"
-    ] = percentile_rank(
-        result[
-            "stockout_percentage"
-        ]
-    )
-
-    result[
-        "low_stock_component"
-    ] = percentile_rank(
-        result[
-            "low_stock_percentage"
-        ]
-    )
+    # --------------------------------------------------------
+    # Final DBARI
+    # --------------------------------------------------------
+    # The district score is the equal-weighted bank-level risk
+    # average. This makes DBARI a hierarchical aggregation of BBRI
+    # rather than a second composite that double-counts the same
+    # stockout/low-stock inputs.
+    # --------------------------------------------------------
 
     result[
         "DBARI"
-    ] = (
-
-        0.50
-        *
-        result[
-            "BBRI_component"
-        ]
-
-        +
-
-        0.30
-        *
-        result[
-            "stockout_component"
-        ]
-
-        +
-
-        0.20
-        *
-        result[
-            "low_stock_component"
-        ]
-
+    ] = result[
+        "average_BBRI"
+    ].clip(
+        lower=0,
+        upper=100
     )
 
     result[
@@ -2469,15 +2968,38 @@ def objective3(
 
         [
 
-            "Low",
-            "Moderate",
-            "High"
+            "Low Risk",
+            "Moderate Risk",
+            "High Risk"
 
         ],
 
-        default="Very High"
+        default="Very High Risk"
 
     )
+
+    output_columns = [
+
+        "district",
+        "blood_banks",
+        "average_BBRI",
+        "median_BBRI",
+        "highest_BBRI",
+        "BBRI_std",
+        "high_risk_banks",
+        "high_risk_bank_share",
+        "very_high_risk_banks",
+        "very_high_risk_bank_share",
+        "stockout_percent",
+        "low_stock_percent",
+        "DBARI",
+        "risk_class"
+
+    ]
+
+    result = result[
+        output_columns
+    ].copy()
 
     result.to_csv(
 
@@ -2494,7 +3016,13 @@ def objective3(
         len(result)
     )
 
+    print(
+        "DBARI methodology:",
+        "district mean of corrected bank-level BBRI; shortage indicators retained descriptively"
+    )
+
     return result
+
 
 
 # ============================================================
