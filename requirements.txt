@@ -4,3 +4,8 @@ numpy
 joblib
 scikit-learn
 gunicorn
+networkx
+scipy
+pypdf
+PyMuPDF
+openpyxl

@@ -52,6 +52,378 @@ BLOOD_GROUPS = [
 ]
 
 
+# ============================================================
+# MUMBAI AREA SEARCH CATALOG
+# ============================================================
+#
+# User-facing locality areas for Mumbai City and Mumbai
+# Suburban. These are used only by the Find Blood page.
+#
+# Representative coordinates are used only for an approximate
+# straight-line distance when an area has no blood bank of its
+# own. They do not modify research/GIS calculations.
+# ============================================================
+
+MUMBAI_AREA_CATALOG = {'Mumbai': {'Colaba': (18.9067, 72.8147),
+  'Cuffe Parade': (18.9145, 72.822),
+  'Fort': (18.932, 72.8347),
+  'Churchgate': (18.9353, 72.827),
+  'Ballard Estate': (18.9358, 72.8398),
+  'Nariman Point': (18.9255, 72.8242),
+  'Marine Lines': (18.944, 72.8245),
+  'Kalbadevi': (18.9495, 72.8265),
+  'Bhuleshwar': (18.9523, 72.83),
+  'Mandvi': (18.9522, 72.838),
+  'Masjid': (18.9561, 72.8392),
+  'Dongri': (18.9574, 72.838),
+  'Girgaon': (18.954, 72.8145),
+  'Charni Road': (18.9525, 72.8182),
+  'Grant Road': (18.964, 72.815),
+  'Khetwadi': (18.9605, 72.8188),
+  'Malabar Hill': (18.9549, 72.8037),
+  'Cumballa Hill': (18.9647, 72.8084),
+  'Tardeo': (18.9715, 72.8175),
+  'Mumbai Central': (18.9698, 72.8205),
+  'Mahalaxmi': (18.982, 72.812),
+  'Breach Candy': (18.9727, 72.8044),
+  'Agripada': (18.9715, 72.823),
+  'Nagpada': (18.965, 72.824),
+  'Byculla': (18.976, 72.8338),
+  'Mazgaon': (18.9685, 72.843),
+  'Dockyard Road': (18.969, 72.8465),
+  'Parel': (18.9993, 72.8406),
+  'Lalbaug': (18.9986, 72.837),
+  'Lower Parel': (18.998, 72.825),
+  'Dadar': (19.0233, 72.8377),
+  'Prabhadevi': (19.0135, 72.825),
+  'Worli': (19.017, 72.817),
+  'Mahim': (19.0335, 72.8383),
+  'Matunga': (19.0278, 72.855),
+  'Sion': (19.0365, 72.8687),
+  'Dharavi': (19.0445, 72.855),
+  'Wadala': (19.0165, 72.858),
+  'Antop Hill': (19.0268, 72.8725),
+  'Sewri': (19.0005, 72.8545),
+  'Shivdi': (19.003, 72.859),
+  'Cotton Green': (18.9948, 72.8515),
+  'Chinchpokli': (18.9785, 72.83),
+  'Jacob Circle': (18.976, 72.824),
+  'Reay Road': (18.981, 72.857),
+  'Sandhurst Road': (18.9538, 72.845),
+  'Princess Dock': (18.949, 72.85),
+  'Chinch Bunder': (18.9525, 72.844)},
+ 'Mumbai Suburban': {'Bandra': (19.0575, 72.8336),
+  'Bandra East': (19.0605, 72.849),
+  'Bandra West': (19.06, 72.836),
+  'Bandra Kurla Complex': (19.068, 72.869),
+  'Khar': (19.0695, 72.836),
+  'Khar East': (19.071, 72.846),
+  'Khar West': (19.0695, 72.832),
+  'Santacruz': (19.081, 72.842),
+  'Santacruz East': (19.083, 72.854),
+  'Santacruz West': (19.08, 72.839),
+  'Vile Parle': (19.1, 72.843),
+  'Vile Parle East': (19.1005, 72.852),
+  'Vile Parle West': (19.098, 72.836),
+  'Juhu': (19.1075, 72.8265),
+  'Vakola': (19.0855, 72.861),
+  'Kalina': (19.082, 72.865),
+  'Andheri': (19.1195, 72.846),
+  'Andheri East': (19.1155, 72.865),
+  'Andheri West': (19.1195, 72.844),
+  'Chakala': (19.116, 72.8615),
+  'Marol': (19.1175, 72.879),
+  'MIDC': (19.1115, 72.8735),
+  'Saki Naka': (19.1015, 72.888),
+  'Jogeshwari': (19.137, 72.848),
+  'Jogeshwari East': (19.136, 72.861),
+  'Jogeshwari West': (19.137, 72.842),
+  'Goregaon': (19.166, 72.852),
+  'Goregaon East': (19.166, 72.865),
+  'Goregaon West': (19.1595, 72.8403),
+  'Aarey': (19.145, 72.869),
+  'Malad': (19.187, 72.848),
+  'Malad East': (19.186, 72.858),
+  'Malad West': (19.187, 72.838),
+  'Malvani': (19.198, 72.822),
+  'Marve': (19.195, 72.798),
+  'Madh Island': (19.135, 72.795),
+  'Kandivali': (19.204, 72.839),
+  'Kandivali East': (19.205, 72.861),
+  'Kandivali West': (19.205, 72.837),
+  'Charkop': (19.22, 72.82),
+  'Poisar': (19.205, 72.845),
+  'Kurar': (19.192, 72.872),
+  'Borivali': (19.23, 72.8525),
+  'Borivali East': (19.23, 72.864),
+  'Borivali West': (19.23, 72.843),
+  'Dahisar': (19.25, 72.858),
+  'Dahisar East': (19.25, 72.866),
+  'Dahisar West': (19.25, 72.851),
+  'Gorai': (19.245, 72.8),
+  'Manori': (19.2, 72.78),
+  'Kurla': (19.072, 72.879),
+  'Kurla East': (19.073, 72.888),
+  'Kurla West': (19.071, 72.872),
+  'Chandivali': (19.114, 72.9),
+  'Powai': (19.118, 72.907),
+  'Ghatkopar': (19.085, 72.908),
+  'Ghatkopar East': (19.0825, 72.915),
+  'Ghatkopar West': (19.086, 72.9),
+  'Vikhroli': (19.1115, 72.927),
+  'Vikhroli East': (19.112, 72.938),
+  'Vikhroli West': (19.111, 72.918),
+  'Kanjurmarg': (19.129, 72.94),
+  'Kanjurmarg East': (19.131, 72.948),
+  'Kanjurmarg West': (19.128, 72.931),
+  'Bhandup': (19.146, 72.937),
+  'Bhandup East': (19.145, 72.945),
+  'Bhandup West': (19.146, 72.93),
+  'Nahur': (19.155, 72.946),
+  'Mulund': (19.1726, 72.956),
+  'Mulund East': (19.1715, 72.965),
+  'Mulund West': (19.1725, 72.947),
+  'Chembur': (19.062, 72.899),
+  'Tilak Nagar': (19.067, 72.899),
+  'Govandi': (19.055, 72.915),
+  'Govandi East': (19.054, 72.92),
+  'Govandi West': (19.057, 72.909),
+  'Mankhurd': (19.048, 72.933),
+  'Deonar': (19.059, 72.916),
+  'Trombay': (19.016, 72.957),
+  'Anushakti Nagar': (19.0425, 72.9145)}}
+
+
+MUMBAI_AREA_ALIASES = {'Mumbai': {'girgoan': 'Girgaon',
+  'dadar west': 'Dadar',
+  'vileparle': 'Vile Parle',
+  'mumbai cst': 'Fort',
+  'chinch bunder': 'Chinch Bunder'},
+ 'Mumbai Suburban': {'vileparle': 'Vile Parle',
+  'bandra reclamation': 'Bandra West',
+  'bandra reclaimation': 'Bandra West',
+  'rajawadi hospital': 'Ghatkopar East',
+  'janta market': 'Bhandup West',
+  'janta markat': 'Bhandup West',
+  'andher': 'Andheri East',
+  'mumabi': 'Andheri East',
+  'cts no': 'Jogeshwari West',
+  'goregaon': 'Goregaon',
+  'kurla': 'Kurla'}}
+
+
+def normalize_search_text(value):
+
+    return (
+        str(value or "")
+        .strip()
+        .casefold()
+    )
+
+
+def canonical_mumbai_area(
+    district,
+    area
+):
+
+    if not area:
+
+        return None
+
+    district_key = (
+        "Mumbai Suburban"
+        if normalize_search_text(
+            district
+        )
+        == "mumbai suburban"
+        else "Mumbai"
+    )
+
+    text = normalize_search_text(
+        area
+    )
+
+    alias_map = (
+        MUMBAI_AREA_ALIASES.get(
+            district_key,
+            {}
+        )
+    )
+
+    if text in alias_map:
+
+        return alias_map[text]
+
+    for canonical_name in (
+        MUMBAI_AREA_CATALOG[
+            district_key
+        ]
+    ):
+
+        if (
+            normalize_search_text(
+                canonical_name
+            )
+            ==
+            text
+        ):
+
+            return canonical_name
+
+    return None
+
+
+def mumbai_area_coordinates(
+    district,
+    canonical_area
+):
+
+    if not canonical_area:
+
+        return None
+
+    district_key = (
+        "Mumbai Suburban"
+        if normalize_search_text(
+            district
+        )
+        == "mumbai suburban"
+        else "Mumbai"
+    )
+
+    return (
+        MUMBAI_AREA_CATALOG[
+            district_key
+        ].get(
+            canonical_area
+        )
+    )
+
+
+def haversine_km(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+):
+
+    radius = 6371.0
+
+    lat1 = np.radians(lat1)
+    lon1 = np.radians(lon1)
+    lat2 = np.radians(lat2)
+    lon2 = np.radians(lon2)
+
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    a = (
+        np.sin(dlat / 2.0) ** 2
+        +
+        np.cos(lat1)
+        *
+        np.cos(lat2)
+        *
+        np.sin(dlon / 2.0) ** 2
+    )
+
+    return float(
+        2.0
+        *
+        radius
+        *
+        np.arctan2(
+            np.sqrt(a),
+            np.sqrt(
+                np.maximum(
+                    0.0,
+                    1.0 - a
+                )
+            )
+        )
+    )
+
+
+def bank_area_matches(
+    bank_area,
+    canonical_area
+):
+
+    if (
+        not bank_area
+        or
+        not canonical_area
+    ):
+
+        return False
+
+    text = normalize_search_text(
+        bank_area
+    )
+
+    canonical = normalize_search_text(
+        canonical_area
+    )
+
+    if text == canonical:
+
+        return True
+
+    known_aliases = {
+
+        "dadar west":
+            "dadar",
+
+        "girgoan":
+            "girgaon",
+
+        "mumbai cst":
+            "fort",
+
+        "bandra reclaimation":
+            "bandra west",
+
+        "bandra reclamation":
+            "bandra west",
+
+        "rajawadi hospit":
+            "ghatkopar east",
+
+        "janta markat":
+            "bhandup west",
+
+        "janta market":
+            "bhandup west",
+
+        "andher":
+            "andheri east",
+
+        "mumabi":
+            "andheri east",
+
+        "cts no":
+            "jogeshwari west",
+
+        "opp. kem hospital":
+            "parel",
+
+        "l.t.":
+            "fort",
+
+        "dr.g.deshmukh":
+            "cumballa hill",
+
+    }
+
+    return (
+        known_aliases.get(
+            text
+        )
+        ==
+        canonical
+    )
+
+
 MODEL_FEATURES = [
     "stock",
     "previous_stock",
@@ -631,6 +1003,164 @@ def locations():
             """
         ).fetchall()
 
+        # ----------------------------------------------------
+        # REAL DISTRICT -> CITY -> AREA HIERARCHY
+        # Kept for all districts outside Mumbai City and
+        # Mumbai Suburban.
+        # ----------------------------------------------------
+
+        hierarchy_rows = conn.execute(
+            """
+            SELECT DISTINCT
+                district,
+                city,
+                area
+            FROM blood_banks
+            WHERE district IS NOT NULL
+              AND TRIM(district) != ''
+              AND city IS NOT NULL
+              AND TRIM(city) != ''
+              AND area IS NOT NULL
+              AND TRIM(area) != ''
+            ORDER BY
+                district,
+                city,
+                area
+            """
+        ).fetchall()
+
+        hierarchy = {}
+
+        for row in hierarchy_rows:
+
+            district_name = str(
+                row["district"]
+            ).strip()
+
+            city_name = str(
+                row["city"]
+            ).strip()
+
+            area_name = str(
+                row["area"]
+            ).strip()
+
+            if (
+                not district_name
+                or
+                not city_name
+                or
+                not area_name
+            ):
+
+                continue
+
+            hierarchy.setdefault(
+                district_name,
+                {}
+            )
+
+            hierarchy[
+                district_name
+            ].setdefault(
+                city_name,
+                set()
+            )
+
+            hierarchy[
+                district_name
+            ][
+                city_name
+            ].add(
+                area_name
+            )
+
+        hierarchy_output = []
+
+        for district_name in sorted(
+            hierarchy.keys(),
+            key=lambda value:
+                value.casefold()
+        ):
+
+            city_output = []
+
+            for city_name in sorted(
+                hierarchy[
+                    district_name
+                ].keys(),
+                key=lambda value:
+                    value.casefold()
+            ):
+
+                city_output.append({
+
+                    "city":
+                        city_name,
+
+                    "areas":
+                        sorted(
+                            hierarchy[
+                                district_name
+                            ][
+                                city_name
+                            ],
+                            key=lambda value:
+                                value.casefold()
+                        )
+
+                })
+
+            hierarchy_output.append({
+
+                "district":
+                    district_name,
+
+                "cities":
+                    city_output
+
+            })
+
+        cityless_districts = [
+            "Mumbai",
+            "Mumbai Suburban"
+        ]
+
+        # ----------------------------------------------------
+        # SPECIAL MUMBAI AREA CATALOG
+        #
+        # For Mumbai City and Mumbai Suburban the user goes
+        # directly:
+        #
+        # District -> Area
+        #
+        # The area field remains a plain text field with no
+        # dropdown/autocomplete. The catalog is returned only
+        # so the frontend can validate the typed locality.
+        # ----------------------------------------------------
+
+        valid_areas_by_district = {
+
+            "Mumbai":
+                sorted(
+                    MUMBAI_AREA_CATALOG[
+                        "Mumbai"
+                    ].keys(),
+                    key=lambda value:
+                        value.casefold()
+                ),
+
+            "Mumbai Suburban":
+                sorted(
+                    MUMBAI_AREA_CATALOG[
+                        "Mumbai Suburban"
+                    ].keys(),
+                    key=lambda value:
+                        value.casefold()
+                )
+
+        }
+
         return jsonify({
 
             "cities": [
@@ -646,7 +1176,16 @@ def locations():
             "areas": [
                 row["area"]
                 for row in areas
-            ]
+            ],
+
+            "hierarchy":
+                hierarchy_output,
+
+            "cityless_districts":
+                cityless_districts,
+
+            "valid_areas_by_district":
+                valid_areas_by_district
 
         })
 
@@ -729,59 +1268,610 @@ def find_blood():
 
     try:
 
-        rows = []
+        # ====================================================
+        # SPECIAL RULE:
+        # Mumbai City + Mumbai Suburban
+        #
+        # These two districts use:
+        #
+        #     District -> Area
+        #
+        # and only a curated, valid locality catalog is
+        # accepted.
+        #
+        # If a valid area has no blood bank of its own,
+        # return the closest registered Mumbai blood bank.
+        #
+        # IMPORTANT:
+        # The closest-bank fallback happens ONLY when there
+        # is no bank registered in the requested area.
+        # If a bank exists in the area but lacks the requested
+        # stock, we do NOT silently substitute another area.
+        # ====================================================
 
-        search_level = None
+        district_key = (
+            "Mumbai Suburban"
+            if normalize_search_text(
+                district
+            )
+            == "mumbai suburban"
+            else (
+                "Mumbai"
+                if normalize_search_text(
+                    district
+                )
+                == "mumbai"
+                else district
+            )
+        )
 
-        if area:
+        is_mumbai_special = (
+            district_key
+            in {
+                "Mumbai",
+                "Mumbai Suburban"
+            }
+        )
 
-            rows = conn.execute(
+        canonical_area = None
+
+        if (
+            is_mumbai_special
+            and
+            area
+        ):
+
+            canonical_area = canonical_mumbai_area(
+                district_key,
+                area
+            )
+
+            if canonical_area is None:
+
+                valid_areas = sorted(
+                    MUMBAI_AREA_CATALOG[
+                        district_key
+                    ].keys(),
+                    key=lambda value:
+                        value.casefold()
+                )
+
+                return jsonify({
+
+                    "success":
+                        False,
+
+                    "error":
+                        "invalid_area",
+
+                    "message":
+                        "Please enter a valid area for "
+                        f"{district_key}.",
+
+                    "district":
+                        district_key,
+
+                    "valid_areas":
+                        valid_areas
+
+                }), 400
+
+        # ====================================================
+        # SPECIAL MUMBAI AREA SEARCH
+        # ====================================================
+
+        if (
+            is_mumbai_special
+            and
+            canonical_area
+        ):
+
+            # ------------------------------------------------
+            # Get all blood banks that belong to Mumbai City
+            # / Mumbai Suburban in the current database.
+            #
+            # We intentionally use both district and city
+            # because the current source data contains some
+            # Mumbai-suburban facilities recorded under the
+            # broader "Mumbai" district label.
+            # ------------------------------------------------
+
+            region_rows = conn.execute(
                 """
                 SELECT *
                 FROM blood_banks
-                WHERE LOWER(TRIM(area))
-                    = LOWER(TRIM(?))
-                """,
-                (area,)
-            ).fetchall()
-
-            if rows:
-
-                search_level = "area"
-
-        if not rows and city:
-
-            rows = conn.execute(
+                WHERE
+                    LOWER(TRIM(district))
+                        IN (
+                            'mumbai',
+                            'mumbai suburban'
+                        )
+                    OR
+                    LOWER(TRIM(city))
+                        = 'mumbai'
+                ORDER BY
+                    blood_bank_name
                 """
-                SELECT *
-                FROM blood_banks
-                WHERE LOWER(TRIM(city))
-                    = LOWER(TRIM(?))
-                """,
-                (city,)
             ).fetchall()
 
-            if rows:
+            # ------------------------------------------------
+            # 1. FIRST: determine whether a bank is actually
+            # registered in the requested area.
+            #
+            # This uses canonical area names and a small set
+            # of known legacy aliases such as:
+            #   Dadar West -> Dadar
+            #   Girgoan -> Girgaon
+            # ------------------------------------------------
 
-                search_level = "city"
+            local_rows = [
 
-        if not rows and district:
+                row
 
-            rows = conn.execute(
-                """
-                SELECT *
-                FROM blood_banks
-                WHERE LOWER(TRIM(district))
-                    = LOWER(TRIM(?))
-                """,
-                (district,)
-            ).fetchall()
+                for row in region_rows
 
-            if rows:
+                if bank_area_matches(
+                    row["area"],
+                    canonical_area
+                )
 
-                search_level = "district"
+            ]
 
-        if not rows:
+            # ------------------------------------------------
+            # The area HAS a blood bank.
+            #
+            # Therefore we only show banks from that area
+            # that satisfy the requested blood-stock amount.
+            #
+            # No nearest-area substitution is performed.
+            # ------------------------------------------------
+
+            if local_rows:
+
+                results = []
+
+                for row in local_rows:
+
+                    try:
+
+                        stock = float(
+                            row[
+                                blood_group
+                            ]
+                        )
+
+                    except (
+                        ValueError,
+                        TypeError,
+                        KeyError
+                    ):
+
+                        continue
+
+                    if (
+                        stock
+                        <
+                        required_units
+                    ):
+
+                        continue
+
+                    results.append({
+
+                        "hospital_code":
+                            row[
+                                "hospital_code"
+                            ],
+
+                        "blood_bank_name":
+                            row[
+                                "blood_bank_name"
+                            ],
+
+                        "address":
+                            row[
+                                "address"
+                            ],
+
+                        "contact":
+                            row[
+                                "contact"
+                            ],
+
+                        "hospital_type":
+                            row[
+                                "hospital_type"
+                            ],
+
+                        "district":
+                            row[
+                                "district"
+                            ],
+
+                        "area":
+                            canonical_area,
+
+                        "city":
+                            row[
+                                "city"
+                            ],
+
+                        "latitude":
+                            row[
+                                "latitude"
+                            ],
+
+                        "longitude":
+                            row[
+                                "longitude"
+                            ],
+
+                        "stock":
+                            stock,
+
+                        "blood_group":
+                            blood_group,
+
+                        "is_area_fallback":
+                            False,
+
+                        "distance_km":
+                            None
+
+                    })
+
+                results.sort(
+                    key=lambda item:
+                        item[
+                            "stock"
+                        ],
+                    reverse=True
+                )
+
+                return jsonify({
+
+                    "success":
+                        True,
+
+                    "search_level":
+                        "area",
+
+                    "blood_group":
+                        blood_group,
+
+                    "required_units":
+                        required_units,
+
+                    "selected_area":
+                        canonical_area,
+
+                    "area_has_blood_bank":
+                        True,
+
+                    "area_fallback":
+                        False,
+
+                    "results":
+                        results
+
+                })
+
+            # ------------------------------------------------
+            # 2. NO BANK IN REQUESTED AREA
+            #
+            # Find the closest registered Mumbai blood bank.
+            # ------------------------------------------------
+
+            area_coordinates = (
+                mumbai_area_coordinates(
+                    district_key,
+                    canonical_area
+                )
+            )
+
+            if area_coordinates is None:
+
+                return jsonify({
+
+                    "success":
+                        True,
+
+                    "search_level":
+                        "area",
+
+                    "blood_group":
+                        blood_group,
+
+                    "required_units":
+                        required_units,
+
+                    "selected_area":
+                        canonical_area,
+
+                    "area_has_blood_bank":
+                        False,
+
+                    "area_fallback":
+                        False,
+
+                    "results":
+                        [],
+
+                    "message":
+                        "No representative location "
+                        "is available for this area."
+
+                })
+
+            area_lat, area_lon = (
+                area_coordinates
+            )
+
+            candidates = []
+
+            for row in region_rows:
+
+                latitude = row[
+                    "latitude"
+                ]
+
+                longitude = row[
+                    "longitude"
+                ]
+
+                if (
+                    latitude is None
+                    or
+                    longitude is None
+                ):
+
+                    continue
+
+                try:
+
+                    bank_lat = float(
+                        latitude
+                    )
+
+                    bank_lon = float(
+                        longitude
+                    )
+
+                except (
+                    ValueError,
+                    TypeError
+                ):
+
+                    continue
+
+                distance = haversine_km(
+                    area_lat,
+                    area_lon,
+                    bank_lat,
+                    bank_lon
+                )
+
+                try:
+
+                    stock = float(
+                        row[
+                            blood_group
+                        ]
+                    )
+
+                except (
+                    ValueError,
+                    TypeError,
+                    KeyError
+                ):
+
+                    stock = 0.0
+
+                candidates.append({
+
+                    "row":
+                        row,
+
+                    "distance_km":
+                        distance,
+
+                    "stock":
+                        stock,
+
+                    "stock_sufficient":
+                        (
+                            stock
+                            >=
+                            required_units
+                        )
+
+                })
+
+            # ------------------------------------------------
+            # Prefer the nearest bank that actually has the
+            # requested number of units.
+            # ------------------------------------------------
+
+            sufficient = [
+
+                item
+                for item in candidates
+                if item[
+                    "stock_sufficient"
+                ]
+
+            ]
+
+            if sufficient:
+
+                sufficient.sort(
+                    key=lambda item:
+                        item[
+                            "distance_km"
+                        ]
+                )
+
+                selected = [
+                    sufficient[0]
+                ]
+
+                fallback_stock_available = True
+
+            elif candidates:
+
+                candidates.sort(
+                    key=lambda item:
+                        item[
+                            "distance_km"
+                        ]
+                )
+
+                selected = [
+                    candidates[0]
+                ]
+
+                fallback_stock_available = False
+
+            else:
+
+                return jsonify({
+
+                    "success":
+                        True,
+
+                    "search_level":
+                        "area-fallback",
+
+                    "blood_group":
+                        blood_group,
+
+                    "required_units":
+                        required_units,
+
+                    "selected_area":
+                        canonical_area,
+
+                    "area_has_blood_bank":
+                        False,
+
+                    "area_fallback":
+                        True,
+
+                    "results":
+                        [],
+
+                    "message":
+                        "No Mumbai blood-bank coordinate "
+                        "was available for a nearest-bank search."
+
+                })
+
+            results = []
+
+            for item in selected:
+
+                row = item[
+                    "row"
+                ]
+
+                results.append({
+
+                    "hospital_code":
+                        row[
+                            "hospital_code"
+                        ],
+
+                    "blood_bank_name":
+                        row[
+                            "blood_bank_name"
+                        ],
+
+                    "address":
+                        row[
+                            "address"
+                        ],
+
+                    "contact":
+                        row[
+                            "contact"
+                        ],
+
+                    "hospital_type":
+                        row[
+                            "hospital_type"
+                        ],
+
+                    "district":
+                        row[
+                            "district"
+                        ],
+
+                    "area":
+                        row[
+                            "area"
+                        ],
+
+                    "city":
+                        row[
+                            "city"
+                        ],
+
+                    "latitude":
+                        row[
+                            "latitude"
+                        ],
+
+                    "longitude":
+                        row[
+                            "longitude"
+                        ],
+
+                    "stock":
+                        item[
+                            "stock"
+                        ],
+
+                    "blood_group":
+                        blood_group,
+
+                    "is_area_fallback":
+                        True,
+
+                    "distance_km":
+                        round(
+                            item[
+                                "distance_km"
+                            ],
+                            2
+                        ),
+
+                    "stock_sufficient":
+                        item[
+                            "stock_sufficient"
+                        ]
+
+                })
+
+            if fallback_stock_available:
+
+                message = (
+                    f"No blood bank is registered in "
+                    f"{canonical_area}. "
+                    f"Showing the closest registered "
+                    f"blood bank with {blood_group} "
+                    f"stock."
+                )
+
+            else:
+
+                message = (
+                    f"No blood bank is registered in "
+                    f"{canonical_area}, and no nearby "
+                    f"Mumbai blood bank currently has "
+                    f"{required_units} or more units of "
+                    f"{blood_group}. Showing the closest "
+                    f"registered blood bank and its current stock."
+                )
 
             return jsonify({
 
@@ -789,12 +1879,149 @@ def find_blood():
                     True,
 
                 "search_level":
-                    "none",
+                    "area-fallback",
+
+                "blood_group":
+                    blood_group,
+
+                "required_units":
+                    required_units,
+
+                "selected_area":
+                    canonical_area,
+
+                "area_has_blood_bank":
+                    False,
+
+                "area_fallback":
+                    True,
+
+                "fallback_stock_available":
+                    fallback_stock_available,
+
+                "message":
+                    message,
 
                 "results":
-                    []
+                    results
 
             })
+
+        # ====================================================
+        # ORIGINAL MAHARASHTRA-WIDE SEARCH
+        #
+        # For all other districts, preserve the existing
+        # behaviour.
+        # ====================================================
+
+        filters = []
+        parameters = []
+
+        if district:
+
+            filters.append(
+                "LOWER(TRIM(district)) = LOWER(TRIM(?))"
+            )
+
+            parameters.append(
+                district
+            )
+
+        if city:
+
+            filters.append(
+                "LOWER(TRIM(city)) = LOWER(TRIM(?))"
+            )
+
+            parameters.append(
+                city
+            )
+
+        if area:
+
+            filters.append(
+                "LOWER(TRIM(area)) = LOWER(TRIM(?))"
+            )
+
+            parameters.append(
+                area
+            )
+
+        query = """
+            SELECT *
+            FROM blood_banks
+        """
+
+        if filters:
+
+            query += (
+                " WHERE "
+                +
+                " AND ".join(
+                    filters
+                )
+            )
+
+        query += """
+            ORDER BY
+                district,
+                city,
+                area,
+                blood_bank_name
+        """
+
+        rows = conn.execute(
+            query,
+            parameters
+        ).fetchall()
+
+        if (
+            district
+            and
+            city
+            and
+            area
+        ):
+
+            search_level = (
+                "district-city-area"
+            )
+
+        elif (
+            district
+            and
+            area
+        ):
+
+            search_level = (
+                "district-area"
+            )
+
+        elif (
+            district
+            and
+            city
+        ):
+
+            search_level = (
+                "district-city"
+            )
+
+        elif area:
+
+            search_level = "area"
+
+        elif city:
+
+            search_level = "city"
+
+        elif district:
+
+            search_level = "district"
+
+        else:
+
+            search_level = "all"
 
         results = []
 
@@ -803,7 +2030,9 @@ def find_blood():
             try:
 
                 stock = float(
-                    row[blood_group]
+                    row[
+                        blood_group
+                    ]
                 )
 
             except (
@@ -821,46 +2050,74 @@ def find_blood():
             results.append({
 
                 "hospital_code":
-                    row["hospital_code"],
+                    row[
+                        "hospital_code"
+                    ],
 
                 "blood_bank_name":
-                    row["blood_bank_name"],
+                    row[
+                        "blood_bank_name"
+                    ],
 
                 "address":
-                    row["address"],
+                    row[
+                        "address"
+                    ],
 
                 "contact":
-                    row["contact"],
+                    row[
+                        "contact"
+                    ],
 
                 "hospital_type":
-                    row["hospital_type"],
+                    row[
+                        "hospital_type"
+                    ],
 
                 "district":
-                    row["district"],
+                    row[
+                        "district"
+                    ],
 
                 "area":
-                    row["area"],
+                    row[
+                        "area"
+                    ],
 
                 "city":
-                    row["city"],
+                    row[
+                        "city"
+                    ],
 
                 "latitude":
-                    row["latitude"],
+                    row[
+                        "latitude"
+                    ],
 
                 "longitude":
-                    row["longitude"],
+                    row[
+                        "longitude"
+                    ],
 
                 "stock":
                     stock,
 
                 "blood_group":
-                    blood_group
+                    blood_group,
+
+                "is_area_fallback":
+                    False,
+
+                "distance_km":
+                    None
 
             })
 
         results.sort(
             key=lambda item:
-                item["stock"],
+                item[
+                    "stock"
+                ],
             reverse=True
         )
 
@@ -877,6 +2134,9 @@ def find_blood():
 
             "required_units":
                 required_units,
+
+            "area_fallback":
+                False,
 
             "results":
                 results

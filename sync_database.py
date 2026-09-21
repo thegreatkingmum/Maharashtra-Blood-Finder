@@ -17,10 +17,14 @@
 #   - current blood stock
 #   - historical stock
 #   - hospital code
+#
+# Additional permanent location normalization:
+#   Dadar West -> Dadar
 # ============================================================
 
 from pathlib import Path
 import sqlite3
+
 import pandas as pd
 
 
@@ -28,17 +32,23 @@ import pandas as pd
 # PATHS
 # ============================================================
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(
+    __file__
+).resolve().parent
+
 
 DATABASE_FILE = (
-    BASE_DIR / "database.db"
+    BASE_DIR
+    / "database.db"
 )
+
 
 MASTER_FILE = (
     BASE_DIR
     / "data"
     / "master_blood_banks.csv"
 )
+
 
 COORDINATE_FILE = (
     BASE_DIR
@@ -48,13 +58,73 @@ COORDINATE_FILE = (
 
 
 # ============================================================
+# PERMANENT LOCATION NORMALIZATION
+# ============================================================
+
+# These rules are applied AFTER reading the master CSV and
+# BEFORE updating the live database.
+#
+# This protects the website from legacy/source-data spelling
+# variations returning later.
+
+AREA_NORMALIZATION = {
+
+    "dadar west":
+        "Dadar",
+
+}
+
+
+CITY_NORMALIZATION = {
+
+    "panvel":
+        "Panvel",
+
+    "panvel ":
+        "Panvel",
+
+    "panvel municipal corporation":
+        "Panvel",
+
+    "panvel":
+        "Panvel",
+
+    "mira road":
+        "Mira-Bhayandar",
+
+    "Mira Road":
+        "Mira-Bhayandar",
+
+}
+
+
+DISTRICT_NORMALIZATION = {
+
+    "bid":
+        "Beed",
+
+    "Bid":
+        "Beed",
+
+    "raigarh":
+        "Raigad",
+
+    "Raigarh":
+        "Raigad",
+
+}
+
+
+# ============================================================
 # CHECK FILES
 # ============================================================
 
 for file_path in [
+
     DATABASE_FILE,
     MASTER_FILE,
     COORDINATE_FILE,
+
 ]:
 
     if not file_path.exists():
@@ -72,23 +142,32 @@ master_df = pd.read_csv(
     MASTER_FILE
 )
 
+
 master_df.columns = [
     str(column).strip()
     for column in master_df.columns
 ]
 
+
 required_master_columns = [
+
     "hospital_code",
     "district",
     "area",
     "city",
+
 ]
 
+
 missing_master_columns = [
+
     column
-    for column in required_master_columns
+    for column
+    in required_master_columns
     if column not in master_df.columns
+
 ]
+
 
 if missing_master_columns:
 
@@ -102,20 +181,189 @@ if missing_master_columns:
 # NORMALIZE MASTER HOSPITAL CODES
 # ============================================================
 
-master_df["hospital_code"] = (
-    master_df["hospital_code"]
+master_df[
+    "hospital_code"
+] = (
+
+    master_df[
+        "hospital_code"
+    ]
     .astype(str)
     .str.strip()
+
 )
 
 
 master_df = (
+
     master_df
     .drop_duplicates(
         "hospital_code"
     )
     .copy()
+
 )
+
+
+# ============================================================
+# NORMALIZE MASTER LOCATION VALUES
+# ============================================================
+
+def normalize_area(
+    value
+):
+
+    if pd.isna(
+        value
+    ):
+
+        return value
+
+    cleaned = str(
+        value
+    ).strip()
+
+    key = cleaned.lower()
+
+    return AREA_NORMALIZATION.get(
+        key,
+        cleaned
+    )
+
+
+def normalize_city(
+    value
+):
+
+    if pd.isna(
+        value
+    ):
+
+        return value
+
+    cleaned = str(
+        value
+    ).strip()
+
+    key = cleaned.lower()
+
+    return CITY_NORMALIZATION.get(
+        key,
+        cleaned
+    )
+
+
+def normalize_district(
+    value
+):
+
+    if pd.isna(
+        value
+    ):
+
+        return value
+
+    cleaned = str(
+        value
+    ).strip()
+
+    key = cleaned.lower()
+
+    return DISTRICT_NORMALIZATION.get(
+        key,
+        cleaned
+    )
+
+
+master_df[
+    "district"
+] = (
+
+    master_df[
+        "district"
+    ]
+    .apply(
+        normalize_district
+    )
+
+)
+
+
+master_df[
+    "area"
+] = (
+
+    master_df[
+        "area"
+    ]
+    .apply(
+        normalize_area
+    )
+
+)
+
+
+master_df[
+    "city"
+] = (
+
+    master_df[
+        "city"
+    ]
+    .apply(
+        normalize_city
+    )
+
+)
+
+
+# ============================================================
+# SHOW IMPORTANT MASTER CHECK
+# ============================================================
+
+master_check = master_df[
+    master_df[
+        "hospital_code"
+    ]
+    == "18023"
+]
+
+
+print()
+print(
+    "=============================================="
+)
+
+print(
+    "MASTER LOCATION CHECK — 18023"
+)
+
+print(
+    "=============================================="
+)
+
+
+if not master_check.empty:
+
+    print(
+        master_check[
+            [
+                "hospital_code",
+                "district",
+                "area",
+                "city"
+            ]
+        ].to_string(
+            index=False
+        )
+    )
+
+else:
+
+    print(
+        "WARNING: hospital code 18023 "
+        "not found in master."
+    )
 
 
 # ============================================================
@@ -126,22 +374,38 @@ coordinates_df = pd.read_csv(
     COORDINATE_FILE
 )
 
+
 coordinates_df.columns = [
+
     str(column).strip()
-    for column in coordinates_df.columns
+
+    for column
+    in coordinates_df.columns
+
 ]
 
+
 required_coordinate_columns = [
+
     "hospital_code",
     "latitude",
     "longitude",
+
 ]
 
+
 missing_coordinate_columns = [
+
     column
-    for column in required_coordinate_columns
-    if column not in coordinates_df.columns
+
+    for column
+    in required_coordinate_columns
+
+    if column
+    not in coordinates_df.columns
+
 ]
+
 
 if missing_coordinate_columns:
 
@@ -151,31 +415,53 @@ if missing_coordinate_columns:
     )
 
 
-coordinates_df["hospital_code"] = (
-    coordinates_df["hospital_code"]
+coordinates_df[
+    "hospital_code"
+] = (
+
+    coordinates_df[
+        "hospital_code"
+    ]
     .astype(str)
     .str.strip()
+
 )
 
 
-coordinates_df["latitude"] = pd.to_numeric(
-    coordinates_df["latitude"],
+coordinates_df[
+    "latitude"
+] = pd.to_numeric(
+
+    coordinates_df[
+        "latitude"
+    ],
+
     errors="coerce",
+
 )
 
 
-coordinates_df["longitude"] = pd.to_numeric(
-    coordinates_df["longitude"],
+coordinates_df[
+    "longitude"
+] = pd.to_numeric(
+
+    coordinates_df[
+        "longitude"
+    ],
+
     errors="coerce",
+
 )
 
 
 coordinates_df = (
+
     coordinates_df
     .drop_duplicates(
         "hospital_code"
     )
     .copy()
+
 )
 
 
@@ -186,6 +472,7 @@ coordinates_df = (
 connection = sqlite3.connect(
     DATABASE_FILE
 )
+
 
 connection.row_factory = sqlite3.Row
 
@@ -209,12 +496,13 @@ try:
     if table_check is None:
 
         raise ValueError(
-            "blood_banks table does not exist in database.db"
+            "blood_banks table does not exist "
+            "in database.db"
         )
 
 
     # ========================================================
-    # SHOW BEFORE VALUE FOR 284016
+    # SHOW BEFORE VALUE FOR 18023
     # ========================================================
 
     before = connection.execute(
@@ -225,21 +513,26 @@ try:
             district,
             area,
             city,
-            latitude,
-            longitude
+            "A+",
+            "O+",
+            snapshot_date,
+            source_file
         FROM blood_banks
         WHERE hospital_code = ?
         """,
-        ("284016",)
+        (
+            "18023",
+        )
     ).fetchone()
 
 
+    print()
     print(
-        "\n=============================================="
+        "=============================================="
     )
 
     print(
-        "DATABASE SYNCHRONIZATION"
+        "DATABASE LOCATION SYNCHRONIZATION"
     )
 
     print(
@@ -247,22 +540,25 @@ try:
     )
 
 
+    print()
     print(
-        "\nBEFORE synchronization:"
+        "BEFORE synchronization — 18023:"
     )
 
 
     if before:
 
         print(
-            dict(before)
+            dict(
+                before
+            )
         )
 
     else:
 
         print(
-            "Hospital code 284016 "
-            "was not found in current database."
+            "Hospital code 18023 "
+            "was not found."
         )
 
 
@@ -271,6 +567,7 @@ try:
     # ========================================================
 
     master_lookup = (
+
         master_df[
             [
                 "hospital_code",
@@ -279,12 +576,15 @@ try:
                 "city",
             ]
         ]
+
         .set_index(
             "hospital_code"
         )
+
         .to_dict(
             orient="index"
         )
+
     )
 
 
@@ -293,6 +593,7 @@ try:
     # ========================================================
 
     coordinate_lookup = (
+
         coordinates_df[
             [
                 "hospital_code",
@@ -300,12 +601,15 @@ try:
                 "longitude",
             ]
         ]
+
         .set_index(
             "hospital_code"
         )
+
         .to_dict(
             orient="index"
         )
+
     )
 
 
@@ -321,9 +625,12 @@ try:
     ).fetchall()
 
 
+    print()
     print(
-        "\nCurrent database banks:",
-        len(current_rows)
+        "Current database banks:",
+        len(
+            current_rows
+        )
     )
 
 
@@ -341,7 +648,9 @@ try:
     for row in current_rows:
 
         hospital_code = str(
-            row["hospital_code"]
+            row[
+                "hospital_code"
+            ]
         ).strip()
 
 
@@ -358,6 +667,25 @@ try:
 
         if master_location is not None:
 
+            district = normalize_district(
+                master_location.get(
+                    "district"
+                )
+            )
+
+            area = normalize_area(
+                master_location.get(
+                    "area"
+                )
+            )
+
+            city = normalize_city(
+                master_location.get(
+                    "city"
+                )
+            )
+
+
             connection.execute(
                 """
                 UPDATE blood_banks
@@ -368,20 +696,16 @@ try:
                 WHERE hospital_code = ?
                 """,
                 (
-                    master_location.get(
-                        "district"
-                    ),
-                    master_location.get(
-                        "area"
-                    ),
-                    master_location.get(
-                        "city"
-                    ),
+                    district,
+                    area,
+                    city,
                     hospital_code,
                 )
             )
 
+
             updated_location_count += 1
+
 
         else:
 
@@ -412,8 +736,13 @@ try:
 
             # Do not overwrite with invalid NaN.
             if (
-                pd.notna(latitude)
-                and pd.notna(longitude)
+                pd.notna(
+                    latitude
+                )
+                and
+                pd.notna(
+                    longitude
+                )
             ):
 
                 connection.execute(
@@ -425,24 +754,86 @@ try:
                     WHERE hospital_code = ?
                     """,
                     (
-                        float(latitude),
-                        float(longitude),
+                        float(
+                            latitude
+                        ),
+                        float(
+                            longitude
+                        ),
                         hospital_code,
                     )
                 )
+
 
                 updated_coordinate_count += 1
 
 
     # ========================================================
-    # COMMIT CHANGES
+    # EXPLICIT LEGACY ALIAS SAFETY
+    #
+    # This guarantees that Dadar West can never remain in the
+    # live blood_banks table even if an old master copy or
+    # legacy location value reappears.
+    # ========================================================
+
+    legacy_area_updates = connection.execute(
+        """
+        UPDATE blood_banks
+        SET area = 'Dadar'
+        WHERE LOWER(TRIM(area))
+              = 'dadar west'
+        """
+    )
+
+
+    legacy_area_count = (
+        legacy_area_updates.rowcount
+    )
+
+
+    # ========================================================
+    # NORMALIZE OTHER KNOWN LEGACY VALUES
+    # ========================================================
+
+    district_alias_updates = connection.execute(
+        """
+        UPDATE blood_banks
+        SET district = 'Beed'
+        WHERE LOWER(TRIM(district))
+              = 'bid'
+        """
+    )
+
+
+    district_alias_count = (
+        district_alias_updates.rowcount
+    )
+
+
+    raigarh_updates = connection.execute(
+        """
+        UPDATE blood_banks
+        SET district = 'Raigad'
+        WHERE LOWER(TRIM(district))
+              = 'raigarh'
+        """
+    )
+
+
+    raigarh_count = (
+        raigarh_updates.rowcount
+    )
+
+
+    # ========================================================
+    # COMMIT
     # ========================================================
 
     connection.commit()
 
 
     # ========================================================
-    # SHOW AFTER VALUE
+    # SHOW AFTER VALUE FOR 18023
     # ========================================================
 
     after = connection.execute(
@@ -453,40 +844,48 @@ try:
             district,
             area,
             city,
-            latitude,
-            longitude
+            "A+",
+            "O+",
+            snapshot_date,
+            source_file
         FROM blood_banks
         WHERE hospital_code = ?
         """,
-        ("284016",)
+        (
+            "18023",
+        )
     ).fetchone()
 
 
+    print()
     print(
-        "\nAFTER synchronization:"
+        "AFTER synchronization — 18023:"
     )
 
 
     if after:
 
         print(
-            dict(after)
+            dict(
+                after
+            )
         )
 
     else:
 
         print(
-            "Hospital code 284016 "
+            "Hospital code 18023 "
             "was not found."
         )
 
 
     # ========================================================
-    # FINAL CHECK
+    # FINAL COUNTS
     # ========================================================
 
+    print()
     print(
-        "\n=============================================="
+        "=============================================="
     )
 
     print(
@@ -497,15 +896,18 @@ try:
         "=============================================="
     )
 
+
     print(
         "Location records synchronized:",
         updated_location_count
     )
 
+
     print(
         "Coordinate records synchronized:",
         updated_coordinate_count
     )
+
 
     print(
         "Banks missing from master:",
@@ -513,8 +915,26 @@ try:
     )
 
 
+    print(
+        "Dadar West -> Dadar corrections:",
+        legacy_area_count
+    )
+
+
+    print(
+        "Bid -> Beed corrections:",
+        district_alias_count
+    )
+
+
+    print(
+        "Raigarh -> Raigad corrections:",
+        raigarh_count
+    )
+
+
     # ========================================================
-    # VERIFY PAREL → VILE PARLE
+    # VERIFY 18023
     # ========================================================
 
     verification = connection.execute(
@@ -528,39 +948,99 @@ try:
         FROM blood_banks
         WHERE hospital_code = ?
         """,
-        ("284016",)
+        (
+            "18023",
+        )
     ).fetchone()
+
+
+    print()
+    print(
+        "FINAL 18023 VERIFICATION:"
+    )
 
 
     if verification:
 
-        final_area = verification["area"]
+        print(
+            dict(
+                verification
+            )
+        )
+
+
+        final_area = (
+            verification[
+                "area"
+            ]
+        )
 
 
         if (
-            str(final_area).strip().lower()
-            == "vile parle"
+            str(
+                final_area
+            )
+            .strip()
+            .lower()
+            ==
+            "dadar"
         ):
 
+            print()
             print(
-                "\nSUCCESS:"
+                "SUCCESS:"
             )
 
             print(
-                "284016 area is now:",
-                final_area
+                "18023 area is permanently normalized to Dadar."
             )
 
         else:
 
+            print()
             print(
-                "\nWARNING:"
+                "WARNING:"
             )
 
             print(
-                "284016 area is:",
+                "18023 area is still:",
                 final_area
             )
+
+
+    # ========================================================
+    # CHECK NO DADAR WEST REMAINS
+    # ========================================================
+
+    remaining_legacy = connection.execute(
+        """
+        SELECT COUNT(*)
+        FROM blood_banks
+        WHERE LOWER(TRIM(area))
+              = 'dadar west'
+        """
+    ).fetchone()[0]
+
+
+    print()
+    print(
+        "Remaining Dadar West rows:",
+        remaining_legacy
+    )
+
+
+    if remaining_legacy == 0:
+
+        print(
+            "SUCCESS: No Dadar West values remain "
+            "in the live blood_banks table."
+        )
+
+    else:
+
+        print(
+            "WARNING: Dadar West values still remain."
+        )
 
 
 finally:
@@ -568,6 +1048,7 @@ finally:
     connection.close()
 
 
+print()
 print(
-    "\nDatabase synchronization finished."
+    "Database synchronization finished."
 )
