@@ -12,20 +12,9 @@ Maharashtra Insights | Maharashtra Blood Finder
 
 <div class="insights-header">
 
-<span class="section-label">
-MAHARASHTRA BLOOD INTELLIGENCE
-</span>
-
 <h1>
 Understand the blood-stock landscape
 </h1>
-
-<p>
-Explore blood availability, blood-group
-vulnerability and district-level hotspots
-derived from the project's historical
-e-RaktKosh analysis.
-</p>
 
 </div>
 
@@ -1163,29 +1152,7 @@ async function loadBloodGroupComparison() {
                         ""
                     }
 
-                    ${
-                        rocColumn
-                        ?
-                        "<th>ROC-AUC</th>"
-                        :
-                        ""
-                    }
 
-                    ${
-                        f1Column
-                        ?
-                        "<th>F1</th>"
-                        :
-                        ""
-                    }
-
-                    ${
-                        recallColumn
-                        ?
-                        "<th>Recall</th>"
-                        :
-                        ""
-                    }
 
                 </tr>
 
@@ -1233,58 +1200,6 @@ async function loadBloodGroupComparison() {
                     }
 
 
-                    ${
-                        rocColumn
-                        ?
-                        `
-                        <td>
-
-                            ${formatNumber(
-                                row[rocColumn],
-                                3
-                            )}
-
-                        </td>
-                        `
-                        :
-                        ""
-                    }
-
-
-                    ${
-                        f1Column
-                        ?
-                        `
-                        <td>
-
-                            ${formatNumber(
-                                row[f1Column],
-                                3
-                            )}
-
-                        </td>
-                        `
-                        :
-                        ""
-                    }
-
-
-                    ${
-                        recallColumn
-                        ?
-                        `
-                        <td>
-
-                            ${formatNumber(
-                                row[recallColumn],
-                                3
-                            )}
-
-                        </td>
-                        `
-                        :
-                        ""
-                    }
 
                 </tr>
 

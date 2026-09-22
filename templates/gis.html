@@ -111,11 +111,6 @@ opacity: 0.65;
 GIS & Network Intelligence
 </h1>
 
-<p class="text-muted">
-Geographic vulnerability, district-level risk,
-network resilience and blood redistribution.
-</p>
-
 </div>
 
 
@@ -243,6 +238,32 @@ stockout and low-stock risk.
 </div>
 
 
+<div class="row g-3 align-items-end mb-4">
+
+<div class="col-lg-6">
+
+<label
+for="dbariDistrictSelect"
+class="form-label fw-semibold"
+>
+District
+</label>
+
+<select
+id="dbariDistrictSelect"
+class="form-select"
+>
+
+<option value="" selected disabled>
+Select a district
+</option>
+
+</select>
+
+</div>
+
+</div>
+
 <div class="table-responsive">
 
 <table class="table table-hover">
@@ -257,18 +278,6 @@ Rank
 
 <th>
 District
-</th>
-
-<th>
-Blood Banks
-</th>
-
-<th>
-Stockout %
-</th>
-
-<th>
-Low Stock %
 </th>
 
 <th>
@@ -288,7 +297,7 @@ Risk
 <tr>
 
 <td
-colspan="7"
+colspan="4"
 class="text-center"
 >
 Loading...
@@ -582,7 +591,7 @@ Loading...
 <div class="alert alert-light border">
 
 <strong>
-Research note:
+Note:
 </strong>
 
 Geographic calculations use straight-line
@@ -729,19 +738,7 @@ async function loadDBARI() {
         );
 
 
-    document.getElementById(
-        "districtCount"
-    ).textContent =
-        rows.length;
-
-
-    const table =
-        document.getElementById(
-            "dbariTable"
-        );
-
-
-    table.innerHTML =
+    const sortedRows =
         rows
             .slice()
             .sort(
@@ -760,73 +757,137 @@ async function loadDBARI() {
                         ??
                         0
                     )
-            )
-            .map(
-                (
-                    row,
-                    index
-                ) => `
+            );
+
+
+    document.getElementById(
+        "districtCount"
+    ).textContent =
+        rows.length;
+
+
+    const select =
+        document.getElementById(
+            "dbariDistrictSelect"
+        );
+
+
+    select.innerHTML = `
+        <option value="" selected disabled>
+            Select a district
+        </option>
+    `;
+
+
+    sortedRows.forEach(
+        row => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                row.district ?? "";
+
+            option.textContent =
+                row.district ?? "—";
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    const table =
+        document.getElementById(
+            "dbariTable"
+        );
+
+
+    function renderDBARITable() {
+
+        const selectedDistrict =
+            select.value;
+
+
+        if (!selectedDistrict) {
+
+            table.innerHTML = `
+                <tr>
+                    <td
+                        colspan="4"
+                        class="text-center text-muted"
+                    >
+                        Select a district to view its blood availability risk.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        const visibleRows =
+            sortedRows.filter(
+                row =>
+                    String(
+                        row.district ?? ""
+                    ) === selectedDistrict
+            );
+
+
+        if (
+            visibleRows.length === 0
+        ) {
+
+            table.innerHTML = `
+                <tr>
+                    <td
+                        colspan="4"
+                        class="text-center"
+                    >
+                        No district data available.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        table.innerHTML =
+            visibleRows
+                .map(
+                    (
+                        row,
+                        index
+                    ) => `
 
                     <tr>
 
                         <td>
-                            ${index + 1}
+                            ${
+                                sortedRows.indexOf(row) + 1
+                            }
                         </td>
 
                         <td>
-
                             <strong>
-
                                 ${
                                     row.district
                                     ??
                                     "—"
                                 }
-
                             </strong>
-
                         </td>
 
                         <td>
-                            ${
-                                row.blood_banks
-                                ??
-                                "—"
-                            }
-                        </td>
-
-                        <td>
-
-                            ${
-                                Number(
-                                    row.stockout_percentage
-                                    ??
-                                    row.stockout_percent
-                                    ??
-                                    0
-                                ).toFixed(1)
-                            }%
-
-                        </td>
-
-                        <td>
-
-                            ${
-                                Number(
-                                    row.low_stock_percentage
-                                    ??
-                                    row.low_stock_percent
-                                    ??
-                                    0
-                                ).toFixed(1)
-                            }%
-
-                        </td>
-
-                        <td>
-
                             <strong>
-
                                 ${
                                     Number(
                                         row.DBARI
@@ -834,9 +895,7 @@ async function loadDBARI() {
                                         0
                                     ).toFixed(2)
                                 }
-
                             </strong>
-
                         </td>
 
                         <td
@@ -844,20 +903,29 @@ async function loadDBARI() {
                                 row.risk_class
                             )}"
                         >
-
                             ${
                                 row.risk_class
                                 ??
                                 "—"
                             }
-
                         </td>
 
                     </tr>
 
                 `
-            )
-            .join("");
+                )
+                .join("");
+
+    }
+
+
+    select.addEventListener(
+        "change",
+        renderDBARITable
+    );
+
+
+    renderDBARITable();
 
 }
 

@@ -136,7 +136,6 @@ async function initializeRiskPage() {
         loadBBRISummary(),
         loadBBRITable(),
         loadModelComparison(),
-        loadFeatureImportance(),
         loadRiskBanks(),
         initializePrediction()
     ];
@@ -787,19 +786,6 @@ function renderPredictionResult(data) {
     }
 
     let reasonsHTML = "";
-
-    if (reasons.length > 0) {
-        reasonsHTML = `
-            <div class="mt-3">
-                <h6>Risk Drivers</h6>
-                <ul>
-                    ${reasons.map(reason =>
-                        `<li>${escapeHTML(reason)}</li>`
-                    ).join("")}
-                </ul>
-            </div>
-        `;
-    }
 
     resultContainer.innerHTML = `
         <div class="card border-0 shadow-sm">
