@@ -1051,4 +1051,4 @@ finally:
 print()
 print(
     "Database synchronization finished."
-)
+)python sync_database.py
